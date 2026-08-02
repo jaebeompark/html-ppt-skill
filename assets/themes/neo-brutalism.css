@@ -9,7 +9,7 @@
   --grad-soft:linear-gradient(135deg,#fffbd0,#fff);
   --radius:6px;--radius-sm:4px;--radius-lg:10px;
   --shadow:6px 6px 0 #000;--shadow-lg:10px 10px 0 #000;
-  --font-sans:'Space Grotesk','Inter','Noto Sans SC',sans-serif;
+  --font-sans:'Space Grotesk','Inter','Noto Sans KR','Noto Sans SC',sans-serif;
   --font-display:'Archivo Black','Space Grotesk',sans-serif;
   --letter-tight:-.03em;
 }

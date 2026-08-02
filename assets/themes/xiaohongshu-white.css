@@ -10,7 +10,7 @@
   --radius:20px;--radius-sm:14px;--radius-lg:28px;
   --shadow:0 12px 30px rgba(255,39,66,.08);
   --shadow-lg:0 24px 60px rgba(255,39,66,.14);
-  --font-sans:'Noto Sans SC','Inter',sans-serif;
-  --font-display:'Noto Serif SC','Playfair Display',serif;
+  --font-sans:'Noto Sans KR','Noto Sans SC','Inter',sans-serif;
+  --font-display:'Noto Serif KR','Noto Serif SC','Playfair Display',serif;
   --letter-tight:-.02em;
 }

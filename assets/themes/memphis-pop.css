@@ -9,7 +9,7 @@
   --grad-soft:linear-gradient(135deg,#fdebc7,#fff1d1);
   --radius:10px;--radius-sm:6px;--radius-lg:18px;
   --shadow:5px 5px 0 #111;--shadow-lg:9px 9px 0 #111;
-  --font-sans:'Space Grotesk','Inter','Noto Sans SC',sans-serif;
+  --font-sans:'Space Grotesk','Inter','Noto Sans KR','Noto Sans SC',sans-serif;
   --font-display:'Archivo Black',sans-serif;
 }
 .card{border:2.5px solid #111}
