@@ -1,3 +1,24 @@
+> ## 🇰🇷 한국어 최적화 버전 (Aiden)
+>
+> 이 저장소는 [lewislulu/html-ppt-skill](https://github.com/lewislulu/html-ppt-skill)의
+> **한국어 최적화 포크**입니다. 원본의 모든 기능은 그대로이며, 아래 내용만 다릅니다.
+>
+> **변경 사항**
+> - 전체 36개 테마에 한글 폰트 지원 추가 (Noto Sans KR / Noto Serif KR) — 세리프 테마에서도 한글이 명조 계열로 올바르게 표시됩니다
+> - 한국어 트리거 키워드 추가 ("피피티", "발표자료", "카드뉴스" 등) — 한국어로 요청해도 스킬이 잘 발동됩니다
+> - 대형 숫자 슬라이드의 세리프 테마 글자 겹침 수정
+> - 한국어 테스트 덱 추가 (`examples/ko-test/`) — 설치 후 한글 표시 확인용
+>
+> **설치 (한 줄)**
+> ```
+> npx skills add https://github.com/aiden-44/html-ppt-skill
+> ```
+>
+> 자세한 사용법은 유튜브 [Aiden의 친절한 AI](여기에_영상_링크) 영상을 참고하세요.
+> 원작자 lewis님께 감사드립니다. 라이선스는 원본과 동일한 MIT입니다.
+
+---
+
 # html-ppt — HTML PPT Studio
 
 > A world-class AgentSkill for producing professional HTML presentations in
