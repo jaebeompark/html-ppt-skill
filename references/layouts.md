@@ -6,7 +6,31 @@ in Chrome to see it working.
 
 To compose a new deck: open the file, copy the `<section class="slide">…</section>`
 block (or multiple blocks) into your deck HTML, and replace the demo data.
-Shared CSS (base, theme, animations) is already wired by `deck.html`.
+Base, theme and animation CSS are already wired by `deck.html` — but **half of
+these layouts also carry their own `<style>` block, which you must copy along
+with the markup.**
+
+## Layouts with scoped CSS
+
+These 16 define classes that do **not** exist in `base.css`. Copy their
+`<style>` block into your deck (or the layout renders as an unstyled stack):
+
+`arch-diagram` · `comparison` · `cta` · `diff` · `flow-diagram` · `gantt` ·
+`image-grid` · `image-hero` · `mindmap` · `process-steps` · `pros-cons` ·
+`roadmap` · `table` · `terminal` · `timeline` · `todo-checklist`
+
+## Layouts that pull an external library
+
+Five more need a CDN `<script>`/`<link>` from the layout file's `<head>`,
+copied into your deck alongside the markup:
+
+| layout | needs |
+|---|---|
+| `code` | highlight.js (core + the language you use + a theme stylesheet) |
+| `chart-bar`, `chart-line`, `chart-pie`, `chart-radar` | Chart.js |
+
+Everything else is built purely from `base.css` primitives and needs nothing
+beyond the markup.
 
 ## Openers & transitions
 
