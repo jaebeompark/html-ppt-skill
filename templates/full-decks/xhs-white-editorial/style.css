@@ -17,7 +17,7 @@
   --xw-soft-orange:#fff5ea;
   background:var(--xw-bg);
   color:var(--xw-ink);
-  font-family:'Inter','Noto Sans SC','PingFang SC',-apple-system,sans-serif;
+  font-family:'Pretendard','Noto Sans SC','PingFang SC',-apple-system,sans-serif;
 }
 .tpl-xhs-white-editorial .slide{background:#fff;padding:72px 88px}
 .tpl-xhs-white-editorial .xw-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}

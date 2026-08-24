@@ -8,7 +8,7 @@
   --grad-soft:linear-gradient(135deg,#eef1ff,#f4edff 55%,#fbedff);
   --radius:20px;--radius-lg:28px;
   --shadow:0 14px 40px rgba(20,25,60,.08),0 2px 8px rgba(20,25,60,.04);
-  font-family:'Inter','Noto Sans SC',sans-serif;
+  font-family:'Pretendard','Noto Sans SC',sans-serif;
 }
 .tpl-pitch-deck .slide{padding:88px 112px}
 .tpl-pitch-deck .kicker{color:var(--accent);font-weight:700}
@@ -21,7 +21,7 @@
 .tpl-pitch-deck .brand-dot{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--grad);margin-right:10px;vertical-align:middle}
 .tpl-pitch-deck .brand{font-weight:800;font-size:22px;letter-spacing:-.02em}
 .tpl-pitch-deck .card{border-radius:var(--radius)}
-.tpl-pitch-deck .num-tag{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.12em}
+.tpl-pitch-deck .num-tag{font-family:'Pretendard',sans-serif;font-size:14px;font-weight:700;color:var(--accent);letter-spacing:.12em}
 .tpl-pitch-deck .big-q{font-family:'Playfair Display',serif;font-size:56px;line-height:1.15;font-weight:700;letter-spacing:-.02em;max-width:22ch}
 .tpl-pitch-deck .metric{display:flex;flex-direction:column;gap:6px}
 .tpl-pitch-deck .metric .n{font-size:72px;font-weight:900;letter-spacing:-.035em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}

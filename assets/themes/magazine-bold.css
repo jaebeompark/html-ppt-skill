@@ -10,7 +10,7 @@
   --radius:0px;--radius-sm:0px;--radius-lg:2px;
   --shadow:none;
   --shadow-lg:6px 6px 0 var(--accent);
-  --font-sans:'Inter','Noto Sans KR','Noto Sans SC',sans-serif;
+  --font-sans:'Pretendard','Noto Sans SC',sans-serif;
   --font-serif:'Playfair Display','Noto Serif KR','Noto Serif SC',Georgia,serif;
   --font-display:'Playfair Display','Noto Serif KR','Noto Serif SC',Georgia,serif;
 }

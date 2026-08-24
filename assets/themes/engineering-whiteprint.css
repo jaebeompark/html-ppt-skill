@@ -10,9 +10,9 @@
   --radius:0px;--radius-sm:0px;--radius-lg:0px;
   --shadow:none;
   --shadow-lg:0 0 0 1px var(--border-strong);
-  --font-sans:'Inter','Noto Sans KR','Noto Sans SC',sans-serif;
+  --font-sans:'Pretendard','Noto Sans SC',sans-serif;
   --font-mono:'JetBrains Mono','IBM Plex Mono',monospace;
-  --font-display:'JetBrains Mono','Inter',monospace;
+  --font-display:'JetBrains Mono','Pretendard',monospace;
 }
 body{background:
   repeating-linear-gradient(0deg,rgba(10,30,70,.07) 0 1px,transparent 1px 40px),

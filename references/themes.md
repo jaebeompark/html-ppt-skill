@@ -14,7 +14,7 @@ All themes define the same variables: `--bg`, `--bg-soft`, `--surface`,
 
 | name | description | when to use |
 |---|---|---|
-| `minimal-white` | 极简白，克制高级。Inter，强文字层级，极低阴影。 | 内部汇报、一对一技术评审、不抢内容的严肃话题 |
+| `minimal-white` | 极简白，克制高级。Pretendard，强文字层级，极低阴影。 | 内部汇报、一对一技术评审、不抢内容的严肃话题 |
 | `editorial-serif` | 杂志风 Playfair 衬线 + 奶油底。 | 品牌故事、文字密度大的长文演讲 |
 | `soft-pastel` | 柔和马卡龙三色渐变。 | 产品发布、面向消费者、轻松话题 |
 | `xiaohongshu-white` | 小红书白底 + 暖红 accent + 衬线标题。 | 小红书图文、生活/美学类内容 |
@@ -65,7 +65,7 @@ All themes define the same variables: `--bg`, `--bg-soft`, `--surface`,
 
 | name | description | when to use |
 |---|---|---|
-| `corporate-clean` | 纯白 + 海军蓝 accent + Inter + 保守边框。 | 董事会汇报、B2B 销售、金融保险 |
+| `corporate-clean` | 纯白 + 海军蓝 accent + Pretendard + 保守边框。 | 董事会汇报、B2B 销售、金融保险 |
 | `pitch-deck-vc` | YC 风白底 + 蓝紫渐变 accent + 大留白。 | 融资路演、种子轮、VC meeting |
 | `academic-paper` | 论文白 + 衬线正文 + 黑墨 + 蓝链接。 | 学术报告、研究分享、会议论文 |
 | `japanese-minimal` | 象牙白 + 朱红 accent + 极大留白 + Noto Serif。 | 品牌升级、匠人故事、禅意叙事 |

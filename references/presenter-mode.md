@@ -235,6 +235,6 @@ html-ppt 的 **S 键演讲者视图是 `runtime.js` 内置的，所有 full-deck
 ## 推荐搭配
 
 - **主题**：`tokyo-night`（深色，技术分享首选）、`corporate-clean`（浅色，商务汇报）、`dracula`（深色备选）
-- **字体**：默认 Noto Sans SC + JetBrains Mono，无需更改
+- **字体**：默认 Pretendard（拉丁 + 韩文）+ Noto Sans SC（中文）+ JetBrains Mono，无需更改
 - **动效**：克制使用，`fade-up` / `rise-in` 最自然，不要用 `glitch-in` / `confetti-burst` 之类花哨的
 - **页数**：30 分钟分享 = 8–12 页；45 分钟 = 12–16 页；1 小时 = 16–22 页

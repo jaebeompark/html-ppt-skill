@@ -9,7 +9,8 @@ Before touching files, clarify:
 
 1. **Audience** — engineers? designers? executives? consumers?
 2. **Length** — 5 min lightning? 20 min share? 45 min talk?
-3. **Language** — Chinese, English, bilingual? (Noto Sans SC is preloaded.)
+3. **Language** — Chinese, Korean, English, bilingual? (Pretendard covers Latin +
+   Korean; Noto Sans SC covers Chinese. Both are preloaded.)
 4. **Format** — on-screen live, PDF export, 小红书图文?
 5. **Tone** — clinical / playful / editorial / cyber?
 
@@ -80,7 +81,8 @@ Pick **one** accent animation per slide. Everything else should be calm.
 
 ## 7. Chinese + English decks
 
-- Fonts are already imported in `fonts.css` (Noto Sans SC + Noto Serif SC).
+- Fonts are already imported in `fonts.css` (Pretendard for Latin + Korean,
+  Noto Sans SC + Noto Serif SC for Chinese, Noto Serif KR for Korean serif).
 - Use `lang="zh-CN"` on `<html>`.
 - For bilingual titles, stack lines: `<h1 class="h1">主标题<br><span class="dim">English subtitle</span></h1>`.
 - Keep English subtitles in a lighter weight (300) and dim color to avoid

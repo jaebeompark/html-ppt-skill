@@ -7,7 +7,7 @@
   --grad:linear-gradient(120deg,#7ee787 0%,#79c0ff 60%,#d2a8ff 100%);
   --radius:14px;--radius-lg:20px;
   --shadow:0 20px 60px rgba(0,0,0,.5);
-  font-family:'Inter','Noto Sans SC',sans-serif;
+  font-family:'Pretendard','Noto Sans SC',sans-serif;
 }
 .tpl-tech-sharing{background:#0d1117;color:var(--text-1)}
 .tpl-tech-sharing .slide{padding:72px 96px;background:#0d1117;color:var(--text-1)}
@@ -40,7 +40,7 @@
 .tpl-tech-sharing .tag{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:6px;font-family:'JetBrains Mono',monospace;font-size:12px;background:var(--surface-2);border:1px solid var(--border);color:var(--text-2)}
 .tpl-tech-sharing .agenda-row{display:flex;align-items:baseline;gap:24px;padding:18px 0;border-bottom:1px dashed var(--border);font-family:'JetBrains Mono',monospace}
 .tpl-tech-sharing .agenda-row .num{color:var(--accent);flex:none;width:48px}
-.tpl-tech-sharing .agenda-row .t{color:#fff;font-size:24px;flex:1;font-family:'Inter',sans-serif;font-weight:600}
+.tpl-tech-sharing .agenda-row .t{color:#fff;font-size:24px;flex:1;font-family:'Pretendard',sans-serif;font-weight:600}
 .tpl-tech-sharing .agenda-row .d{color:var(--text-3);font-size:13px}
 .tpl-tech-sharing .speaker{display:flex;align-items:center;gap:14px;margin-top:28px}
 .tpl-tech-sharing .speaker .av{width:56px;height:56px;border-radius:50%;background:var(--grad)}

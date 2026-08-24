@@ -8,7 +8,7 @@
   --good:#7bc67b;--warn:#ffb547;--bad:#ff6b6b;
   --radius:24px;--radius-lg:32px;
   --shadow:0 14px 36px rgba(90,40,30,.08);
-  font-family:'Inter','Noto Sans SC','PingFang SC',sans-serif;
+  font-family:'Pretendard','Noto Sans SC','PingFang SC',sans-serif;
 }
 .tpl-xhs-post{background:#f0eae2;display:flex;align-items:center;justify-content:center;min-height:100vh}
 .tpl-xhs-post .deck{width:810px;height:1080px;position:relative;background:transparent}

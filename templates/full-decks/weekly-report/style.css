@@ -8,7 +8,7 @@
   --grad:linear-gradient(120deg,#2e63eb,#0ea5b5);
   --radius:14px;--radius-lg:18px;
   --shadow:0 6px 20px rgba(22,30,55,.06),0 1px 3px rgba(22,30,55,.04);
-  font-family:'Inter','Noto Sans SC',sans-serif;
+  font-family:'Pretendard','Noto Sans SC',sans-serif;
 }
 .tpl-weekly-report .slide{padding:64px 88px;background:var(--bg)}
 .tpl-weekly-report .h1{font-size:64px;line-height:1.05;font-weight:800;letter-spacing:-.025em}
