@@ -1,3 +1,33 @@
+> ## 🇰🇷 한국어 고도화 버전 (jaebeompark)
+>
+> 이 저장소는 [aiden-44/html-ppt-skill](https://github.com/aiden-44/html-ppt-skill)의
+> **한국어 고도화 포크**입니다. 아래 Aiden 버전의 한국어 지원을 이어받아,
+> 폰트 체계를 다시 잡고 렌더링 버그를 정리했습니다.
+>
+> **주요 추가 사항**
+> - **기본 산세리프를 [Pretendard](https://github.com/orioncactus/pretendard)로 교체** — 기존 `Inter` + `Noto Sans KR` 두 벌을 한 벌로 통합했습니다. Pretendard의 라틴은 Inter 기반이라, 한글과 영문이 섞인 문장에서 자간과 베이스라인이 중간에 어긋나지 않습니다
+> - **풀덱 템플릿 15종에 한국어 지원** — 기존에는 `Inter` + `Noto Sans SC`만 지정돼 있어 한글이 시스템 기본 폰트로 떨어졌습니다. 이제 풀덱 템플릿에서도 한글이 제대로 표시됩니다
+> - **`CONTEXT.md` 추가** — deck / slide / chrome / layout / 풀덱 템플릿 등 이 프로젝트의 용어 정의
+>
+> **주요 수정 사항**
+> - **덱 하단 footer가 본문과 겹치던 문제** — 풀덱 템플릿 8종의 `.slide > *` 규칙이 `.deck-header` / `.deck-footer`까지 잡아 위치 지정을 덮어쓰고 있었습니다 (`tech-sharing`, `pitch-deck`에서 실제로 발생)
+> - **`deck.html` 큰 숫자 슬라이드** — 래퍼 `<div>`가 내용물 앞에서 닫혀 있어 `220px` 크기가 정작 숫자에 적용되지 않았습니다
+> - **`scripts/render.sh` 출력 경로** — 슬라이드가 1장일 때 세 번째 인자를 디렉터리가 아닌 파일 경로로 취급해, 디렉터리를 넘기면 아무것도 저장하지 않고도 성공으로 표시했습니다
+> - **문서·슬라이드의 오래된 수치** — 테마·레이아웃·템플릿 개수를 실제 값으로 정정
+>
+> 세리프 테마는 Pretendard에 세리프가 없어 `Noto Serif KR`을, 중국어는 Pretendard가
+> 간체를 지원하지 않아 `Noto Sans SC`를 그대로 유지합니다.
+> 전체 변경 이력은 [CHANGELOG.md](./CHANGELOG.md)를 참고하세요.
+>
+> **설치 (한 줄)**
+> ```
+> npx skills add https://github.com/jaebeompark/html-ppt-skill
+> ```
+>
+> Aiden님과 원작자 lewis님께 감사드립니다. 라이선스는 원본과 동일한 MIT입니다.
+
+---
+
 > ## 🇰🇷 한국어 최적화 버전 (Aiden)
 >
 > 이 저장소는 [lewislulu/html-ppt-skill](https://github.com/lewislulu/html-ppt-skill)의
