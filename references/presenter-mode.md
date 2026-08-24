@@ -35,7 +35,7 @@ cp -r templates/full-decks/presenter-mode-reveal examples/my-talk
 
 html-ppt 的 **S 键演讲者视图是 `runtime.js` 内置的，所有 full-deck 模板都自动支持**。你只需要做两件事：
 
-1. **每张 slide 末尾加 `<aside class="notes">`**（或 `<div class="notes">`），里面写逐字稿
+1. **每张 slide 末尾加 `<aside class="notes">`**，里面写逐字稿
 2. **确认 HTML 引入了 `assets/runtime.js`**
 
 ```html

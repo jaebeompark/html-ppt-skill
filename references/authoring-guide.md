@@ -64,7 +64,7 @@ For each outline item:
 3. Paste into your deck.
 4. Replace demo data with real data. Keep the class structure intact.
 5. Set `data-title="..."` (used by the Overview grid).
-6. Add `<div class="notes">…</div>` with speaker notes.
+6. Add `<aside class="notes">…</aside>` with speaker notes.
 
 ## 6. Add animations sparingly
 
@@ -126,7 +126,7 @@ for 小红书图文 (1242×1660).
 - **Don't put presenter-only text on the slide.** Any descriptive text,
   narration cues, or explanations meant for the speaker (e.g. "这一页的重点是…",
   "Note: mention X here", small grey captions explaining the slide's purpose)
-  MUST go inside `<div class="notes">`, not as visible elements. The `.notes`
+  MUST go inside `<aside class="notes">`, not as visible elements. The `.notes`
   div is hidden (`display:none`) and only shown via the S overlay. Slides
   should contain ONLY audience-facing content.
 

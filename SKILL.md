@@ -78,7 +78,7 @@ tasteful default and confirm.
    - Academic / report → `academic-paper`, `editorial-serif`, `minimal-white`
    - Edgy / cyber / launch → `cyberpunk-neon`, `vaporwave`, `y2k-chrome`,
      `neo-brutalism`
-3. **Starting point.** One of the 14 full-deck templates, or scratch? Point
+3. **Starting point.** One of the 15 full-deck templates, or scratch? Point
    to the closest `templates/full-decks/<name>/` and ask if it fits. If the
    user's content suggests something obvious (e.g. "我要做产品发布会" →
    `product-launch`), propose it confidently instead of asking blindly.
@@ -130,18 +130,18 @@ Only after those are clear, scaffold the deck and start writing.
   from CSS variables defined in `assets/base.css` and overridden by a theme.
   Good: `color: var(--text-1)`. Bad: `color: #111`.
 - **Don't invent new layout files.** Prefer composing existing ones. Only add
-  a new `templates/single-page/*.html` if none of the 30 fit.
+  a new `templates/single-page/*.html` if none of the 31 fit.
 - **Respect chrome slots.** `.deck-header`, `.deck-footer`, `.slide-number`
   and the progress bar are provided by `assets/base.css` + `runtime.js`.
 - **Keyboard-first.** Always include `<script src="../assets/runtime.js"></script>`
   so the deck supports ← → / T / A / F / S / O / hash deep-links.
 - **One `.slide` per logical page.** `runtime.js` makes `.slide.is-active`
   visible; all others are hidden.
-- **Supply notes.** Wrap speaker notes in `<div class="notes">…</div>` inside
+- **Supply notes.** Wrap speaker notes in `<aside class="notes">…</aside>` inside
   each slide. Press S to open the overlay.
 - **NEVER put presenter-only text on the slide itself.** Descriptive text like
   "这一页展示了……" or "Speaker: 这里可以补充……" or small explanatory captions
-  aimed at the presenter MUST go inside `<div class="notes">`, NOT as visible
+  aimed at the presenter MUST go inside `<aside class="notes">`, NOT as visible
   `<p>` / `<span>` elements on the slide. The `.notes` class is `display:none`
   by default — it only appears in the S overlay. Slides should contain ONLY
   audience-facing content (titles, bullet points, data, charts, images).
@@ -182,8 +182,8 @@ html-ppt/
 │   ├── theme-showcase.html        (36 slides, iframe-isolated per theme)
 │   ├── layout-showcase.html       (iframe tour of all 31 layouts)
 │   ├── animation-showcase.html    (20 FX + 27 CSS animation slides)
-│   ├── full-decks-index.html      (gallery of all 14 full-deck templates)
-│   ├── full-decks/<name>/         (14 scoped multi-slide deck templates)
+│   ├── full-decks-index.html      (gallery of all 15 full-deck templates)
+│   ├── full-decks/<name>/         (15 scoped multi-slide deck templates)
 │   └── single-page/*.html         (31 layout files with demo data)
 ├── scripts/
 │   ├── new-deck.sh                (scaffold a deck from deck.html)

@@ -100,4 +100,4 @@ Shared CSS (base, theme, animations) is already wired by `deck.html`.
 - Lede: `<p class="lede">…</p>`.
 - Cards: `<div class="card">…</div>` (variants: `card-soft`, `card-outline`, `card-accent`).
 - Grids: `.grid.g2`, `.grid.g3`, `.grid.g4`.
-- Notes: `<div class="notes">…</div>` per slide.
+- Notes: `<aside class="notes">…</aside>` per slide.
