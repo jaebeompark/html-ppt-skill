@@ -4,8 +4,7 @@
 > **한국어 최적화 포크**입니다. 원본의 모든 기능은 그대로이며, 아래 내용만 다릅니다.
 >
 > **변경 사항**
-> - 전체 36개 테마에 한글 폰트 지원 추가 — 산세리프는 **Pretendard**, 세리프 테마는 Noto Serif KR로 한글이 명조 계열로 올바르게 표시됩니다
-> - 기본 산세리프를 Pretendard로 교체 (기존 Inter + Noto Sans KR을 대체) — 라틴/한글이 한 패밀리로 통일되어 자간과 베이스라인이 어긋나지 않습니다
+> - 전체 36개 테마에 한글 폰트 지원 추가 (Noto Sans KR / Noto Serif KR) — 세리프 테마에서도 한글이 명조 계열로 올바르게 표시됩니다
 > - 한국어 트리거 키워드 추가 ("피피티", "발표자료", "카드뉴스" 등) — 한국어로 요청해도 스킬이 잘 발동됩니다
 > - 대형 숫자 슬라이드의 세리프 테마 글자 겹침 수정
 > - 한국어 테스트 덱 추가 (`examples/ko-test/`) — 설치 후 한글 표시 확인용
@@ -249,8 +248,7 @@ html-ppt-skill/
   and chart.js (optional).
 - **Senior-designer defaults.** Opinionated type scale, spacing rhythm,
   gradients and card treatments — no "Corporate PowerPoint 2006" vibes.
-- **Korean + Chinese + English first-class.** Pretendard covers Latin and Korean
-  in one family; Noto Sans SC / Noto Serif SC / Noto Serif KR pre-imported.
+- **Chinese + English first-class.** Noto Sans SC / Noto Serif SC pre-imported.
 
 ## License
 

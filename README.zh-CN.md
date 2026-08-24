@@ -231,8 +231,7 @@ html-ppt-skill/
   (可选) 走 CDN。
 - **资深设计师的默认值。** 字号规律、间距节奏、渐变、卡片处理都有态度 ——
   绝不是 "PowerPoint 2006" 那种味道。
-- **中英韩三语一等公民。** 拉丁 + 韩文由 Pretendard 一套字体覆盖，另预导入
-  Noto Sans SC / Noto Serif SC / Noto Serif KR。
+- **中英双语一等公民。** 预导入了 Noto Sans SC / Noto Serif SC。
 
 ## 协议
 
