@@ -25,7 +25,9 @@
 .tpl-xhs-pastel-card .xp-blob.b1{width:420px;height:420px;background:radial-gradient(circle,var(--xp-peach),transparent 70%);top:-8%;right:-6%}
 .tpl-xhs-pastel-card .xp-blob.b2{width:360px;height:360px;background:radial-gradient(circle,var(--xp-lilac),transparent 72%);bottom:-10%;left:-8%}
 .tpl-xhs-pastel-card .xp-blob.b3{width:260px;height:260px;background:radial-gradient(circle,var(--xp-mint),transparent 72%);top:40%;right:20%}
-.tpl-xhs-pastel-card .slide > *{position:relative;z-index:2}
+.tpl-xhs-pastel-card .slide > *:not(.deck-header):not(.deck-footer){position:relative;z-index:2}
+/* chrome stays absolutely positioned by base.css; only lift it above .slide::before */
+.tpl-xhs-pastel-card .slide > .deck-header,.tpl-xhs-pastel-card .slide > .deck-footer{z-index:2}
 .tpl-xhs-pastel-card .xp-topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;font-family:'Pretendard','Noto Sans SC',sans-serif}
 .tpl-xhs-pastel-card .xp-chip{display:inline-flex;align-items:center;gap:10px;padding:8px 18px;border-radius:999px;background:#fff;border:1.5px solid rgba(42,35,64,.1);font-size:13px;font-weight:600;letter-spacing:.08em;color:var(--xp-ink2);text-transform:uppercase}
 .tpl-xhs-pastel-card .xp-chip::before{content:'';width:9px;height:9px;border-radius:50%;background:var(--xp-peach-d)}

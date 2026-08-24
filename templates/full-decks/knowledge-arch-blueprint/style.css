@@ -13,7 +13,9 @@
 }
 .tpl-knowledge-arch-blueprint .slide{background:var(--kb-bg);color:var(--kb-ink);padding:64px 80px}
 .tpl-knowledge-arch-blueprint .kb-grid-bg{position:absolute;inset:0;pointer-events:none;opacity:.35;background-image:linear-gradient(rgba(26,26,26,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(26,26,26,.06) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at center,black 40%,transparent 85%)}
-.tpl-knowledge-arch-blueprint .slide > *{position:relative;z-index:2}
+.tpl-knowledge-arch-blueprint .slide > *:not(.deck-header):not(.deck-footer){position:relative;z-index:2}
+/* chrome stays absolutely positioned by base.css; only lift it above .slide::before */
+.tpl-knowledge-arch-blueprint .slide > .deck-header,.tpl-knowledge-arch-blueprint .slide > .deck-footer{z-index:2}
 .tpl-knowledge-arch-blueprint .kb-kicker{font-size:13px;font-weight:800;letter-spacing:4px;text-transform:uppercase;color:var(--kb-rust);margin-bottom:12px}
 .tpl-knowledge-arch-blueprint .kb-h1{font-size:66px;font-weight:900;line-height:1.08;color:#111;margin:0 0 14px;letter-spacing:-.02em}
 .tpl-knowledge-arch-blueprint .kb-h1 span.rust{color:var(--kb-rust)}

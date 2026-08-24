@@ -15,7 +15,9 @@
   radial-gradient(60% 50% at 90% 10%,rgba(121,192,255,.12),transparent 60%),
   radial-gradient(50% 50% at 10% 90%,rgba(126,231,135,.08),transparent 60%);
   pointer-events:none;z-index:0}
-.tpl-tech-sharing .slide>*{position:relative;z-index:1}
+.tpl-tech-sharing .slide>*:not(.deck-header):not(.deck-footer){position:relative;z-index:1}
+/* chrome stays absolutely positioned by base.css; only lift it above .slide::before */
+.tpl-tech-sharing .slide > .deck-header,.tpl-tech-sharing .slide > .deck-footer{z-index:1}
 .tpl-tech-sharing .h1{font-size:78px;line-height:1.03;font-weight:800;letter-spacing:-.03em;color:#fff}
 .tpl-tech-sharing .h2{font-size:54px;font-weight:700;letter-spacing:-.025em;color:#fff}
 .tpl-tech-sharing h3,.tpl-tech-sharing h4{color:#fff}

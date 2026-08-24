@@ -36,5 +36,7 @@
 .tpl-pitch-deck .traction-bar .bar span{position:absolute;bottom:-28px;left:0;right:0;text-align:center;font-size:13px;color:var(--text-3)}
 .tpl-pitch-deck .traction-bar .bar em{position:absolute;top:-28px;left:0;right:0;text-align:center;font-size:14px;font-weight:700;font-style:normal;color:var(--text-1)}
 .tpl-pitch-deck .section-num{font-size:220px;font-weight:900;line-height:.9;color:var(--surface-2);position:absolute;right:72px;bottom:40px;z-index:0;letter-spacing:-.05em}
-.tpl-pitch-deck .slide > *{position:relative;z-index:1}
+.tpl-pitch-deck .slide > *:not(.deck-header):not(.deck-footer){position:relative;z-index:1}
+/* chrome stays absolutely positioned by base.css; only lift it above .slide::before */
+.tpl-pitch-deck .slide > .deck-header,.tpl-pitch-deck .slide > .deck-footer{z-index:1}
 .tpl-pitch-deck .deck-footer{color:var(--text-3)}

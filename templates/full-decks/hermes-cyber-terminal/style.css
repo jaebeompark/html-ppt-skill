@@ -19,7 +19,9 @@
 .tpl-hermes-cyber-terminal .hc-scanlines{position:absolute;inset:0;pointer-events:none;z-index:3;background:repeating-linear-gradient(180deg,transparent 0,transparent 3px,rgba(126,211,164,.025) 3px,rgba(126,211,164,.025) 4px);mix-blend-mode:screen}
 .tpl-hermes-cyber-terminal .hc-grid{position:absolute;inset:0;pointer-events:none;opacity:.35;background-image:linear-gradient(rgba(126,211,164,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(126,211,164,.08) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 50% 50%,black 30%,transparent 80%)}
 .tpl-hermes-cyber-terminal .hc-vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 50%,transparent 50%,rgba(0,0,0,.6) 100%)}
-.tpl-hermes-cyber-terminal .slide > *{position:relative;z-index:2}
+.tpl-hermes-cyber-terminal .slide > *:not(.deck-header):not(.deck-footer){position:relative;z-index:2}
+/* chrome stays absolutely positioned by base.css; only lift it above .slide::before */
+.tpl-hermes-cyber-terminal .slide > .deck-header,.tpl-hermes-cyber-terminal .slide > .deck-footer{z-index:2}
 .tpl-hermes-cyber-terminal .hc-chrome{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;font-size:11px;color:var(--hc-ink2);letter-spacing:.18em;text-transform:uppercase}
 .tpl-hermes-cyber-terminal .hc-chrome .dots{display:flex;gap:8px}
 .tpl-hermes-cyber-terminal .hc-chrome .dots span{width:11px;height:11px;border-radius:50%;background:#2a2d33}

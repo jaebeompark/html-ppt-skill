@@ -23,7 +23,9 @@
 .tpl-graphify-dark-graph .gd-orb-2{width:460px;height:460px;background:radial-gradient(circle,rgba(232,168,124,.45),transparent 70%);top:55%;right:-8%;animation-delay:-6s}
 .tpl-graphify-dark-graph .gd-orb-3{width:420px;height:420px;background:radial-gradient(circle,rgba(184,164,214,.4),transparent 70%);bottom:-8%;left:30%;animation-delay:-11s}
 @keyframes gdDrift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(25px,-20px) scale(1.08)}}
-.tpl-graphify-dark-graph .slide > *{position:relative;z-index:2}
+.tpl-graphify-dark-graph .slide > *:not(.deck-header):not(.deck-footer){position:relative;z-index:2}
+/* chrome stays absolutely positioned by base.css; only lift it above .slide::before */
+.tpl-graphify-dark-graph .slide > .deck-header,.tpl-graphify-dark-graph .slide > .deck-footer{z-index:2}
 .tpl-graphify-dark-graph .gd-snum{position:absolute;top:28px;right:40px;font-size:12px;letter-spacing:.25em;color:var(--gd-text3);z-index:3}
 .tpl-graphify-dark-graph .gd-eyebrow{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gd-text3);font-weight:500}
 .tpl-graphify-dark-graph .gd-h1{font-size:74px;font-weight:800;line-height:1.08;letter-spacing:-.02em;margin:16px 0 10px;color:var(--gd-text)}

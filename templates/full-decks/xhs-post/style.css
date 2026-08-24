@@ -22,7 +22,9 @@
   radial-gradient(50% 35% at 10% 95%,rgba(255,107,139,.22),transparent 70%),
   radial-gradient(40% 30% at 90% 85%,rgba(122,200,255,.18),transparent 70%);
   pointer-events:none;z-index:0}
-.tpl-xhs-post .slide > *{position:relative;z-index:1}
+.tpl-xhs-post .slide > *:not(.deck-header):not(.deck-footer){position:relative;z-index:1}
+/* chrome stays absolutely positioned by base.css; only lift it above .slide::before */
+.tpl-xhs-post .slide > .deck-header,.tpl-xhs-post .slide > .deck-footer{z-index:1}
 .tpl-xhs-post .h1{font-size:72px;line-height:1.1;font-weight:900;letter-spacing:-.02em;color:var(--text-1)}
 .tpl-xhs-post .h2{font-size:54px;line-height:1.15;font-weight:800;letter-spacing:-.015em;color:var(--text-1)}
 .tpl-xhs-post .h3{font-size:36px;font-weight:800;color:var(--text-1)}
