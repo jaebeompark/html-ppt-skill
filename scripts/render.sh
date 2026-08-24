@@ -37,7 +37,8 @@ ABS="$(cd "$(dirname "$FILE")" && pwd)/$(basename "$FILE")"
 STEM="$(basename "${FILE%.*}")"
 
 if [[ "$COUNT" == "all" ]]; then
-  COUNT="$(grep -c 'class="slide"' "$FILE" || true)"
+  # match class="slide" and class="slide center tc" alike
+  COUNT="$(grep -c 'class="slide[ "]' "$FILE" || true)"
   [[ -z "$COUNT" || "$COUNT" -lt 1 ]] && COUNT=1
 fi
 
