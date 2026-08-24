@@ -41,6 +41,10 @@ img,svg,video{max-width:100%;display:block}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
 code,kbd,pre,samp{font-family:var(--font-mono)}
+/* highlight.js themes paint their own panel (background + 1em padding). Let the
+   host <pre class="card"> own the surface so code blocks match every other card;
+   token colours still come from the hljs stylesheet. */
+pre code.hljs{background:transparent;padding:0}
 
 /* ================= SLIDE SYSTEM ================= */
 .deck{position:relative;width:100vw;height:100vh;overflow:hidden;background:var(--bg)}
