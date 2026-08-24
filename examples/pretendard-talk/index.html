@@ -7,6 +7,10 @@
 <link rel="stylesheet" href="../../assets/base.css">
 <link rel="stylesheet" id="theme-link" href="../../assets/themes/tokyo-night.css">
 <link rel="stylesheet" href="../../assets/animations/animations.css">
+<!-- highlight.js browser bundle (see references/layouts.md) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/styles/tokyo-night-dark.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/highlight.min.js"></script>
+<script>addEventListener('DOMContentLoaded',()=>hljs.highlightAll())</script>
 <style>
 /* from templates/single-page/comparison.html */
 .vs{display:grid;grid-template-columns:1fr 90px 1fr;gap:28px;align-items:stretch;margin-top:30px}
@@ -85,7 +89,7 @@
   <section class="slide" data-title="코드">
     <p class="kicker">02 · 어떻게 바꿨나</p>
     <h2 class="h2">스택 두 자리가 한 자리로</h2>
-<pre class="card mt-m anim-fade-up" data-anim="fade-up" style="padding:24px"><code>/* assets/base.css — before */
+<pre class="card mt-m anim-fade-up" data-anim="fade-up" style="padding:24px"><code class="language-css">/* assets/base.css — before */
 --font-sans: 'Inter','Noto Sans KR','Noto Sans SC',-apple-system,…;
 
 /* after */

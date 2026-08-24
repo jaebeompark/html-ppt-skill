@@ -26,7 +26,7 @@ copied into your deck alongside the markup:
 
 | layout | needs |
 |---|---|
-| `code` | highlight.js (core + the language you use + a theme stylesheet) |
+| `code` | highlight.js — the **cdn-release browser bundle** plus a theme stylesheet. Do not use the npm package's `lib/core.min.js` + `lib/languages/*.min.js`: those are CommonJS and load to nothing in a plain `<script>`, leaving the code unhighlighted. |
 | `chart-bar`, `chart-line`, `chart-pie`, `chart-radar` | Chart.js |
 
 Everything else is built purely from `base.css` primitives and needs nothing

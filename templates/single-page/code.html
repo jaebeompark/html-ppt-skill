@@ -4,10 +4,12 @@
 <link rel="stylesheet" href="../../assets/base.css">
 <link rel="stylesheet" id="theme-link" href="../../assets/themes/tokyo-night.css">
 <link rel="stylesheet" href="../../assets/animations/animations.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.10.0/styles/tokyo-night-dark.min.css">
-<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.10.0/lib/core.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/highlight.js@11.10.0/lib/languages/javascript.min.js"></script>
-<script>addEventListener('DOMContentLoaded',()=>{hljs.registerLanguage('javascript',window.hljsLangJavascript||window.hljs.getLanguage('javascript'));document.querySelectorAll('pre code').forEach(el=>hljs.highlightElement(el))})</script>
+<!-- highlight.js: use the cdn-release BROWSER bundle. The npm package's
+     lib/languages/*.js are CommonJS and cannot be loaded via a plain <script>,
+     so registerLanguage never receives a grammar and nothing highlights. -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/styles/tokyo-night-dark.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/highlight.min.js"></script>
+<script>addEventListener('DOMContentLoaded',()=>hljs.highlightAll())</script>
 </head><body class="single">
 <div class="deck"><section class="slide is-active" data-title="Code">
   <p class="kicker">Snippet · 运行时核心</p>
