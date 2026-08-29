@@ -122,6 +122,38 @@ Only after those are clear, scaffold the deck and start writing.
    ./scripts/render.sh examples/my-talk/index.html 12      # 12 slides
    ```
 
+## Routing work: plan → author → verify
+
+A deck build has three phases with different shapes. Match the work to the runner.
+
+| phase | shape | runner |
+|---|---|---|
+| **plan** | one holistic judgment — audience → theme, outline, a layout per page | the main thread |
+| **author** | N independent slides, once the outline is fixed | subagents, 2–3 slides each, `model: "sonnet"` |
+| **verify** | mechanical and checkable | `./scripts/smoke.sh --render`, then read the PNGs |
+
+**Plan in one head.** Theme, arc and per-page layout all constrain each other,
+so the outline is a single decision. Split it across agents and the deck reads
+like three people wrote it. Keep this phase in the main thread and spend the
+reasoning budget here.
+
+**Author in parallel.** Once the outline names a layout and the content for each
+slide, the slides are independent — copy the layout, replace the data, write the
+notes. Dispatch the batches **in one message** so they run concurrently, and give
+each subagent the four inputs in
+[references/agent-routing.md](references/agent-routing.md): layout path, theme
+name, the slide's actual content, and the scoped-CSS rule. A subagent missing the
+theme writes literal colours; one missing the content invents numbers.
+
+**Verify with the script.** `./scripts/smoke.sh` catches the failures that still
+look like success — a deck that rendered half its slides, markup closed in the
+wrong order, a theme that lost its Korean face. Then open the PNGs: the script
+cannot see a title that wrapped badly or a chart nobody can read.
+
+Effort follows the phase. Planning wants the session's strongest setting;
+authoring and verifying run fine cheaper, which is what the per-dispatch `model`
+override is for.
+
 ## Authoring rules (important)
 
 - **Always start from a template.** Don't author slides from scratch — copy the
@@ -161,6 +193,7 @@ Chinese + English deck, and how to export.
 - [references/full-decks.md](references/full-decks.md) — all 15 full-deck templates.
 - [references/presenter-mode.md](references/presenter-mode.md) — **演讲者模式 + 逐字稿编写指南（技术分享/演讲必看）**.
 - [references/authoring-guide.md](references/authoring-guide.md) — full workflow.
+- [references/agent-routing.md](references/agent-routing.md) — dispatching authoring subagents: the four inputs, batching, assembly.
 
 ## File structure
 
@@ -187,7 +220,8 @@ html-ppt/
 │   └── single-page/*.html         (31 layout files with demo data)
 ├── scripts/
 │   ├── new-deck.sh                (scaffold a deck from deck.html)
-│   └── render.sh                  (headless Chrome → PNG)
+│   ├── render.sh                  (headless Chrome → PNG)
+│   └── smoke.sh                   (markup, counts, fonts, render — run before shipping)
 └── examples/demo-deck/            (complete working deck)
 ```
 
