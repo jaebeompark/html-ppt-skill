@@ -141,7 +141,7 @@ slide, the slides are independent — copy the layout, replace the data, write t
 notes. Dispatch the batches **in one message** so they run concurrently, and give
 each subagent the four inputs in
 [references/agent-routing.md](references/agent-routing.md): layout path, theme
-name, the slide's actual content, and the scoped-CSS rule. A subagent missing the
+name, the slide's actual content, and the house rules. A subagent missing the
 theme writes literal colours; one missing the content invents numbers.
 
 **Verify with the script.** `./scripts/smoke.sh` catches the failures that still

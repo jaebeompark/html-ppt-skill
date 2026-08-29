@@ -104,32 +104,28 @@ PY
 
 # --------------------------------------------------------------- 3. layouts
 head_ "3. Layout catalogue matches the layout files"
-python3 - <<'PY' && pass "scoped-CSS list is accurate; no layout leans on an undefined class" || fail "layout catalogue drift (see above)"
+python3 - <<'PY' && pass "no layout carries its own CSS; every class it uses is defined" || fail "layout CSS drift (see above)"
 import glob, io, re, sys
 bad=[]
 
-# 3a. layouts.md's scoped-CSS list must equal the set that really carries <style>
-real = {f.split('/')[-1][:-5] for f in glob.glob('templates/single-page/*.html')
-        if re.search(r'<style>', io.open(f,encoding='utf-8').read())}
-cat = io.open('references/layouts.md',encoding='utf-8').read()
-sec = re.search(r'## Layouts with scoped CSS(.*?)^## ', cat, re.S|re.M)
-if not sec:
-    bad.append('    references/layouts.md has no "Layouts with scoped CSS" section')
-else:
-    listed = set(re.findall(r'`([a-z0-9-]+)`', sec.group(1)))
-    for m in sorted(real-listed): bad.append('    %s carries <style> but is not listed in layouts.md'%m)
-    for m in sorted(listed-real): bad.append('    layouts.md lists %s, which has no <style> block'%m)
+# 3a. Layout CSS belongs in assets/layouts.css. A <style> block back inside a
+#     layout file means copying the <section> silently loses those rules again.
+for f in sorted(glob.glob('templates/single-page/*.html')):
+    if re.search(r'<style>', io.open(f,encoding='utf-8').read()):
+        bad.append('    %s carries a <style> block — move it to assets/layouts.css'%f)
+if not io.open('assets/base.css',encoding='utf-8').read().count("@import url('layouts.css')"):
+    bad.append('    assets/base.css no longer imports layouts.css')
 
-# 3b. a layout without <style> must only use classes base/animations/themes define
+# 3b. every class a layout uses must be defined by base/layouts/animations/themes
 known=set()
-for f in ['assets/base.css','assets/animations/animations.css']+glob.glob('assets/themes/*.css'):
+for f in (['assets/base.css','assets/layouts.css','assets/animations/animations.css']
+          + glob.glob('assets/themes/*.css')):
     known |= set(re.findall(r'\.([a-z][a-z0-9-]*)', io.open(f,encoding='utf-8').read()))
 ALLOW = {'language-javascript','language-css','language-bash','language-json','hljs','g1'}
 for f in sorted(glob.glob('templates/single-page/*.html')):
-    s = io.open(f,encoding='utf-8').read()
-    if re.search(r'<style>', s): continue
     used=set()
-    for m in re.findall(r'class="([^"]+)"', s): used |= set(m.split())
+    for m in re.findall(r'class="([^"]+)"', io.open(f,encoding='utf-8').read()):
+        used |= set(m.split())
     unknown = sorted(c for c in used if c not in known and c not in ALLOW)
     if unknown:
         bad.append('    %s uses undefined classes: %s'%(f,unknown))

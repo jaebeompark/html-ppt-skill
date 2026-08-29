@@ -15,9 +15,9 @@ renders correctly, and every one of them is a real failure when omitted:
    is, and never reaches for a literal colour.
 3. **The slide's content** — the actual words, data and numbers. A subagent
    asked to "write a slide about performance" invents figures.
-4. **The scoped-CSS rule** — if the layout carries a `<style>` block, that block
-   comes along with the markup. Half the layouts do; the list is in
-   [layouts.md](./layouts.md#layouts-with-scoped-css).
+4. **The house rules** — tokens over literal colours, one accent animation per
+   slide, presenter-only prose in `<aside class="notes">`. Layout CSS needs no
+   mention: `assets/layouts.css` carries it, so the markup stands alone.
 
 ## Dispatch template
 
@@ -32,15 +32,13 @@ Content:
 
 Steps:
 1. Read templates/single-page/<layout>.html.
-2. Copy its <section class="slide">…</section> block. If the file has a <style>
-   block, return that too — it defines classes base.css does not.
+2. Copy its <section class="slide">…</section> block.
 3. Replace the demo data with the content above, keeping the class structure.
 4. Set data-title="<short title>" for the overview grid.
 5. Add <aside class="notes">…</aside> with 150–300 words of spoken-register
    speaker script.
 
-Return the section markup, and the <style> block if there was one. Return
-nothing else.
+Return the section markup and nothing else.
 ```
 
 ## Batching
@@ -58,8 +56,6 @@ throw it away.
 Concatenate the returned sections in outline order into the scaffold from
 `./scripts/new-deck.sh <name>`, then:
 
-- **Deduplicate the `<style>` blocks.** Two slides from the same layout return
-  the same CSS twice.
 - **Renumber `data-current` / `data-total`** across every `.slide-number`.
   Subagents number their own slide and cannot know the total.
 - **Run `./scripts/smoke.sh`.** It catches the assembly mistakes — unbalanced

@@ -6,18 +6,9 @@ in Chrome to see it working.
 
 To compose a new deck: open the file, copy the `<section class="slide">…</section>`
 block (or multiple blocks) into your deck HTML, and replace the demo data.
-Base, theme and animation CSS are already wired by `deck.html` — but **half of
-these layouts also carry their own `<style>` block, which you must copy along
-with the markup.**
-
-## Layouts with scoped CSS
-
-These 16 define classes that do **not** exist in `base.css`. Copy their
-`<style>` block into your deck (or the layout renders as an unstyled stack):
-
-`arch-diagram` · `comparison` · `cta` · `diff` · `flow-diagram` · `gantt` ·
-`image-grid` · `image-hero` · `mindmap` · `process-steps` · `pros-cons` ·
-`roadmap` · `table` · `terminal` · `timeline` · `todo-checklist`
+Base, theme, animation **and layout** CSS are already wired by `deck.html`:
+`base.css` pulls in `assets/layouts.css`, which owns every class these layouts
+use. Copying the `<section>` is enough — nothing else comes with it.
 
 ## Layouts that pull an external library
 

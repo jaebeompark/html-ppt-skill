@@ -1,0 +1,162 @@
+/* html-ppt :: layouts.css — CSS owned by individual single-page layouts.
+ *
+ * These classes used to live in a <style> block inside each layout file, which
+ * meant composing a deck required copying that block along with the markup —
+ * miss it and the grid silently collapsed into a stack of divs. base.css
+ * @imports this file, so every deck that links base.css already has them and
+ * copying the <section> is enough.
+ *
+ * Selectors are namespaced by their layout and do not collide.
+ */
+
+/* ---- arch-diagram ---- */
+.arch{margin-top:20px;display:grid;grid-template-rows:auto auto auto;gap:22px}
+.arch .tier{display:grid;grid-template-columns:120px 1fr;align-items:stretch;gap:22px}
+.arch .tname{display:flex;align-items:center;justify-content:center;background:var(--surface-2);border-radius:var(--radius);padding:18px;font-weight:600;font-size:13px;color:var(--text-2);text-transform:uppercase;letter-spacing:.1em;text-align:center}
+.arch .cells{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.arch .cells.three{grid-template-columns:repeat(3,1fr)}
+.arch .cell{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center;box-shadow:var(--shadow)}
+.arch .cell .ic{font-size:24px}
+.arch .cell h4{font-size:14px;margin:6px 0 2px}
+.arch .cell p{font-size:11px;color:var(--text-3);margin:0}
+.arch .tier.hl .cell{border-top:3px solid var(--accent)}
+
+/* ---- comparison ---- */
+.vs{display:grid;grid-template-columns:1fr 90px 1fr;gap:28px;align-items:stretch;margin-top:30px}
+.vs .side{padding:30px}
+.vs .mid{font-size:56px;font-weight:800;color:var(--text-3);display:flex;align-items:center;justify-content:center}
+.vs .bad-side{border-top:3px solid var(--bad)}
+.vs .good-side{border-top:3px solid var(--good)}
+.vs h3{font-size:24px}
+.vs ul{padding-left:20px;font-size:15px;line-height:1.8;color:var(--text-2)}
+.vs li::marker{color:var(--bad)}
+.vs .good-side li::marker{color:var(--good)}
+
+/* ---- cta ---- */
+.cta .btn{display:inline-flex;align-items:center;gap:10px;padding:20px 32px;border-radius:999px;background:var(--accent);color:#0b1024;font-weight:700;font-size:20px;box-shadow:var(--shadow-lg);text-decoration:none;border:none;cursor:pointer}
+.cta .btn.outline{background:transparent;color:var(--text-1);border:1.5px solid var(--border-strong)}
+
+/* ---- diff ---- */
+.diff{font-family:var(--font-mono);font-size:14px;line-height:1.6;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+.diff .ln{display:block;padding:2px 16px;white-space:pre}
+.diff .add{background:rgba(26,175,108,.12);color:var(--good)}
+.diff .del{background:rgba(224,68,90,.12);color:var(--bad)}
+.diff .ctx{color:var(--text-2)}
+.diff .hd{background:var(--surface-2);color:var(--text-3);padding:8px 16px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--border)}
+
+/* ---- flow-diagram ---- */
+.flow{display:flex;align-items:center;gap:16px;margin-top:40px;max-width:1200px}
+.flow .node{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;text-align:center;box-shadow:var(--shadow);position:relative}
+.flow .node .ic{font-size:32px;margin-bottom:6px}
+.flow .node h4{font-size:16px}
+.flow .node p{font-size:12px;color:var(--text-3);margin:0}
+.flow .arr{color:var(--text-3);font-size:28px;flex-shrink:0}
+.flow .node.hl{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent),var(--shadow)}
+
+/* ---- gantt ---- */
+.gantt{margin-top:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.gantt .hd{display:grid;grid-template-columns:200px repeat(12,1fr);gap:4px;font-size:12px;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.gantt .row{display:grid;grid-template-columns:200px repeat(12,1fr);gap:4px;align-items:center;height:40px}
+.gantt .lbl{font-size:14px;font-weight:500}
+.gantt .cells{grid-column:2/-1;position:relative;height:28px;background:linear-gradient(90deg,var(--surface-2) 1px,transparent 1px) 0 0/calc(100%/12) 100%}
+.gantt .bar{position:absolute;top:4px;height:20px;border-radius:6px;background:var(--grad);display:flex;align-items:center;padding:0 10px;font-size:11px;color:#fff;font-weight:600;box-shadow:var(--shadow)}
+
+/* ---- image-grid ---- */
+.gg{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:14px;margin-top:24px}
+.gg .cell{border-radius:var(--radius);overflow:hidden;position:relative;box-shadow:var(--shadow)}
+.gg .cell span{position:absolute;inset:auto 0 0 0;padding:12px 14px;color:#fff;font-size:13px;font-weight:500;background:linear-gradient(transparent,rgba(0,0,0,.55))}
+.gg .c1{background:linear-gradient(135deg,#3b6cff,#7a5cff);grid-column:span 2;grid-row:span 2}
+.gg .c2{background:linear-gradient(135deg,#ff7a90,#ff2742)}
+.gg .c3{background:linear-gradient(135deg,#5ef2c6,#7aa2ff)}
+.gg .c4{background:linear-gradient(135deg,#ffd27a,#f2a341)}
+.gg .c5{background:linear-gradient(135deg,#c984ff,#ff5c8a)}
+.gg .c6{background:linear-gradient(135deg,#0e1530,#24283b)}
+.gg .c7{background:linear-gradient(135deg,#88c0d0,#5ef2c6);grid-column:span 2}
+
+/* ---- image-hero ---- */
+.hero{position:relative;height:calc(100vh - 144px);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg)}
+.hero .bg{position:absolute;inset:0;background:
+  radial-gradient(80% 60% at 30% 40%,#ffb38a,transparent 70%),
+  radial-gradient(70% 50% at 75% 60%,#c084fc,transparent 70%),
+  linear-gradient(135deg,#0b1024,#1a2238)}
+.hero .bg.kb{animation:kf-kenburns 12s ease-in-out infinite alternate}
+.hero .overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(10,12,20,.65));}
+.hero .caption{position:absolute;bottom:48px;left:56px;right:56px;color:#fff;z-index:2}
+.hero h1{font-size:72px;line-height:1;font-weight:800;letter-spacing:-.03em;margin:0}
+.hero p{font-size:20px;opacity:.85;margin:14px 0 0;max-width:60ch}
+.hero .pill{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
+
+/* ---- mindmap ---- */
+.mm{position:relative;margin:30px auto 0;max-width:1200px;height:520px}
+.mm .n{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 18px;box-shadow:var(--shadow);font-weight:600}
+.mm .root{top:calc(50% - 34px);left:calc(50% - 100px);width:200px;padding:22px;background:var(--accent);color:#fff;border:none;text-align:center;font-size:20px;border-radius:24px}
+.mm .n.sm{font-size:13px}
+.mm svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.mm svg path{stroke:var(--border-strong);stroke-width:1.5;fill:none}
+
+/* ---- process-steps ---- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:24px}
+.step{position:relative;padding:24px 26px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow)}
+.step .num{position:absolute;top:-24px;left:22px;width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;box-shadow:var(--shadow)}
+.step h4{margin:18px 0 8px;font-size:17px}
+.step p{font-size:13px;color:var(--text-2);line-height:1.6}
+.step .tag{display:inline-block;margin-top:10px;font-size:11px;padding:3px 10px;border-radius:999px;background:var(--surface-2);color:var(--text-3)}
+
+/* ---- pros-cons ---- */
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:30px}
+.pc .card h3{display:flex;align-items:center;gap:10px}
+.pc .card h3 .b{display:inline-flex;width:36px;height:36px;border-radius:10px;align-items:center;justify-content:center;font-size:20px}
+.pc .pro h3 .b{background:color-mix(in srgb,var(--good) 18%,transparent);color:var(--good)}
+.pc .con h3 .b{background:color-mix(in srgb,var(--bad) 18%,transparent);color:var(--bad)}
+.pc ul{padding-left:22px;line-height:1.8;color:var(--text-2)}
+.pc .pro{border-top:3px solid var(--good)}
+.pc .con{border-top:3px solid var(--bad)}
+
+/* ---- roadmap ---- */
+.rm{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:28px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.rm .col{padding:20px 22px;border-right:1px solid var(--border);background:var(--surface);position:relative}
+.rm .col:last-child{border-right:none}
+.rm .col .tag{display:inline-block;padding:3px 12px;border-radius:999px;font-size:11px;background:var(--surface-2);color:var(--text-2);margin-bottom:10px}
+.rm .col.now{background:color-mix(in srgb,var(--accent) 6%,var(--surface))}
+.rm .col.now .tag{background:var(--accent);color:#fff}
+.rm h4{font-size:15px;margin:8px 0 4px}
+.rm ul{padding-left:18px;margin:8px 0 0;font-size:13px;color:var(--text-2)}
+.rm li{margin-bottom:6px;line-height:1.5}
+
+/* ---- table ---- */
+.t{width:100%;border-collapse:collapse;font-size:16px}
+.t th,.t td{padding:14px 16px;text-align:left;border-bottom:1px solid var(--border)}
+.t th{font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);font-weight:600}
+.t tr:hover td{background:var(--surface-2)}
+.t td.num{font-variant-numeric:tabular-nums;text-align:right}
+.up{color:var(--good)}.dn{color:var(--bad)}
+
+/* ---- terminal ---- */
+.term{font-family:var(--font-mono);font-size:16px;background:#020803;border:1px solid rgba(0,255,120,.3);border-radius:10px;padding:24px 28px;box-shadow:0 0 60px rgba(0,255,136,.08) inset}
+.term .bar{display:flex;gap:6px;margin-bottom:16px}
+.term .bar span{width:12px;height:12px;border-radius:50%;background:#222;border:1px solid rgba(0,255,136,.3)}
+.term .p{color:var(--accent)}
+.term .c{color:var(--text-1)}
+.term .o{color:var(--text-2)}
+.term .caret{display:inline-block;width:9px;height:18px;background:var(--accent);vertical-align:middle;animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---- timeline ---- */
+.tl{position:relative;margin-top:40px}
+.tl::before{content:"";position:absolute;left:0;right:0;top:48px;height:2px;background:var(--border)}
+.tl .row{display:grid;grid-template-columns:repeat(5,1fr);gap:22px;align-items:start}
+.tl .item{position:relative;padding-top:80px;text-align:center}
+.tl .dot{position:absolute;top:36px;left:50%;transform:translateX(-50%);width:24px;height:24px;border-radius:50%;background:var(--accent);border:4px solid var(--bg);box-shadow:0 0 0 2px var(--accent)}
+.tl .year{font-size:14px;color:var(--text-3);letter-spacing:.12em;text-transform:uppercase;position:absolute;top:0;left:0;right:0;font-weight:600}
+.tl h4{font-size:18px}
+.tl p{font-size:13px;color:var(--text-2)}
+
+/* ---- todo-checklist ---- */
+.todo{max-width:820px;margin-top:26px}
+.todo li{list-style:none;display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-bottom:1px solid var(--border)}
+.todo li .b{flex-shrink:0;width:22px;height:22px;border:2px solid var(--border-strong);border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.todo li.done .b{background:var(--good);border-color:var(--good);color:#fff}
+.todo li.done .b::after{content:"✓";font-weight:900}
+.todo li.done .t{text-decoration:line-through;color:var(--text-3)}
+.todo li .t{font-size:18px}
+.todo li .tag{margin-left:auto;font-size:12px;color:var(--text-3)}

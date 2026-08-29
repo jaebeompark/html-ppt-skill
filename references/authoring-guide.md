@@ -62,18 +62,14 @@ For each outline item:
 
 1. Open the matching single-page layout, e.g. `templates/single-page/kpi-grid.html`.
 2. Copy the `<section class="slide">…</section>` block.
-3. **Check the file for a `<style>` block and copy that too.** 16 of the 31
-   layouts define their own scoped CSS (`.vs`, `.steps`, `.tl`, …) that is
-   *not* in `base.css`. Copying only the `<section>` leaves those rules
-   undefined, and the grid silently collapses into a stack of divs — it looks
-   plausible enough that it's easy to miss. See the list in
-   [layouts.md](./layouts.md#layouts-with-scoped-css). Five more (`code` and
-   the four `chart-*`) additionally need a CDN script from the layout's
-   `<head>` — those are listed there too.
-4. Paste both into your deck.
-5. Replace demo data with real data. Keep the class structure intact.
-6. Set `data-title="..."` (used by the Overview grid).
-7. Add `<aside class="notes">…</aside>` with speaker notes.
+3. Paste it into your deck. Layout CSS lives in `assets/layouts.css`, which
+   `base.css` imports, so the markup carries everything it needs. The
+   exception is `code` and the four `chart-*`, which need a CDN script from
+   the layout's `<head>` — see
+   [layouts.md](./layouts.md#layouts-that-pull-an-external-library).
+4. Replace demo data with real data. Keep the class structure intact.
+5. Set `data-title="..."` (used by the Overview grid).
+6. Add `<aside class="notes">…</aside>` with speaker notes.
 
 ## 6. Add animations sparingly
 
