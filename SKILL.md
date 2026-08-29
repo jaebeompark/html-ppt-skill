@@ -128,14 +128,13 @@ A deck build has three phases with different shapes. Match the work to the runne
 
 | phase | shape | runner |
 |---|---|---|
-| **plan** | one holistic judgment — audience → theme, outline, a layout per page | the main thread |
+| **plan** | one holistic judgment — audience → theme, outline, a layout per page | the main thread, medium effort |
 | **author** | N independent slides, once the outline is fixed | subagents, 2–3 slides each, `model: "sonnet"` |
 | **verify** | mechanical and checkable | `./scripts/smoke.sh --render`, then read the PNGs |
 
 **Plan in one head.** Theme, arc and per-page layout all constrain each other,
 so the outline is a single decision. Split it across agents and the deck reads
-like three people wrote it. Keep this phase in the main thread and spend the
-reasoning budget here.
+like three people wrote it. Keep this phase whole, in the main thread.
 
 **Author in parallel.** Once the outline names a layout and the content for each
 slide, the slides are independent — copy the layout, replace the data, write the
@@ -150,9 +149,17 @@ look like success — a deck that rendered half its slides, markup closed in the
 wrong order, a theme that lost its Korean face. Then open the PNGs: the script
 cannot see a title that wrapped badly or a chart nobody can read.
 
-Effort follows the phase. Planning wants the session's strongest setting;
-authoring and verifying run fine cheaper, which is what the per-dispatch `model`
-override is for.
+**Run this skill at medium effort.** Building a deck is selection, not
+open-ended problem solving: the theme comes from an audience table, the layout
+for each page from a catalogue of 31, the animation from a per-slide-type
+default. Higher settings spend their budget re-deriving choices the catalogue has
+already made, and the deck lands in the same place. Set the level with `/model`
+before a build. The one place to spend more is content you are reasoning about
+from scratch — a technical argument, an unfamiliar dataset — and that is writing,
+not deck assembly.
+
+Model is the separate knob: authoring and verifying carry a cheaper `model` on
+each dispatch, since replacing demo data in a copied layout needs no more.
 
 ## Authoring rules (important)
 
