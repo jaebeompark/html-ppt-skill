@@ -1,0 +1,54 @@
+/* ko-presenter-reveal — 한국어 발표용, S키 발표자 모드 전용
+ *
+ * 한글 조판 두 가지가 이 템플릿의 핵심입니다.
+ *   word-break: keep-all  — 브라우저 기본값은 한글을 아무 글자에서나 끊습니다.
+ *                            "발표자료가" 가 "발표자" / "료가" 로 갈리면 읽는
+ *                            리듬이 무너집니다. 어절 단위로 넘깁니다.
+ *   line-height 여유       — 한글은 라틴보다 글자가 빽빽해서 같은 값이면 답답합니다.
+ */
+.tpl-ko-presenter-reveal{word-break:keep-all;overflow-wrap:anywhere}
+.tpl-ko-presenter-reveal .slide{padding:80px 104px}
+
+.tpl-ko-presenter-reveal .h1{font-size:76px;line-height:1.22;font-weight:800;letter-spacing:-.03em}
+.tpl-ko-presenter-reveal .h2{font-size:50px;line-height:1.3;font-weight:700;letter-spacing:-.025em}
+.tpl-ko-presenter-reveal .lede{font-size:21px;line-height:1.75;color:var(--text-2)}
+.tpl-ko-presenter-reveal .kicker{color:var(--accent);font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:.04em}
+
+/* 발표자 소개 줄 (표지) */
+.tpl-ko-presenter-reveal .speaker{display:flex;align-items:center;gap:14px;margin-top:34px}
+.tpl-ko-presenter-reveal .speaker .av{width:52px;height:52px;border-radius:50%;background:var(--grad);flex:none}
+.tpl-ko-presenter-reveal .speaker b{display:block;color:var(--text-1);font-size:17px}
+.tpl-ko-presenter-reveal .speaker span{color:var(--text-3);font-size:13px;font-family:var(--font-mono)}
+
+/* 목차 / 배운 점 — 번호 + 제목 + 설명 한 줄 */
+.tpl-ko-presenter-reveal .kr-row{display:flex;align-items:baseline;gap:22px;padding:17px 0;border-bottom:1px dashed var(--border)}
+.tpl-ko-presenter-reveal .kr-row:last-child{border-bottom:0}
+.tpl-ko-presenter-reveal .kr-row .num{flex:none;width:42px;color:var(--accent);font-family:var(--font-mono);font-weight:700}
+.tpl-ko-presenter-reveal .kr-row .t{flex:1;color:var(--text-1);font-size:23px;font-weight:600}
+.tpl-ko-presenter-reveal .kr-row .d{flex:none;color:var(--text-3);font-size:13px;font-family:var(--font-mono)}
+
+/* 문제 → 해결 대비 */
+.tpl-ko-presenter-reveal .kr-vs{display:grid;grid-template-columns:1fr 64px 1fr;gap:24px;align-items:stretch;margin-top:32px}
+.tpl-ko-presenter-reveal .kr-vs .mid{display:flex;align-items:center;justify-content:center;font-size:40px;color:var(--text-3)}
+.tpl-ko-presenter-reveal .kr-vs .side{padding:28px 30px}
+.tpl-ko-presenter-reveal .kr-vs .before{border-top:3px solid var(--bad)}
+.tpl-ko-presenter-reveal .kr-vs .after{border-top:3px solid var(--good)}
+.tpl-ko-presenter-reveal .kr-vs h4{font-size:19px;margin:0 0 12px}
+.tpl-ko-presenter-reveal .kr-vs ul{margin:0;padding-left:20px;line-height:1.9;color:var(--text-2);font-size:16px}
+
+/* 터미널 / 코드 */
+.tpl-ko-presenter-reveal .kr-code{background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px 28px;font-family:var(--font-mono);font-size:16px;line-height:1.85;overflow:auto;
+  /* <div>은 줄바꿈을 보존하지 않습니다. 코드는 어절 단위 줄바꿈도 끕니다. */
+  white-space:pre;word-break:normal}
+.tpl-ko-presenter-reveal .kr-code .c{color:var(--text-3)}
+.tpl-ko-presenter-reveal .kr-code .k{color:var(--accent)}
+.tpl-ko-presenter-reveal .kr-code .v{color:var(--accent-2)}
+
+/* 큰 숫자 (결과) */
+.tpl-ko-presenter-reveal .kr-stat{font-size:180px;font-weight:900;line-height:1.18;letter-spacing:-.04em}
+.tpl-ko-presenter-reveal .kr-unit{font-size:52px;font-weight:700;color:var(--text-2);margin-left:8px}
+
+/* 리허설 안내 배지 — 발표자만 보는 정보가 아니라 템플릿 사용자를 위한 표시 */
+.tpl-ko-presenter-reveal .kr-time{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:999px;
+  background:var(--surface-2);color:var(--text-3);font-family:var(--font-mono);font-size:12px}

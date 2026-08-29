@@ -1,7 +1,7 @@
 # html-ppt · HTML PPT 工作室
 
 > 一款专业级的 AgentSkill，让 AI 做出真正能打的 HTML 演示文稿。
-> **36 套主题**、**15 套完整 deck 模板**、**31 种页面布局**、**47 个动效**
+> **36 套主题**、**16 套完整 deck 模板**、**31 种页面布局**、**47 个动效**
 > (27 个 CSS + 20 个 Canvas FX)，加上全新的 **演讲者模式** —— 像素级
 > 完美预览 + 逐字稿提词器 + 计时器。纯静态 HTML/CSS/JS，无需构建。
 
@@ -60,7 +60,7 @@ npx skills add https://github.com/lewislulu/html-ppt-skill
 |---|---|---|
 | 🎤 **演讲者模式** | **新增** | `S` 键 / `?preview=N` |
 | 🎨 **主题** | **36** | `assets/themes/*.css` |
-| 📑 **完整 deck 模板** | **15** | `templates/full-decks/<name>/` |
+| 📑 **完整 deck 模板** | **16** | `templates/full-decks/<name>/` |
 | 🧩 **单页布局** | **31** | `templates/single-page/*.html` |
 | ✨ **CSS 动画** | **27** | `assets/animations/animations.css` |
 | 💥 **Canvas FX 动画** | **20** | `assets/animations/fx/*.js` |
@@ -83,9 +83,9 @@ npx skills add https://github.com/lewislulu/html-ppt-skill
 换皮。在 `templates/theme-showcase.html` 里可以浏览全部（每一页用独立 iframe
 渲染，避免样式互相污染）。
 
-![15 套完整 deck 模板](docs/readme/templates.png)
+![16 套完整 deck 模板](docs/readme/templates.png)
 
-### 15 套完整 deck 模板
+### 16 套完整 deck 模板
 
 8 个从真实作品提炼的视觉语言，7 个通用场景脚手架：
 
@@ -160,7 +160,7 @@ chart-pie · chart-radar · arch-diagram · process-steps · cta · thanks
 open templates/theme-showcase.html         # 全部 36 主题（iframe 隔离）
 open templates/layout-showcase.html        # 全部 31 布局
 open templates/animation-showcase.html     # 全部 47 动效
-open templates/full-decks-index.html       # 全部 15 个完整 deck
+open templates/full-decks-index.html       # 全部 16 个完整 deck
 
 # 用 headless Chrome 导出 PNG
 ./scripts/render.sh templates/theme-showcase.html
@@ -193,7 +193,7 @@ html-ppt-skill/
 │   ├── themes.md                 36 主题 + 使用场景
 │   ├── layouts.md                31 布局
 │   ├── animations.md             27 CSS + 20 FX 目录
-│   ├── full-decks.md             15 完整 deck 模板
+│   ├── full-decks.md             16 完整 deck 模板
 │   ├── presenter-mode.md         🎤 演讲者模式 + 逐字稿指南
 │   └── authoring-guide.md        完整工作流
 ├── assets/
@@ -210,8 +210,8 @@ html-ppt-skill/
 │   ├── theme-showcase.html       iframe 隔离的主题 tour
 │   ├── layout-showcase.html      全部 31 布局
 │   ├── animation-showcase.html   47 动画 slide
-│   ├── full-decks-index.html     15 deck gallery
-│   ├── full-decks/<name>/        15 个 scoped 多页 deck 模板
+│   ├── full-decks-index.html     16 deck gallery
+│   ├── full-decks/<name>/        16 个 scoped 多页 deck 模板
 │   └── single-page/*.html        31 个布局文件（带示例数据）
 ├── scripts/
 │   ├── new-deck.sh               脚手架
