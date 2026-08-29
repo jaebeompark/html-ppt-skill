@@ -65,7 +65,6 @@ npx skills add https://github.com/lewislulu/html-ppt-skill
 | ✨ **CSS 动画** | **27** | `assets/animations/animations.css` |
 | 💥 **Canvas FX 动画** | **20** | `assets/animations/fx/*.js` |
 | 🖼️ **Showcase deck** | 4 | `templates/*-showcase.html` |
-| 📸 **验证截图** | 56 | `scripts/verify-output/` |
 
 ### 36 套主题
 
@@ -217,7 +216,7 @@ html-ppt-skill/
 ├── scripts/
 │   ├── new-deck.sh               脚手架
 │   ├── render.sh                 headless Chrome → PNG
-│   └── verify-output/            56 张自测截图
+│   └── smoke.sh                  标记 / 计数 / 字体 / 渲染检查
 └── examples/demo-deck/           完整可运行的示例 deck
 ```
 

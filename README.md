@@ -119,7 +119,6 @@ that supports AgentSkills can author presentations by asking things like:
 | ✨ **CSS animations** | **27** | `assets/animations/animations.css` |
 | 💥 **Canvas FX animations** | **20** | `assets/animations/fx/*.js` |
 | 🖼️ **Showcase decks** | 4 | `templates/*-showcase.html` |
-| 📸 **Verification screenshots** | 56 | `scripts/verify-output/` |
 
 ### 36 Themes
 
@@ -263,7 +262,7 @@ html-ppt-skill/
 ├── scripts/
 │   ├── new-deck.sh               scaffold
 │   ├── render.sh                 headless Chrome → PNG
-│   └── verify-output/            56 self-test screenshots
+│   └── smoke.sh                  markup / counts / fonts / render checks
 └── examples/demo-deck/           complete working deck
 ```
 

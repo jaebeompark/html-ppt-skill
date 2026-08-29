@@ -1,1 +1,5 @@
 .DS_Store
+
+# render output — regenerate with scripts/render.sh or scripts/smoke.sh --render
+*-png/
+scripts/verify-output/
