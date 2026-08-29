@@ -138,7 +138,7 @@ Each is a pure CSS-tokens file — swap one `<link>` to reskin the entire deck.
 Browse them all in `templates/theme-showcase.html` (each slide rendered in an
 isolated iframe so theme ≠ theme is visually guaranteed).
 
-![14 full-deck templates](docs/readme/templates.png)
+![15 full-deck templates](docs/readme/templates.png)
 
 ### 15 Full-deck templates
 
@@ -241,7 +241,7 @@ html-ppt-skill/
 │   ├── themes.md                 36 themes with when-to-use
 │   ├── layouts.md                31 layout types
 │   ├── animations.md             27 CSS + 20 FX catalog
-│   ├── full-decks.md             14 full-deck templates
+│   ├── full-decks.md             15 full-deck templates
 │   └── authoring-guide.md        full workflow
 ├── assets/
 │   ├── base.css                  shared tokens + primitives
