@@ -242,7 +242,6 @@ else
 HTML
   DOM="$("$CHROME_BIN" --headless=new --disable-gpu --no-sandbox \
         --virtual-time-budget=2000 --dump-dom "file://$FIXDIR/fixture.html" 2>/dev/null)"
-  rm -rf "$FIXDIR"
 
   got=$(grep -c 'class="deck-copyright"' <<<"$DOM" || true)
   [[ "$got" == "2" ]] \
@@ -268,6 +267,51 @@ if not m:
 if 'deck-copyright' in m.group(1):
     print('    assets/base.css @media print hides .deck-copyright'); sys.exit(1)
 PY
+
+  cat > "$FIXDIR/prompt.html" <<HTML
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="file://$REPO/assets/base.css"></head><body>
+<div class="deck">
+  <section class="slide is-active">
+    <div class="prompt-card">
+      <div class="prompt-head"><h4 class="prompt-title">T</h4>
+        <button class="copy-btn" data-copied="OK">Copy</button></div>
+      <pre class="prompt-body">PROMPT-SENTINEL</pre>
+    </div>
+  </section>
+</div>
+<script src="file://$REPO/assets/deck-extras.js"></script>
+<script>
+  addEventListener('DOMContentLoaded', function () {
+    var got = '';
+    // navigator.clipboard is a readonly accessor on Navigator.prototype; plain
+    // assignment silently no-ops and the test would hit the real clipboard.
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: function (t) { got = t; return Promise.resolve(); } }
+    });
+    document.querySelector('.copy-btn').click();
+    setTimeout(function () {
+      var b = document.querySelector('.copy-btn');
+      document.title = (got === 'PROMPT-SENTINEL' ? 'COPIED' : 'NOCOPY')
+                     + '-' + (b.textContent.trim() === 'OK' ? 'LABEL' : 'NOLABEL');
+    }, 50);
+  });
+</script>
+</body></html>
+HTML
+  PDOM="$("$CHROME_BIN" --headless=new --disable-gpu --no-sandbox \
+         --virtual-time-budget=2000 --dump-dom "file://$FIXDIR/prompt.html" 2>/dev/null)"
+
+  grep -q '<title>COPIED-' <<<"$PDOM" \
+    && pass "copy-btn sends .prompt-body text to the clipboard" \
+    || fail "copy-btn copied the wrong text (or nothing)"
+
+  grep -q -- '-LABEL</title>' <<<"$PDOM" \
+    && pass "copy-btn shows its data-copied label after copying" \
+    || fail "copy-btn label did not change after copying"
+
+  rm -rf "$FIXDIR"
 fi
 
 # ---------------------------------------------------------------- summary

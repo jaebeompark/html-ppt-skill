@@ -59,6 +59,7 @@ beyond the markup.
 | `code.html` | Syntax-highlighted code via highlight.js (JS example). |
 | `diff.html` | Hand-rolled +/- diff view. |
 | `terminal.html` | Terminal window mock with traffic-light header. |
+| `practice-prompt.html` | Hands-on prompt cards with a one-click copy button. Each `.prompt-card` is one prompt; stack several per slide. Button label overrides via `data-copied`. Needs `assets/deck-extras.js`. |
 
 ## Diagrams & flows
 

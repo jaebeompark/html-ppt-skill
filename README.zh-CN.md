@@ -112,9 +112,9 @@ npx skills add https://github.com/lewislulu/html-ppt-skill
 每个模板都是自包含的文件夹，用 scoped `.tpl-<name>` CSS，所以多个模板可以
 同时加载不会互相污染。在 `templates/full-decks-index.html` 可以看全套 gallery。
 
-![31 种单页布局](docs/readme/layouts.png)
+![32 种单页布局](docs/readme/layouts.png)
 
-### 31 种单页布局
+### 32 种单页布局
 
 cover · toc · section-divider · bullets · two-column · three-column ·
 big-quote · stat-highlight · kpi-grid · table · code · diff · terminal ·
@@ -124,7 +124,7 @@ chart-pie · chart-radar · arch-diagram · process-steps · cta · thanks
 
 每个布局都带真实的示例数据，拖进 deck 立即看得到效果。
 
-![31 种布局通过真实模板文件自动循环播放](docs/readme/layouts-live.gif)
+![32 种布局通过真实模板文件自动循环播放](docs/readme/layouts-live.gif)
 
 *大 iframe 直接加载 `templates/single-page/<name>.html` 文件，每 2.8 秒
 自动切换到下一个布局。*

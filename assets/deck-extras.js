@@ -32,9 +32,65 @@
     });
   }
 
+  /* Clipboard write with a fallback. navigator.clipboard needs a secure
+     context; file:// counts as one in Chrome, so the deck works when opened
+     straight off disk. The textarea path covers the browsers where it does not. */
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.top = '-1000px';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      if (ok) resolve(); else reject(new Error('copy failed'));
+    });
+  }
+
+  /* Wire every .copy-btn to the .prompt-body in its own .prompt-card, so a
+     slide can carry several prompts. Labels come from markup: the default is
+     English, and a deck overrides it with data-copied. */
+  function bindCopyButtons(root) {
+    Array.prototype.forEach.call(root.querySelectorAll('.copy-btn'), function (btn) {
+      var idle = btn.textContent.trim();
+      var done = btn.getAttribute('data-copied') || 'Copied';
+      var failed = btn.getAttribute('data-copy-failed') || 'Copy failed';
+      var timer = null;
+
+      btn.addEventListener('click', function () {
+        var card = btn.closest('.prompt-card');
+        var body = card && card.querySelector('.prompt-body');
+        if (!body) return;
+
+        function settle(label, ok) {
+          btn.textContent = label;
+          btn.classList.toggle('is-copied', ok);
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            btn.textContent = idle;
+            btn.classList.remove('is-copied');
+          }, 1500);
+        }
+
+        copyText(body.textContent.trim()).then(
+          function () { settle(done, true); },
+          function () { settle(failed, false); }
+        );
+      });
+    });
+  }
+
   ready(function () {
     var deck = document.querySelector('.deck');
     if (!deck) return;
     stampCopyright(deck);
+    bindCopyButtons(deck);
   });
 })();
