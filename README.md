@@ -94,6 +94,50 @@ Start from `templates/full-decks/presenter-reveal/` — it ships a worked
 
 ---
 
+## ✏️ Editing a deck in the browser
+
+Fixing wording is the thing you do most, and round-tripping a typo through an
+LLM is a slow way to change four characters. So the deck can edit itself.
+
+```bash
+./scripts/edit.sh examples/my-talk
+```
+
+That serves the deck locally and opens it in edit mode.
+
+| | |
+|---|---|
+| `E` | toggle edit mode |
+| type | every text element on the slide is editable in place |
+| `＋` `×` | add or remove an item in a list, grid or table |
+| paste | an image from the clipboard lands in the slot under the caret |
+| `⌘S` / the Save button | write it back to the file |
+
+**No deck file references the editor.** The script injects it at serve time
+when the URL carries `?edit=1`, so the 20 decks in this repo are untouched and
+a deck opened any other way is the static file it always was.
+
+**Saving rewrites bytes, not the DOM.** By the time you press save, the runtime
+has stamped `.is-active`, built hidden overview clones and let Chart.js paint
+canvases — serialising that would produce a file nothing could diff. Instead
+the editor keeps the file's original text and splices in only what you changed.
+Fixing a typo gives you a one-line `git diff`.
+
+Two things it deliberately will not do:
+
+- **Font sizes.** If a heading is the wrong size, that is a layout decision,
+  not a per-slide one. Changing it here would desync that slide from the other
+  23 and hollow out the token system. Pick a different layout instead.
+- **Free placement.** Pasted images land in a layout slot and are sized by the
+  layout. There are no drag handles, because the moment there are you are
+  building PowerPoint, badly.
+
+If you can click into it, it will save. Elements the editor cannot pair back to
+the source file are left un-editable rather than accepting typing and silently
+dropping it.
+
+---
+
 ## Keyboard
 
 ```
@@ -102,6 +146,7 @@ S      presenter window          T   cycle themes
 F      fullscreen                A   cycle animation on this slide
 O      overview grid             N   notes drawer
 R      reset timer (presenter)   Esc close overlays
+E      edit mode (edit.sh only)  ⌘S  save while editing
 #/N in the URL                   deep-link to slide N
 ?preview=N                       single slide, no chrome
 ```
@@ -223,6 +268,8 @@ html-ppt/
 │   ├── fonts.css                local @font-face only — no CDN
 │   ├── runtime.js               keyboard, presenter, overview, theme cycling
 │   ├── deck-extras.js           copy buttons, copyright stamps
+│   ├── editor.js                in-browser text editing (injected, never linked)
+│   ├── editor-patch.js          splices edits into the file — unit-tested
 │   ├── themes/*.css             36 token overrides
 │   ├── animations/              27 CSS effects + 20 canvas FX modules
 │   └── vendor/fonts/*.woff2     18 vendored faces
@@ -233,8 +280,11 @@ html-ppt/
 │   └── *-showcase.html          browse themes / layouts / animations
 ├── scripts/
 │   ├── new-deck.sh              scaffold
+│   ├── edit.sh                  serve a deck with in-browser editing
+│   ├── edit-server.py           its save/image endpoints
 │   ├── render.sh                headless Chrome → PNG
 │   └── smoke.sh                 run before shipping
+├── tests/                       node --test unit tests for the save patcher
 └── examples/                    working decks
 ```
 

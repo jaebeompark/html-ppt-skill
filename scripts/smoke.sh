@@ -365,6 +365,41 @@ if bad:
 PY
 
 # ---------------------------------------------------------------- summary
+# ---------------------------------------------------------------- 10. editor
+# The editor decorates the live DOM with contenteditable, +/x buttons and its
+# own classes, and strips them again on save (editor.js clean()). If that ever
+# regresses, every deck saved afterwards carries editor chrome into the file —
+# and it looks completely normal until someone opens the deck without the
+# editor and the pasted images lose their sizing.
+head_ "10. No editor artefacts in saved decks"
+python3 - <<'PY' && pass "no deck carries contenteditable, ed-* classes or data-ed-btn" || fail "editor chrome leaked into a deck (see above)"
+import glob, io, re, sys
+bad = []
+for f in sorted(glob.glob('templates/**/*.html', recursive=True)
+                + glob.glob('examples/**/*.html', recursive=True)):
+    s = io.open(f, encoding='utf-8').read()
+    for i, line in enumerate(s.splitlines(), 1):
+        for pat in ('contenteditable', 'data-ed-btn', 'class="ed-', "class='ed-"):
+            if pat in line:
+                bad.append('    %s:%d  %s' % (f, i, pat))
+if bad:
+    print(chr(10).join(bad))
+sys.exit(1 if bad else 0)
+PY
+
+# --------------------------------------------------------------- 11. js unit
+head_ "11. Editor patch unit tests"
+if command -v node >/dev/null 2>&1; then
+  if out="$(node --test tests/editor-patch.test.mjs 2>&1)"; then
+    pass "$(printf '%s' "$out" | sed -n 's/^# pass \([0-9]*\)/\1/p') editor-patch assertions"
+  else
+    printf '%s\n' "$out" | sed -n '/^not ok/,/^  \.\.\./p' | head -40
+    fail "editor-patch unit tests"
+  fi
+else
+  fail "node not found — cannot run the editor unit tests"
+fi
+
 if [[ "$FAIL" == "0" ]]; then
   printf '\n\033[32mall checks passed\033[0m\n'
   exit 0

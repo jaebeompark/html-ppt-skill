@@ -233,6 +233,21 @@ html-ppt/
 └── examples/demo-deck/            (complete working deck)
 ```
 
+## Editing a deck by hand
+
+Not every change is worth a prompt. `./scripts/edit.sh <deck>` serves the deck
+locally and opens it with in-place text editing: `E` toggles edit mode, `＋`/`×`
+add and remove list or grid items, pasting drops an image into the slot under
+the caret, and `⌘S` writes it back to the file.
+
+The editor is injected at serve time when the URL carries `?edit=1` — **no deck
+file links it**, so do not add a `<script>` for it when authoring. Saving
+splices the changed text into the original file rather than serialising the
+DOM, so the diff stays to the lines that actually changed.
+
+Font size and free placement are intentionally not editable: both are layout
+decisions, and making them per-slide would desync a deck from its own tokens.
+
 ## Rendering to PNG
 
 `scripts/render.sh` wraps headless Chrome at
@@ -248,6 +263,7 @@ capture, runtime.js exposes `#/N` deep-links, and render.sh iterates 1..N.
 
 ```
 ←  →  ↑  ↓  Space  PgUp  PgDn  Home  End    navigate
+E                                       edit mode (only under scripts/edit.sh)
 F                                       fullscreen
 S                                       open presenter window (magnetic cards: current/next/script/timer)
 N                                       quick notes drawer (bottom overlay)
