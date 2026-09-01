@@ -35,10 +35,7 @@
   /* Clipboard write with a fallback. navigator.clipboard needs a secure
      context; file:// counts as one in Chrome, so the deck works when opened
      straight off disk. The textarea path covers the browsers where it does not. */
-  function copyText(text) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      return navigator.clipboard.writeText(text);
-    }
+  function copyTextLegacy(text) {
     return new Promise(function (resolve, reject) {
       var ta = document.createElement('textarea');
       ta.value = text;
@@ -52,6 +49,18 @@
       document.body.removeChild(ta);
       if (ok) resolve(); else reject(new Error('copy failed'));
     });
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      // A rejection here (permission denied, insecure context edge cases,
+      // etc.) still has a shot via the textarea/execCommand path below —
+      // only give up if that also fails.
+      return navigator.clipboard.writeText(text).catch(function () {
+        return copyTextLegacy(text);
+      });
+    }
+    return copyTextLegacy(text);
   }
 
   /* Wire every .copy-btn to the .prompt-body in its own .prompt-card, so a
