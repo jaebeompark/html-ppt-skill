@@ -57,8 +57,8 @@ Each card is **draggable by its header** and **resizable by the bottom-right cor
 
 Only `presenter-mode-reveal` is designed from the ground up around the feature with proper example 逐字稿 on every slide.
 
-Keyboard in presenter window: `← →` navigate (syncs audience) · `R` reset timer · `Esc` close popup.
-Keyboard in audience window: `S` open presenter · `T` cycle theme · `← →` navigate (syncs presenter) · `F` fullscreen · `O` overview.
+Keyboard in presenter window: `← → / ↑ ↓` navigate (syncs audience) · `R` reset timer · `Esc` close popup.
+Keyboard in audience window: `S` open presenter · `T` cycle theme · `← → / ↑ ↓` navigate (syncs presenter) · `F` fullscreen · `O` overview.
 
 ## Before you author anything — ALWAYS ask or recommend
 
@@ -173,7 +173,7 @@ each dispatch, since replacing demo data in a copied layout needs no more.
 - **Respect chrome slots.** `.deck-header`, `.deck-footer`, `.slide-number`
   and the progress bar are provided by `assets/base.css` + `runtime.js`.
 - **Keyboard-first.** Always include `<script src="../assets/runtime.js"></script>`
-  so the deck supports ← → / T / A / F / S / O / hash deep-links.
+  so the deck supports ← → / ↑ ↓ / T / A / F / S / O / hash deep-links.
 - **One `.slide` per logical page.** `runtime.js` makes `.slide.is-active`
   visible; all others are hidden.
 - **Supply notes.** Wrap speaker notes in `<aside class="notes">…</aside>` inside
@@ -246,7 +246,7 @@ capture, runtime.js exposes `#/N` deep-links, and render.sh iterates 1..N.
 ## Keyboard cheat sheet
 
 ```
-←  →  Space  PgUp  PgDn  Home  End    navigate
+←  →  ↑  ↓  Space  PgUp  PgDn  Home  End    navigate
 F                                       fullscreen
 S                                       open presenter window (magnetic cards: current/next/script/timer)
 N                                       quick notes drawer (bottom overlay)

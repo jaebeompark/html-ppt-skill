@@ -26,7 +26,7 @@ open examples/my-talk/index.html
 | 키 | 동작 |
 |---|---|
 | `S` | 발표자 창 열기 (현재 / 다음 / 逐字稿 / 타이머) |
-| `←` `→` | 페이지 이동 (두 창 동기화) |
+| `←` `→` / `↑` `↓` | 페이지 이동 (두 창 동기화) |
 | `T` | 테마 순환 — tokyo-night · catppuccin-mocha · dracula · nord · corporate-clean |
 | `F` | 전체화면 |
 | `O` | 전체 슬라이드 개요 |

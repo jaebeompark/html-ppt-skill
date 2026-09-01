@@ -98,7 +98,7 @@ Pick **one** accent animation per slide. Everything else should be calm.
 open examples/my-talk/index.html
 ```
 
-Walk through every slide with ← →. Press:
+Walk through every slide with ← → / ↑ ↓. Press:
 
 - **O** — overview grid; catch any layout clipping.
 - **T** — cycle themes; make sure nothing looks broken in any theme.

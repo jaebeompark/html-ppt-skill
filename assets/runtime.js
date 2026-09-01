@@ -839,8 +839,8 @@
   document.addEventListener('keydown', function(e){
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     switch(e.key) {
-      case 'ArrowRight': case ' ': case 'PageDown': go(idx + 1); e.preventDefault(); break;
-      case 'ArrowLeft':  case 'PageUp':   go(idx - 1); e.preventDefault(); break;
+      case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown': go(idx + 1); e.preventDefault(); break;
+      case 'ArrowLeft':  case 'ArrowUp':   case 'PageUp':   go(idx - 1); e.preventDefault(); break;
       case 'Home': go(0); break;
       case 'End':  go(total - 1); break;
       case 'r': case 'R': resetTimer(); break;
@@ -934,8 +934,8 @@
     document.addEventListener('keydown', function (e) {
       if (e.metaKey||e.ctrlKey||e.altKey) return;
       switch (e.key) {
-        case 'ArrowRight': case ' ': case 'PageDown': case 'Enter': go(idx+1); e.preventDefault(); break;
-        case 'ArrowLeft': case 'PageUp': case 'Backspace': go(idx-1); e.preventDefault(); break;
+        case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown': case 'Enter': go(idx+1); e.preventDefault(); break;
+        case 'ArrowLeft': case 'ArrowUp': case 'PageUp': case 'Backspace': go(idx-1); e.preventDefault(); break;
         case 'Home': go(0); break;
         case 'End': go(total-1); break;
         case 'f': case 'F': fullscreen(); break;

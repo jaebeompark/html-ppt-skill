@@ -6,7 +6,7 @@ Self-contained multi-slide HTML decks under `templates/full-decks/<name>/`. Each
 - `style.css` — scoped with `.tpl-<name>` class prefix so multiple templates can coexist
 - `README.md` — short rationale, inspiration, and use guidance
 
-All templates pull the shared `assets/fonts.css`, `assets/base.css`, and `assets/runtime.js` from the skill root. Navigate with `← →` / `space`, use `F` for fullscreen, `O` for overview.
+All templates pull the shared `assets/fonts.css`, `assets/base.css`, and `assets/runtime.js` from the skill root. Navigate with `← →` / `↑ ↓` / `space`, use `F` for fullscreen, `O` for overview.
 
 Use these when you want a coherent, opinionated look for an entire deck — not a mix-and-match of layouts. Each template is visually distinctive enough to be identified at a glance.
 

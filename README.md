@@ -218,7 +218,7 @@ open templates/full-decks-index.html       # all 14 full decks
 ## Keyboard cheat sheet
 
 ```
-← → Space PgUp PgDn Home End   navigate
+← → ↑ ↓ Space PgUp PgDn Home End   navigate
 F                               fullscreen
 S                               open presenter window (magnetic cards)
 N                               quick notes drawer (bottom)

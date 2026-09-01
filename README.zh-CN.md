@@ -170,7 +170,7 @@ open templates/full-decks-index.html       # 全部 16 个完整 deck
 ## 键盘快捷键
 
 ```
-← → Space PgUp PgDn Home End   翻页
+← → ↑ ↓ Space PgUp PgDn Home End   翻页
 F                               全屏
 S                               打开演讲者窗口（磁吸卡片模式）
 N                               底部 notes 抽屉
