@@ -44,6 +44,10 @@
       cantSave: function (m) { return '저장 불가: ' + m; },
       saveFail: function (m) { return '저장 실패: ' + m; },
       unsaveable: '이 요소는 저장할 수 없어 편집이 반영되지 않습니다',
+      changedOnDisk: '파일이 편집 중에 바뀌었습니다 · 새로고침 후 다시 시도하세요',
+      wrongFolder: function (n) { return n + ' 이(가) 없는 폴더입니다 · 덱이 들어 있는 폴더를 고르세요'; },
+      pick: '폴더 선택', opening: '폴더 여는 중…',
+      pickPrompt: '저장하려면 덱이 있는 폴더 접근을 허용해 주세요 →',
       noMode: function (m) {
         return '편집 모드를 켤 수 없습니다: ' + m +
                '\n\nscripts/edit.sh 로 연 덱에서만 편집할 수 있습니다.';
@@ -60,6 +64,10 @@
       cantSave: function (m) { return 'cannot save: ' + m; },
       saveFail: function (m) { return 'save failed: ' + m; },
       unsaveable: 'this element cannot be saved, so the edit will not stick',
+      changedOnDisk: 'the file changed while you were editing · reload and try again',
+      wrongFolder: function (n) { return 'that folder has no ' + n + ' · pick the folder the deck is in'; },
+      pick: 'Choose folder', opening: 'opening folder…',
+      pickPrompt: 'grant access to the deck\u2019s folder to save \u2192',
       noMode: function (m) {
         return 'Cannot start edit mode: ' + m +
                '\n\nEditing only works on a deck opened with scripts/edit.sh.';
@@ -68,11 +76,117 @@
   };
   var T = /^en/i.test(document.documentElement.lang || '') ? I18N.en : I18N.ko;
   var deckPath = location.pathname.replace(/^\/+/, '');
+  var deckName = decodeURIComponent(location.pathname.split('/').pop() || 'index.html');
+
+  /* ----------------------------------------------------------- backends
+   * Two ways to reach the file, picked by how the deck was opened.
+   *
+   *   http(s)  — served by scripts/edit.sh, which has /save and /image.
+   *   file://  — no server, so the File System Access API. Chrome allows it
+   *              from file:// (file: is a secure context there) as long as the
+   *              picker opens from a user gesture; pressing E is one. fetch()
+   *              of a sibling file IS blocked at file://, which is why the
+   *              source is read through the handle rather than fetched.
+   *
+   * Both expose the same three calls, so nothing below here knows which is in
+   * play — including the patch logic, which never changes between them. */
+
+  var EXT = {
+    'image/png': '.png', 'image/jpeg': '.jpg', 'image/gif': '.gif',
+    'image/webp': '.webp', 'image/svg+xml': '.svg', 'image/avif': '.avif',
+  };
+
+  function ServerBackend() { this.stamp = null; }
+  ServerBackend.prototype.load = function () {
+    var self = this;
+    return fetch(ENDPOINT + '/source?path=' + encodeURIComponent(deckPath))
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j.error) throw new Error(j.error);
+        self.stamp = j.mtime;
+        return j.text;
+      });
+  };
+  ServerBackend.prototype.save = function (text) {
+    var self = this;
+    return fetch(ENDPOINT + '/save', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ path: deckPath, mtime: this.stamp, text: text }),
+    }).then(function (r) { return r.json(); }).then(function (j) {
+      if (j.error) throw new Error(j.error);
+      self.stamp = j.mtime;
+    });
+  };
+  ServerBackend.prototype.saveImage = function (file) {
+    return fetch(ENDPOINT + '/image?path=' + encodeURIComponent(deckPath), {
+      method: 'POST', headers: { 'Content-Type': file.type }, body: file,
+    }).then(function (r) { return r.json(); }).then(function (j) {
+      if (j.error) throw new Error(j.error);
+      return j.src;
+    });
+  };
+
+  function FileBackend() { this.dir = null; this.file = null; }
+  /* True until the folder has been granted. enter() uses this to put a button
+   * in front of the picker instead of calling it from a stale gesture: E has
+   * to travel through two dynamic script loads to get here, and Chrome's
+   * transient activation may well have lapsed by then. A click cannot lapse. */
+  FileBackend.prototype.needsPick = function () { return !this.dir; };
+  /* Asked once per page load; the handle is kept so toggling E off and on
+   * does not reopen the picker. */
+  FileBackend.prototype.pick = function () {
+    var self = this;
+    if (this.dir) return Promise.resolve();
+    return window.showDirectoryPicker({ mode: 'readwrite' }).then(function (dir) {
+      return dir.getFileHandle(deckName).then(function (fh) {
+        self.dir = dir; self.file = fh;
+      }, function () { throw new Error(T.wrongFolder(deckName)); });
+    });
+  };
+  FileBackend.prototype.load = function () {
+    var self = this;
+    return this.pick()
+      .then(function () { return self.file.getFile(); })
+      .then(function (f) { return f.text(); });
+  };
+  FileBackend.prototype.save = function (text) {
+    var self = this;
+    // the server's mtime check has no equivalent here, so compare the bytes
+    return this.file.getFile().then(function (f) { return f.text(); })
+      .then(function (onDisk) {
+        if (onDisk !== state.source) throw new Error(T.changedOnDisk);
+        return self.file.createWritable();
+      })
+      .then(function (w) { return w.write(text).then(function () { return w.close(); }); });
+  };
+  FileBackend.prototype.saveImage = function (file) {
+    var self = this, ext = EXT[file.type];
+    if (!ext) return Promise.reject(new Error('unsupported image type: ' + file.type));
+    return this.dir.getDirectoryHandle('img', { create: true }).then(function (imgDir) {
+      return nextFreeName(imgDir, ext).then(function (name) {
+        return imgDir.getFileHandle(name, { create: true })
+          .then(function (fh) { return fh.createWritable(); })
+          .then(function (w) { return w.write(file).then(function () { return w.close(); }); })
+          .then(function () { return 'img/' + name; });
+      });
+    });
+  };
+
+  /* paste-001.png, paste-002.png … the same names the server picks, so a deck
+   * edited both ways does not end up with two numbering schemes. */
+  function nextFreeName(dir, ext, n) {
+    n = n || 1;
+    var name = 'paste-' + String(n).padStart(3, '0') + ext;
+    return dir.getFileHandle(name).then(
+      function () { return nextFreeName(dir, ext, n + 1); },
+      function () { return name; });
+  }
+
+  var backend = location.protocol === 'file:' ? new FileBackend() : new ServerBackend();
 
   var state = {
     on: false,
     source: null,      // the deck file exactly as it is on disk
-    mtime: null,       // what it was when we loaded it; the save guard
     dirty: new Set(),  // patch roots the user has touched
     origin: new Map(), // element -> its innerHTML in the pristine file
     nth: new Map(),    // element -> which occurrence of that string it is
@@ -257,17 +371,30 @@
 
   var bar, status;
 
-  function buildBar() {
+  function buildBar(askForFolder) {
+    if (bar) bar.remove();
     bar = el('div', 'ed-bar');
     status = el('span', 'ed-status', '');
-    var save = el('button', 'ed-save', T.save);
-    save.onclick = save_;
+    bar.appendChild(status);
+    if (askForFolder) {
+      var pick = el('button', 'ed-save', T.pick);
+      // THIS click is the user gesture showDirectoryPicker needs
+      pick.onclick = function () {
+        say(T.opening);
+        backend.pick().then(function () { buildBar(false); open_(); },
+          function (err) { say(err.message || String(err), 'bad'); });
+      };
+      bar.appendChild(pick);
+    } else {
+      var save = el('button', 'ed-save', T.save);
+      save.onclick = save_;
+      bar.appendChild(save);
+    }
     var close = el('button', 'ed-close', T.close);
     close.onclick = function () { toggle(false); };
-    bar.appendChild(status);
-    bar.appendChild(save);
     bar.appendChild(close);
     document.body.appendChild(bar);
+    state.on = true;
   }
 
   function say(msg, kind) {
@@ -363,19 +490,16 @@
 
   function upload(file, target) {
     say(T.uploading);
-    fetch(ENDPOINT + '/image?path=' + encodeURIComponent(deckPath), {
-      method: 'POST', headers: { 'Content-Type': file.type }, body: file,
-    }).then(function (r) { return r.json(); }).then(function (j) {
-      if (j.error) throw new Error(j.error);
+    backend.saveImage(file).then(function (src) {
       var img = el('img');
-      img.src = j.src;
+      img.src = src;
       img.alt = '';
       // inline, not a class: the saved deck must not depend on editor CSS
       img.setAttribute('style', 'max-width:100%;height:auto;display:block;margin:10px 0');
       var host = target.closest('[contenteditable]') || target;
       host.appendChild(img);
       markDirty(host);
-      say(T.added(j.src), 'ok');
+      say(T.added(src), 'ok');
     }).catch(function (err) { say(T.imgFail(err.message), 'bad'); });
   }
 
@@ -392,13 +516,8 @@
     catch (err) { return say(T.cantSave(err.message), 'bad'); }
 
     say(T.saving);
-    fetch(ENDPOINT + '/save', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ path: deckPath, mtime: state.mtime, text: text }),
-    }).then(function (r) { return r.json(); }).then(function (j) {
-      if (j.error) throw new Error(j.error);
+    backend.save(text).then(function () {
       state.source = text;
-      state.mtime = j.mtime;
       state.dirty.clear();
       state.origin.clear();
       state.nth.clear();
@@ -425,16 +544,23 @@
   }
 
   function enter() {
-    fetch(ENDPOINT + '/source?path=' + encodeURIComponent(deckPath))
-      .then(function (r) { return r.json(); })
-      .then(function (j) {
-        if (j.error) throw new Error(j.error);
-        state.source = j.text;
-        state.mtime = j.mtime;
+    /* file:// with no folder yet — ask for it behind an explicit click. */
+    if (backend.needsPick && backend.needsPick()) {
+      buildBar(true);
+      say(T.pickPrompt);
+      return;
+    }
+    open_();
+  }
+
+  function open_() {
+    backend.load()
+      .then(function (text) {
+        state.source = text;
         state.origin.clear(); state.nth.clear(); state.dirty.clear();
-        index(new DOMParser().parseFromString(j.text, 'text/html'));
+        index(new DOMParser().parseFromString(text, 'text/html'));
         document.body.classList.add('ed-on');
-        buildBar();
+        if (!bar) buildBar(false);
         decorate();
         state.on = true;
         say(T.ready(state.origin.size));
@@ -504,6 +630,10 @@
     'body.ed-on *:hover > .ed-del{opacity:1}',
   ].join('\n');
   document.head.appendChild(css);
+
+  /* runtime.js loads this file on demand and then calls toggle(true). Exposing
+   * the handle is also how runtime.js knows to stop handling keys itself. */
+  window.__htmlPptEditor = { toggle: toggle, isOn: function () { return state.on; } };
 
   /* ?edit=1 opens straight into edit mode; otherwise E does. */
   if (/(^|&)edit=1(&|$)/.test(location.search.slice(1))) {

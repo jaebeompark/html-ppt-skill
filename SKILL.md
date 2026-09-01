@@ -235,13 +235,16 @@ html-ppt/
 
 ## Editing a deck by hand
 
-Not every change is worth a prompt. `./scripts/edit.sh <deck>` serves the deck
-locally and opens it with in-place text editing: `E` toggles edit mode, `＋`/`×`
-add and remove list or grid items, pasting drops an image into the slot under
-the caret, and `⌘S` writes it back to the file.
+Not every change is worth a prompt. Press `E` on any deck for in-place text
+editing: `＋`/`×` add and remove list or grid items, pasting drops an image into
+the slot under the caret, and `⌘S` writes it back to the file.
 
-The editor is injected at serve time when the URL carries `?edit=1` — **no deck
-file links it**, so do not add a `<script>` for it when authoring. Saving
+Opened straight off disk, saving goes through the File System Access API and
+asks once for the deck's folder. `./scripts/edit.sh <deck>` skips that prompt by
+serving the deck with save endpoints instead.
+
+The editor is never linked by a deck — `runtime.js` loads it on demand, and
+`edit.sh` injects it — so **do not add a `<script>` for it when authoring.** Saving
 splices the changed text into the original file rather than serialising the
 DOM, so the diff stays to the lines that actually changed.
 

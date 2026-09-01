@@ -99,11 +99,18 @@ Start from `templates/full-decks/presenter-reveal/` — it ships a worked
 Fixing wording is the thing you do most, and round-tripping a typo through an
 LLM is a slow way to change four characters. So the deck can edit itself.
 
+Two ways in, and they behave the same once you are editing.
+
+**Just open the file.** Double-click `index.html`, press `E`, and click
+**폴더 선택 / Choose folder** once to grant the deck's folder. Saving then
+writes straight to disk through the File System Access API. Chrome only; the
+grant lasts for the life of the tab.
+
+**Or run the server.** No folder prompt at all:
+
 ```bash
 ./scripts/edit.sh examples/my-talk
 ```
-
-That serves the deck locally and opens it in edit mode.
 
 | | |
 |---|---|
@@ -113,9 +120,12 @@ That serves the deck locally and opens it in edit mode.
 | paste | an image from the clipboard lands in the slot under the caret |
 | `⌘S` / the Save button | write it back to the file |
 
-**No deck file references the editor.** The script injects it at serve time
-when the URL carries `?edit=1`, so the 20 decks in this repo are untouched and
-a deck opened any other way is the static file it always was.
+**No deck file references the editor.** Under `edit.sh` the server injects it
+when the URL carries `?edit=1`. Opened straight off disk there is no server, so
+`runtime.js` loads it the first time you press `E` — about 20KB that a deck
+being *presented* never fetches. Either way no deck's markup mentions the
+editor, and a deck you just open and present is the static file it always
+was.
 
 **Saving rewrites bytes, not the DOM.** By the time you press save, the runtime
 has stamped `.is-active`, built hidden overview clones and let Chart.js paint

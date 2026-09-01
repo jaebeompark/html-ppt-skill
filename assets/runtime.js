@@ -300,6 +300,49 @@
       }
     }
 
+    /* ========== EDIT MODE — loaded on demand ==========
+     * E opens the in-browser text editor (assets/editor.js). It is fetched the
+     * first time it is pressed rather than shipped with every deck: it is
+     * ~20KB that a deck being *presented* never needs, and a deck's markup
+     * should not have to mention a tool it only sometimes uses.
+     *
+     * Under scripts/edit.sh the server has already injected both scripts, so
+     * this finds them loaded and does nothing. Opened straight off disk there
+     * is no server, so we add them here — a file:// page cannot fetch() a
+     * sibling, but it can load one as a <script>, which is all this needs.
+     */
+    let editorLoading = false;
+
+    function assetUrl(name) {
+      /* Resolve against runtime.js's own URL, so it works at whatever depth
+       * the deck sits — examples/x/ and templates/single-page/ differ. */
+      const me = document.currentScript ||
+        document.querySelector('script[src$="runtime.js"]');
+      return me ? new URL(name, me.src).href : '../assets/' + name;
+    }
+
+    function loadEditor() {
+      if (editorLoading) return;
+      editorLoading = true;
+      const add = (src) => new Promise((ok, no) => {
+        const t = document.createElement('script');
+        t.src = src; t.onload = ok; t.onerror = no;
+        document.head.appendChild(t);
+      });
+      /* editor-patch.js first — editor.js reads window.EditorPatch at load. */
+      add(assetUrl('editor-patch.js'))
+        .then(() => add(assetUrl('editor.js')))
+        .then(() => {
+          /* editor.js binds its own E handler, but the keypress that got us
+           * here is already spent, so open it directly. */
+          if (window.__htmlPptEditor) window.__htmlPptEditor.toggle(true);
+        })
+        .catch(() => {
+          editorLoading = false;
+          console.warn('[html-ppt] could not load the editor from ' + assetUrl('editor.js'));
+        });
+    }
+
     /* ========== PRESENTER MODE — Magnetic-card popup window ========== */
     /* Opens a new window with 4 draggable, resizable cards:
      *   CURRENT  — iframe(?preview=N)   pixel-perfect preview of current slide
@@ -985,6 +1028,10 @@ ${fontsTag}
 
     document.addEventListener('keydown', function (e) {
       if (e.metaKey||e.ctrlKey||e.altKey) return;
+      /* Once the editor is loaded it owns E, Escape and every key that lands
+       * in a text box; leave those to it rather than paging the deck. */
+      if (window.__htmlPptEditor) return;
+      if (e.key === 'e' || e.key === 'E') { e.preventDefault(); loadEditor(); return; }
       switch (e.key) {
         case 'ArrowRight': case 'ArrowDown': case ' ': case 'PageDown': case 'Enter': go(idx+1); e.preventDefault(); break;
         case 'ArrowLeft': case 'ArrowUp': case 'PageUp': case 'Backspace': go(idx-1); e.preventDefault(); break;
