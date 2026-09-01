@@ -1,7 +1,7 @@
 # html-ppt · HTML PPT 工作室
 
 > 一款专业级的 AgentSkill，让 AI 做出真正能打的 HTML 演示文稿。
-> **36 套主题**、**16 套完整 deck 模板**、**32 种页面布局**、**47 个动效**
+> **36 套主题**、**16 套完整 deck 模板**、**33 种页面布局**、**47 个动效**
 > (27 个 CSS + 20 个 Canvas FX)，加上全新的 **演讲者模式** —— 像素级
 > 完美预览 + 逐字稿提词器 + 计时器。纯静态 HTML/CSS/JS，无需构建。
 
@@ -11,7 +11,7 @@
 
 ![html-ppt 封面 · 实时预览](docs/readme/hero.gif)
 
-> 一行命令装好 **36 主题 × 20 Canvas FX × 32 布局 × 15 完整 deck + 演讲者模式**。
+> 一行命令装好 **36 主题 × 20 Canvas FX × 33 布局 × 15 完整 deck + 演讲者模式**。
 > 上图里的每一个预览都是真实的 iframe 加载真实模板文件 —— 不是截图，不是色卡。
 
 ## 🎤 演讲者模式（全新）
@@ -61,7 +61,7 @@ npx skills add https://github.com/lewislulu/html-ppt-skill
 | 🎤 **演讲者模式** | **新增** | `S` 键 / `?preview=N` |
 | 🎨 **主题** | **36** | `assets/themes/*.css` |
 | 📑 **完整 deck 模板** | **16** | `templates/full-decks/<name>/` |
-| 🧩 **单页布局** | **32** | `templates/single-page/*.html` |
+| 🧩 **单页布局** | **33** | `templates/single-page/*.html` |
 | ✨ **CSS 动画** | **27** | `assets/animations/animations.css` |
 | 💥 **Canvas FX 动画** | **20** | `assets/animations/fx/*.js` |
 | 🖼️ **Showcase deck** | 4 | `templates/*-showcase.html` |
@@ -112,9 +112,9 @@ npx skills add https://github.com/lewislulu/html-ppt-skill
 每个模板都是自包含的文件夹，用 scoped `.tpl-<name>` CSS，所以多个模板可以
 同时加载不会互相污染。在 `templates/full-decks-index.html` 可以看全套 gallery。
 
-![32 种单页布局](docs/readme/layouts.png)
+![33 种单页布局](docs/readme/layouts.png)
 
-### 32 种单页布局
+### 33 种单页布局
 
 cover · toc · section-divider · bullets · two-column · three-column ·
 big-quote · stat-highlight · kpi-grid · table · code · diff · terminal ·
@@ -124,7 +124,7 @@ chart-pie · chart-radar · arch-diagram · process-steps · cta · thanks
 
 每个布局都带真实的示例数据，拖进 deck 立即看得到效果。
 
-![32 种布局通过真实模板文件自动循环播放](docs/readme/layouts-live.gif)
+![33 种布局通过真实模板文件自动循环播放](docs/readme/layouts-live.gif)
 
 *大 iframe 直接加载 `templates/single-page/<name>.html` 文件，每 2.8 秒
 自动切换到下一个布局。*
@@ -158,7 +158,7 @@ chart-pie · chart-radar · arch-diagram · process-steps · cta · thanks
 
 # 浏览所有内容
 open templates/theme-showcase.html         # 全部 36 主题（iframe 隔离）
-open templates/layout-showcase.html        # 全部 32 布局
+open templates/layout-showcase.html        # 全部 33 布局
 open templates/animation-showcase.html     # 全部 47 动效
 open templates/full-decks-index.html       # 全部 16 个完整 deck
 
@@ -191,7 +191,7 @@ html-ppt-skill/
 ├── README.zh-CN.md               本文件
 ├── references/                   详细文档
 │   ├── themes.md                 36 主题 + 使用场景
-│   ├── layouts.md                32 布局
+│   ├── layouts.md                33 布局
 │   ├── animations.md             27 CSS + 20 FX 目录
 │   ├── full-decks.md             16 完整 deck 模板
 │   ├── presenter-mode.md         🎤 演讲者模式 + 逐字稿指南
@@ -208,11 +208,11 @@ html-ppt-skill/
 ├── templates/
 │   ├── deck.html                 最小起步模板
 │   ├── theme-showcase.html       iframe 隔离的主题 tour
-│   ├── layout-showcase.html      全部 32 布局
+│   ├── layout-showcase.html      全部 33 布局
 │   ├── animation-showcase.html   47 动画 slide
 │   ├── full-decks-index.html     16 deck gallery
 │   ├── full-decks/<name>/        16 个 scoped 多页 deck 模板
-│   └── single-page/*.html        32 个布局文件（带示例数据）
+│   └── single-page/*.html        33 个布局文件（带示例数据）
 ├── scripts/
 │   ├── new-deck.sh               脚手架
 │   ├── render.sh                 headless Chrome → PNG

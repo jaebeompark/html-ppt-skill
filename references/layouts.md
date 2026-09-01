@@ -60,6 +60,7 @@ beyond the markup.
 | `diff.html` | Hand-rolled +/- diff view. |
 | `terminal.html` | Terminal window mock with traffic-light header. |
 | `practice-prompt.html` | Hands-on prompt cards with a one-click copy button. Each `.prompt-card` is one prompt; stack several per slide. Button label overrides via `data-copied`. Needs `assets/deck-extras.js`. |
+| `downloads.html` | 배포 자료 목록. 확장자 배지 + 파일명 + 한 줄 설명 카드. 로컬 파일은 `<a class="dl-item" download>`, 외부 링크는 `.is-external` 로 `download` 없이. JS 불필요. |
 
 ## Diagrams & flows
 
@@ -105,7 +106,7 @@ beyond the markup.
 - **Show a diff or change**: `comparison.html`, `diff.html`, `pros-cons.html`.
 - **Show a plan**: `timeline.html`, `roadmap.html`, `gantt.html`, `process-steps.html`.
 - **Show architecture**: `arch-diagram.html`, `flow-diagram.html`, `mindmap.html`.
-- **Code / demo**: `code.html`, `terminal.html`.
+- **Code / demo**: `code.html`, `terminal.html`, `practice-prompt.html`, `downloads.html`.
 - **Closer**: `cta.html` → `thanks.html`.
 
 ## Naming / structure conventions

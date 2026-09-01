@@ -21,7 +21,7 @@ One command, no build. Pure static HTML/CSS/JS with only CDN webfonts.
 
 - **36 themes** (`assets/themes/*.css`) — minimal-white, editorial-serif, soft-pastel, sharp-mono, arctic-cool, sunset-warm, catppuccin-latte/mocha, dracula, tokyo-night, nord, solarized-light, gruvbox-dark, rose-pine, neo-brutalism, glassmorphism, bauhaus, swiss-grid, terminal-green, xiaohongshu-white, rainbow-gradient, aurora, blueprint, memphis-pop, cyberpunk-neon, y2k-chrome, retro-tv, japanese-minimal, vaporwave, midcentury, corporate-clean, academic-paper, news-broadcast, pitch-deck-vc, magazine-bold, engineering-whiteprint
 - **16 full-deck templates** (`templates/full-decks/<name>/`) — complete multi-slide decks with scoped `.tpl-<name>` CSS. 8 extracted from real-world decks (xhs-white-editorial, graphify-dark-graph, knowledge-arch-blueprint, hermes-cyber-terminal, obsidian-claude-gradient, testing-safety-alert, xhs-pastel-card, dir-key-nav-minimal), 8 scenario scaffolds (pitch-deck, product-launch, tech-sharing, weekly-report, xhs-post 3:4, course-module, **presenter-mode-reveal** — 演讲者模式专用, **ko-presenter-reveal** — 한국어 발표자 모드)
-- **32 layouts** (`templates/single-page/*.html`) with realistic demo data
+- **33 layouts** (`templates/single-page/*.html`) with realistic demo data
 - **27 CSS animations** (`assets/animations/animations.css`) via `data-anim`
 - **20 canvas FX animations** (`assets/animations/fx/*.js`) via `data-fx` — particle-burst, confetti-cannon, firework, starfield, matrix-rain, knowledge-graph (force-directed), neural-net (pulses), constellation, orbit-ring, galaxy-swirl, word-cascade, letter-explode, chain-react, magnetic-field, data-stream, gradient-blob, sparkle-trail, shockwave, typewriter-multi, counter-explosion
 - **Keyboard runtime** (`assets/runtime.js`) — arrows, T (theme), A (anim), F/O, **S (presenter mode: magnetic-card popup with CURRENT / NEXT / SCRIPT / TIMER cards)**, N (notes drawer), R (reset timer in presenter)
@@ -195,7 +195,7 @@ Chinese + English deck, and how to export.
 ## Catalogs (load when needed)
 
 - [references/themes.md](references/themes.md) — all 36 themes with when-to-use.
-- [references/layouts.md](references/layouts.md) — all 32 layout types.
+- [references/layouts.md](references/layouts.md) — all 33 layout types.
 - [references/animations.md](references/animations.md) — 27 CSS + 20 canvas FX animations.
 - [references/full-decks.md](references/full-decks.md) — all 16 full-deck templates.
 - [references/presenter-mode.md](references/presenter-mode.md) — **演讲者模式 + 逐字稿编写指南（技术分享/演讲必看）**.
@@ -220,11 +220,11 @@ html-ppt/
 ├── templates/
 │   ├── deck.html                  (minimal 6-slide starter)
 │   ├── theme-showcase.html        (36 slides, iframe-isolated per theme)
-│   ├── layout-showcase.html       (iframe tour of all 32 layouts)
+│   ├── layout-showcase.html       (iframe tour of all 33 layouts)
 │   ├── animation-showcase.html    (20 FX + 27 CSS animation slides)
 │   ├── full-decks-index.html      (gallery of all 16 full-deck templates)
 │   ├── full-decks/<name>/         (16 scoped multi-slide deck templates)
-│   └── single-page/*.html         (32 layout files with demo data)
+│   └── single-page/*.html         (33 layout files with demo data)
 ├── scripts/
 │   ├── new-deck.sh                (scaffold a deck from deck.html)
 │   ├── render.sh                  (headless Chrome → PNG)

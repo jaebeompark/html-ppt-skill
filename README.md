@@ -52,7 +52,7 @@
 # html-ppt — HTML PPT Studio
 
 > A world-class AgentSkill for producing professional HTML presentations in
-> **36 themes**, **16 full-deck templates**, **32 page layouts**,
+> **36 themes**, **16 full-deck templates**, **33 page layouts**,
 > **47 animations** (27 CSS + 20 canvas FX), and a **true presenter mode**
 > with pixel-perfect previews + speaker script + timer — all pure static
 > HTML/CSS/JS, no build step.
@@ -63,7 +63,7 @@
 
 ![html-ppt — cover with live previews](docs/readme/hero.gif)
 
-> One command installs **36 themes × 20 canvas FX × 32 layouts × 15 full decks + presenter mode**. Every preview above is a live iframe of a real template file rendering inside the deck — no screenshots, no mock-ups.
+> One command installs **36 themes × 20 canvas FX × 33 layouts × 15 full decks + presenter mode**. Every preview above is a live iframe of a real template file rendering inside the deck — no screenshots, no mock-ups.
 
 ## 🎤 Presenter Mode (new!)
 
@@ -115,7 +115,7 @@ that supports AgentSkills can author presentations by asking things like:
 | 🎤 **Presenter mode** | **NEW** | `S` key / `?preview=N` |
 | 🎨 **Themes** | **36** | `assets/themes/*.css` |
 | 📑 **Full-deck templates** | **16** | `templates/full-decks/<name>/` |
-| 🧩 **Single-page layouts** | **32** | `templates/single-page/*.html` |
+| 🧩 **Single-page layouts** | **33** | `templates/single-page/*.html` |
 | ✨ **CSS animations** | **27** | `assets/animations/animations.css` |
 | 💥 **Canvas FX animations** | **20** | `assets/animations/fx/*.js` |
 | 🖼️ **Showcase decks** | 4 | `templates/*-showcase.html` |
@@ -163,9 +163,9 @@ Each is a self-contained folder with scoped `.tpl-<name>` CSS so multiple
 decks can be previewed side-by-side without collisions. Browse the full
 gallery in `templates/full-decks-index.html`.
 
-![32 single-page layouts](docs/readme/layouts.png)
+![33 single-page layouts](docs/readme/layouts.png)
 
-### 32 Single-page layouts
+### 33 Single-page layouts
 
 cover · toc · section-divider · bullets · two-column · three-column ·
 big-quote · stat-highlight · kpi-grid · table · code · diff · terminal ·
@@ -176,9 +176,9 @@ chart-pie · chart-radar · arch-diagram · process-steps · cta · thanks
 Every layout ships with realistic demo data so you can drop it into a deck
 and immediately see it render.
 
-![32 layouts auto-cycling through real template files](docs/readme/layouts-live.gif)
+![33 layouts auto-cycling through real template files](docs/readme/layouts-live.gif)
 
-*The big iframe is loading `templates/single-page/<name>.html` directly and cycling through all 32 layouts every 2.8 seconds.*
+*The big iframe is loading `templates/single-page/<name>.html` directly and cycling through all 33 layouts every 2.8 seconds.*
 
 ![47 animations — 27 CSS + 20 canvas FX](docs/readme/animations.png)
 
@@ -206,7 +206,7 @@ module auto-initialised on slide enter via `fx-runtime.js`.
 
 # Browse everything
 open templates/theme-showcase.html         # all 36 themes (iframe-isolated)
-open templates/layout-showcase.html        # all 32 layouts
+open templates/layout-showcase.html        # all 33 layouts
 open templates/animation-showcase.html     # all 47 animations
 open templates/full-decks-index.html       # all 14 full decks
 
@@ -238,7 +238,7 @@ html-ppt-skill/
 ├── README.md                     this file
 ├── references/                   detailed catalogs
 │   ├── themes.md                 36 themes with when-to-use
-│   ├── layouts.md                32 layout types
+│   ├── layouts.md                33 layout types
 │   ├── animations.md             27 CSS + 20 FX catalog
 │   ├── full-decks.md             16 full-deck templates
 │   └── authoring-guide.md        full workflow
@@ -254,11 +254,11 @@ html-ppt-skill/
 ├── templates/
 │   ├── deck.html                 minimal starter
 │   ├── theme-showcase.html       iframe-isolated theme tour
-│   ├── layout-showcase.html      all 32 layouts
+│   ├── layout-showcase.html      all 33 layouts
 │   ├── animation-showcase.html   47 animation slides
 │   ├── full-decks-index.html     14-deck gallery
 │   ├── full-decks/<name>/        14 scoped multi-slide decks
-│   └── single-page/*.html        32 layout files with demo data
+│   └── single-page/*.html        33 layout files with demo data
 ├── scripts/
 │   ├── new-deck.sh               scaffold
 │   ├── render.sh                 headless Chrome → PNG

@@ -194,3 +194,24 @@
   .copy-btn{display:none!important}
   .prompt-body{max-height:none;overflow:visible}
 }
+
+/* ---- downloads ---- */
+.dl-list{display:grid;gap:14px}
+.dl-item{display:flex;align-items:center;gap:18px;text-decoration:none;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:16px 20px;color:var(--text-1);
+  transition:border-color .2s var(--ease),transform .2s var(--ease)}
+.dl-item:hover{border-color:var(--border-strong);transform:translateY(-2px);
+  text-decoration:none}
+.dl-ext{flex:none;min-width:58px;text-align:center;font-family:var(--font-mono);
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;
+  padding:7px 10px;border-radius:8px;background:var(--surface-2);
+  color:var(--text-2);border:1px solid var(--border)}
+.dl-name{font-size:16px;font-weight:600;margin:0;color:var(--text-1)}
+.dl-desc{font-size:13px;line-height:1.5;color:var(--text-3);margin:3px 0 0}
+.dl-item.is-external .dl-ext{
+  background:color-mix(in srgb,var(--accent) 12%,transparent);
+  color:var(--accent);border-color:color-mix(in srgb,var(--accent) 28%,transparent)}
+@media print{
+  .dl-item{transform:none;box-shadow:none}
+}

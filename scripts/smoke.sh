@@ -330,6 +330,34 @@ HTML
   rm -rf "$FIXDIR"
 fi
 
+# ------------------------------------------------------------ 9. downloads
+head_ "9. downloads layout links are downloadable"
+python3 - <<'PY' && pass "every local .dl-item carries a download attribute" || fail "a download card would open instead of saving (see above)"
+import io, re, sys
+f = 'templates/single-page/downloads.html'
+try:
+    s = io.open(f, encoding='utf-8').read()
+except FileNotFoundError:
+    print('    %s does not exist' % f); sys.exit(1)
+
+items = re.findall(r'<a\b[^>]*class="[^"]*\bdl-item\b[^"]*"[^>]*>', s)
+if not items:
+    print('    %s has no .dl-item anchors' % f); sys.exit(1)
+
+bad = []
+for tag in items:
+    external = 'is-external' in tag
+    has_dl = re.search(r'\bdownload\b', tag) is not None
+    if external and has_dl:
+        bad.append('    external card must not set download: %s' % tag[:90])
+    if not external and not has_dl:
+        bad.append('    local card missing download attribute: %s' % tag[:90])
+    if not re.search(r'href="[^"]+"', tag):
+        bad.append('    card has no href: %s' % tag[:90])
+if bad:
+    print('\n'.join(bad)); sys.exit(1)
+PY
+
 # ---------------------------------------------------------------- summary
 if [[ "$FAIL" == "0" ]]; then
   printf '\n\033[32mall checks passed\033[0m\n'
