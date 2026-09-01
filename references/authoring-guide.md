@@ -10,8 +10,8 @@ Before touching files, clarify:
 1. **Audience** — engineers? designers? executives? consumers?
 2. **Length** — 5 min lightning? 20 min share? 45 min talk?
 3. **Language** — Chinese, Korean, English, bilingual? (Pretendard covers Latin +
-   Korean; Noto Sans SC covers Chinese. Both are preloaded.)
-4. **Format** — on-screen live, PDF export, 小红书图文?
+   Latin and Korean in one family. Every face is vendored locally.)
+4. **Format** — on-screen live, PDF export, card-news images?
 5. **Tone** — clinical / playful / editorial / cyber?
 
 The audience + tone map to a theme; the length maps to slide count; the
@@ -25,7 +25,7 @@ Use `references/themes.md`. When in doubt:
 - **Engineers** → `catppuccin-mocha` / `tokyo-night` / `dracula`.
 - **Designers / product** → `editorial-serif` / `aurora` / `soft-pastel`.
 - **Execs** → `minimal-white` / `arctic-cool` / `swiss-grid`.
-- **Consumers** → `xiaohongshu-white` / `sunset-warm` / `soft-pastel`.
+- **Consumers** → `clean-white` / `sunset-warm` / `soft-pastel`.
 - **Cyber / CLI / infra** → `terminal-green` / `blueprint` / `gruvbox-dark`.
 - **Pitch / bold** → `neo-brutalism` / `sharp-mono` / `bauhaus`.
 - **Launch / product reveal** → `glassmorphism` / `aurora`.
@@ -86,9 +86,9 @@ Pick **one** accent animation per slide. Everything else should be calm.
 ## 7. Chinese + English decks
 
 - Fonts are already imported in `fonts.css` (Pretendard for Latin + Korean,
-  Noto Sans SC + Noto Serif SC for Chinese, Noto Serif KR for Korean serif).
-- Use `lang="zh-CN"` on `<html>`.
-- For bilingual titles, stack lines: `<h1 class="h1">主标题<br><span class="dim">English subtitle</span></h1>`.
+  Noto Serif KR for Korean serif).
+- Use `lang="ko"` on `<html>`; `lang="en"` for an English deck.
+- For bilingual titles, stack lines: `<h1 class="h1">한글 제목<br><span class="dim">English subtitle</span></h1>`.
 - Keep English subtitles in a lighter weight (300) and dim color to avoid
   visual competition.
 
@@ -118,7 +118,7 @@ Walk through every slide with ← → / ↑ ↓. Press:
 ```
 
 Output is 1920×1080 by default. Change in `render.sh` if the user wants 3:4
-for 小红书图文 (1242×1660).
+for card-news images (1242×1660).
 
 ## 10. What to NOT do
 
@@ -130,7 +130,7 @@ for 小红书图文 (1242×1660).
   type is needed. Prefer composition.
 - Don't delete slides from the showcase decks.
 - **Don't put presenter-only text on the slide.** Any descriptive text,
-  narration cues, or explanations meant for the speaker (e.g. "这一页的重点是…",
+  narration cues, or explanations meant for the speaker (e.g. "이 페이지의 핵심은…",
   "Note: mention X here", small grey captions explaining the slide's purpose)
   MUST go inside `<aside class="notes">`, not as visible elements. The `.notes`
   div is hidden (`display:none`) and only shown via the S overlay. Slides

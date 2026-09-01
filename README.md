@@ -1,284 +1,275 @@
-> ## 🇰🇷 한국어 고도화 버전 (jaebeompark)
->
-> 이 저장소는 [aiden-44/html-ppt-skill](https://github.com/aiden-44/html-ppt-skill)의
-> **한국어 고도화 포크**입니다. 아래 Aiden 버전의 한국어 지원을 이어받아,
-> 폰트 체계를 다시 잡고 렌더링 버그를 정리했습니다.
->
-> **주요 추가 사항**
-> - **기본 산세리프를 [Pretendard](https://github.com/orioncactus/pretendard)로 교체** — 기존 `Inter` + `Noto Sans KR` 두 벌을 한 벌로 통합했습니다. Pretendard의 라틴은 Inter 기반이라, 한글과 영문이 섞인 문장에서 자간과 베이스라인이 중간에 어긋나지 않습니다
-> - **풀덱 템플릿 15종에 한국어 지원** — 기존에는 `Inter` + `Noto Sans SC`만 지정돼 있어 한글이 시스템 기본 폰트로 떨어졌습니다. 이제 풀덱 템플릿에서도 한글이 제대로 표시됩니다
-> - **`CONTEXT.md` 추가** — deck / slide / chrome / layout / 풀덱 템플릿 등 이 프로젝트의 용어 정의
->
-> **주요 수정 사항**
-> - **덱 하단 footer가 본문과 겹치던 문제** — 풀덱 템플릿 8종의 `.slide > *` 규칙이 `.deck-header` / `.deck-footer`까지 잡아 위치 지정을 덮어쓰고 있었습니다 (`tech-sharing`, `pitch-deck`에서 실제로 발생)
-> - **`deck.html` 큰 숫자 슬라이드** — 래퍼 `<div>`가 내용물 앞에서 닫혀 있어 `220px` 크기가 정작 숫자에 적용되지 않았습니다
-> - **`scripts/render.sh` 출력 경로** — 슬라이드가 1장일 때 세 번째 인자를 디렉터리가 아닌 파일 경로로 취급해, 디렉터리를 넘기면 아무것도 저장하지 않고도 성공으로 표시했습니다
-> - **문서·슬라이드의 오래된 수치** — 테마·레이아웃·템플릿 개수를 실제 값으로 정정
->
-> 세리프 테마는 Pretendard에 세리프가 없어 `Noto Serif KR`을, 중국어는 Pretendard가
-> 간체를 지원하지 않아 `Noto Sans SC`를 그대로 유지합니다.
-> 전체 변경 이력은 [CHANGELOG.md](./CHANGELOG.md)를 참고하세요.
->
-> **설치 (한 줄)**
-> ```
-> npx skills add https://github.com/jaebeompark/html-ppt-skill
-> ```
->
-> Aiden님과 원작자 lewis님께 감사드립니다. 라이선스는 원본과 동일한 MIT입니다.
+# html-ppt
 
----
+Author professional presentations as plain HTML files. No build step, no
+runtime dependency, no network. Press `S` and you get a real presenter window
+with your script and a timer; press `T` and the whole deck changes clothes.
 
-> ## 🇰🇷 한국어 최적화 버전 (Aiden)
->
-> 이 저장소는 [lewislulu/html-ppt-skill](https://github.com/lewislulu/html-ppt-skill)의
-> **한국어 최적화 포크**입니다. 원본의 모든 기능은 그대로이며, 아래 내용만 다릅니다.
->
-> **변경 사항**
-> - 전체 36개 테마에 한글 폰트 지원 추가 ~~(Noto Sans KR / Noto Serif KR)~~ — 세리프 테마에서도 한글이 명조 계열로 올바르게 표시됩니다
-> - 한국어 트리거 키워드 추가 ("피피티", "발표자료", "카드뉴스" 등) — 한국어로 요청해도 스킬이 잘 발동됩니다
-> - 대형 숫자 슬라이드의 세리프 테마 글자 겹침 수정
-> - 한국어 테스트 덱 추가 (`examples/ko-test/`) — 설치 후 한글 표시 확인용
->
-> **설치 (한 줄)**
-> ```
-> npx skills add https://github.com/aiden-44/html-ppt-skill
-> ```
->
-> 자세한 사용법은 유튜브 [Aiden의 친절한 AI](여기에_영상_링크) 영상을 참고하세요.
-> 원작자 lewis님께 감사드립니다. 라이선스는 원본과 동일한 MIT입니다.
+**36 themes · 15 full-deck templates · 33 page layouts · 47 animations ·
+presenter mode · fully offline**
 
----
-
-# html-ppt — HTML PPT Studio
-
-> A world-class AgentSkill for producing professional HTML presentations in
-> **36 themes**, **16 full-deck templates**, **33 page layouts**,
-> **47 animations** (27 CSS + 20 canvas FX), and a **true presenter mode**
-> with pixel-perfect previews + speaker script + timer — all pure static
-> HTML/CSS/JS, no build step.
-
-**Author:** lewis &lt;sudolewis@gmail.com&gt;
-**License:** MIT
-**中文文档:** [README.zh-CN.md](README.zh-CN.md)
-
-![html-ppt — cover with live previews](docs/readme/hero.gif)
-
-> One command installs **36 themes × 20 canvas FX × 33 layouts × 15 full decks + presenter mode**. Every preview above is a live iframe of a real template file rendering inside the deck — no screenshots, no mock-ups.
-
-## 🎤 Presenter Mode (new!)
-
-Press `S` on any deck to pop open a dedicated presenter window with four
-draggable, resizable **magnetic cards**: current slide, next slide preview,
-speaker script (逐字稿), and timer. Two windows stay in sync via
-`BroadcastChannel`.
-
-![Presenter mode with 4 magnetic cards](docs/readme/presenter-mode.png)
-
-**Why previews are pixel-perfect:** each card is an `<iframe>` that loads the
-same deck HTML with a `?preview=N` query param. The runtime detects this and
-renders only slide N with no chrome — so the preview uses the **same CSS,
-theme, fonts and viewport** as the audience view. Colors and layout are
-guaranteed identical.
-
-**Smooth (no-reload) navigation:** on slide change, the presenter window
-sends `postMessage({type:'preview-goto', idx:N})` to each iframe. The iframe
-just toggles `.is-active` between slides — **no reload, no flicker**.
-
-**Speaker script rules (3 golden):**
-1. **Prompt signals, not lines to read** — bold the keywords, separate
-   transition sentences into their own paragraphs
-2. **150–300 words per slide** — that's the ~2–3 min/page pace
-3. **Write it like you speak** — conversational, not written prose
-
-See [`references/presenter-mode.md`](references/presenter-mode.md) for the
-full authoring guide, or copy the ready-made template at
-`templates/full-decks/presenter-mode-reveal/` which ships with full 150-300
-word speaker scripts on every slide.
-
-## Install (one command)
+![15 full-deck templates, six of them](docs/readme/templates.png)
 
 ```bash
-npx skills add https://github.com/lewislulu/html-ppt-skill
+npx skills add https://github.com/jaebeompark/html-ppt-skill
 ```
 
-That registers the skill with your agent runtime. After install, any agent
-that supports AgentSkills can author presentations by asking things like:
+---
 
-> "做一份 8 页的技术分享 slides，用 cyberpunk 主题"
-> "turn this outline into a pitch deck"
-> "做一个小红书图文，9 张，白底柔和风"
+## Why this one
 
-## What's in the box
+**It works with the wifi off.** Every webfont is vendored into the repository
+and declared as a local `@font-face` — nothing is fetched from a CDN at
+presentation time. This matters more than it sounds: with a CDN import, a dead
+network means Hangul silently falls back to a system face *mid-talk*. Line
+breaks move, the headline rewraps, and you find out in front of the audience.
 
-| | Count | Where |
-|---|---|---|
-| 🎤 **Presenter mode** | **NEW** | `S` key / `?preview=N` |
-| 🎨 **Themes** | **36** | `assets/themes/*.css` |
-| 📑 **Full-deck templates** | **16** | `templates/full-decks/<name>/` |
-| 🧩 **Single-page layouts** | **33** | `templates/single-page/*.html` |
-| ✨ **CSS animations** | **27** | `assets/animations/animations.css` |
-| 💥 **Canvas FX animations** | **20** | `assets/animations/fx/*.js` |
-| 🖼️ **Showcase decks** | 4 | `templates/*-showcase.html` |
+**Korean is the first-class language.** Pretendard covers Latin and Hangul in
+one family, so a line like `12분 → 3분` keeps its letter-spacing and baseline.
+The presenter window's own chrome follows the deck's `<html lang>` — Korean by
+default, English with `lang="en"`. Serif themes fall through to Noto Serif KR.
 
-### 36 Themes
+**A deck is a file.** One `.html` you can diff, review, commit, and open with
+a double-click in ten years.
 
-`minimal-white`, `editorial-serif`, `soft-pastel`, `sharp-mono`, `arctic-cool`,
-`sunset-warm`, `catppuccin-latte`, `catppuccin-mocha`, `dracula`, `tokyo-night`,
-`nord`, `solarized-light`, `gruvbox-dark`, `rose-pine`, `neo-brutalism`,
-`glassmorphism`, `bauhaus`, `swiss-grid`, `terminal-green`, `xiaohongshu-white`,
-`rainbow-gradient`, `aurora`, `blueprint`, `memphis-pop`, `cyberpunk-neon`,
-`y2k-chrome`, `retro-tv`, `japanese-minimal`, `vaporwave`, `midcentury`,
-`corporate-clean`, `academic-paper`, `news-broadcast`, `pitch-deck-vc`,
-`magazine-bold`, `engineering-whiteprint`.
+---
+
+## Quick start
+
+```bash
+./scripts/new-deck.sh my-talk      # scaffold from templates/deck.html
+open examples/my-talk/index.html
+```
+
+Then, in order:
+
+1. **Pick a theme.** Press `T` to cycle, or hard-code it:
+   ```html
+   <link rel="stylesheet" id="theme-link" href="../../assets/themes/aurora.css">
+   ```
+   Catalogue: [references/themes.md](references/themes.md)
+
+2. **Pick layouts.** Open a file in `templates/single-page/`, copy its
+   `<section class="slide">…</section>` block into your deck, replace the demo
+   data. Layout CSS is already wired — `base.css` imports `assets/layouts.css`,
+   which owns every class those blocks use, so copying the `<section>` is
+   enough. Catalogue: [references/layouts.md](references/layouts.md)
+
+3. **Write the speaker script.** One `<aside class="notes">` per slide.
+   Guide: [references/presenter-mode.md](references/presenter-mode.md)
+
+4. **Verify.** `./scripts/smoke.sh --render`
+
+Or skip straight to a finished look by copying a whole deck out of
+`templates/full-decks/`.
+
+---
+
+## 🎤 Presenter mode
+
+Press `S` on any deck. A separate presenter window opens while the original
+page stays as the audience view.
+
+![Presenter mode with four magnetic cards](docs/readme/presenter-mode.png)
+
+Four draggable, resizable cards:
+
+| card | what it shows |
+|---|---|
+| 🔵 **현재** | pixel-perfect preview of the current slide |
+| 🟣 **다음** | the next slide, same fidelity |
+| 🟠 **발표 대본** | your script at 18px, scrollable, `<strong>`/`<em>` honoured |
+| 🟢 **타이머** | elapsed time, slide counter, prev/next/reset |
+
+The previews are not screenshots. Each is an `<iframe>` loading the same deck
+file with `?preview=N`; `runtime.js` sees the parameter and renders only slide
+N with no chrome. Same CSS, same theme, same fonts, same viewport as the
+audience sees — the colours cannot drift. On a slide change the presenter sends
+`postMessage`, the iframe toggles a class, and nothing reloads or flickers.
+
+Both windows stay in sync over `BroadcastChannel`. Card positions persist to
+`localStorage`.
+
+Start from `templates/full-decks/presenter-reveal/` — it ships a worked
+150–300 character script on every slide, plus `[리허설]` timing notes.
+
+---
+
+## Keyboard
+
+```
+←  →  ↑  ↓  Space  PgUp  PgDn  Home  End   navigate
+S      presenter window          T   cycle themes
+F      fullscreen                A   cycle animation on this slide
+O      overview grid             N   notes drawer
+R      reset timer (presenter)   Esc close overlays
+#/N in the URL                   deep-link to slide N
+?preview=N                       single slide, no chrome
+```
+
+---
+
+## What's inside
+
+### 36 themes
 
 ![36 themes · 8 of them](docs/readme/themes.png)
 
-Each is a pure CSS-tokens file — swap one `<link>` to reskin the entire deck.
-Browse them all in `templates/theme-showcase.html` (each slide rendered in an
-isolated iframe so theme ≠ theme is visually guaranteed).
+One CSS file per theme, overriding tokens from `assets/base.css`. Light and
+calm, bold statement, cool dark, warm, effect-heavy — see
+[references/themes.md](references/themes.md) for when to reach for each.
 
-![16 full-deck templates](docs/readme/templates.png)
+### 15 full-deck templates
 
-### 15 Full-deck templates
+Complete multi-slide decks with CSS scoped under `.tpl-<name>`, so two can
+coexist on one page. Eight carry a strong extracted look
+(`card-news-editorial`, `graphify-dark-graph`, `knowledge-arch-blueprint`,
+`hermes-cyber-terminal`, `obsidian-claude-gradient`, `testing-safety-alert`,
+`card-news-pastel`, `dir-key-nav-minimal`); seven are scenario scaffolds
+(`pitch-deck`, `product-launch`, `tech-sharing`, `weekly-report`,
+`card-news-post` 3:4, `course-module`, `presenter-reveal`).
 
-Eight extracted from real-world decks, seven generic scenario scaffolds:
+Gallery: open `templates/full-decks-index.html`.
+Catalogue: [references/full-decks.md](references/full-decks.md)
 
-**Extracted looks**
-- `xhs-white-editorial` — 小红书白底杂志风
-- `graphify-dark-graph` — 暗底 + 力导向知识图谱
-- `knowledge-arch-blueprint` — 蓝图 / 架构图风
-- `hermes-cyber-terminal` — 终端 cyberpunk
-- `obsidian-claude-gradient` — 紫色渐变卡
-- `testing-safety-alert` — 红 / 琥珀警示风
-- `xhs-pastel-card` — 柔和马卡龙图文
-- `dir-key-nav-minimal` — 方向键极简
-
-**Scenario decks**
-- `pitch-deck`, `product-launch`, `tech-sharing`, `weekly-report`,
-  `xhs-post` (9-slide 3:4), `course-module`,
-  **`presenter-mode-reveal`** 🎤 — complete talk template with full 150-300
-  word speaker scripts on every slide, designed around the `S` key presenter mode
-
-Each is a self-contained folder with scoped `.tpl-<name>` CSS so multiple
-decks can be previewed side-by-side without collisions. Browse the full
-gallery in `templates/full-decks-index.html`.
+### 33 page layouts
 
 ![33 single-page layouts](docs/readme/layouts.png)
 
-### 33 Single-page layouts
+Each is a standalone, working page with realistic demo data — open one in
+Chrome to see it before you commit to it.
 
-cover · toc · section-divider · bullets · two-column · three-column ·
-big-quote · stat-highlight · kpi-grid · table · code · diff · terminal ·
-flow-diagram · timeline · roadmap · mindmap · comparison · pros-cons ·
-todo-checklist · gantt · image-hero · image-grid · chart-bar · chart-line ·
-chart-pie · chart-radar · arch-diagram · process-steps · cta · thanks
+Covers, tables of contents, section dividers, bullets, columns, pull quotes,
+stat hero, KPI grid, tables, four Chart.js chart types, syntax-highlighted
+code, diffs, terminals, flow and architecture diagrams, process steps,
+mindmaps, timelines, roadmaps, gantt, before/after, pros-cons, checklists,
+image hero and bento grid, copyable prompt cards, download lists, CTA, thanks.
 
-Every layout ships with realistic demo data so you can drop it into a deck
-and immediately see it render.
+Catalogue: [references/layouts.md](references/layouts.md)
 
-![33 layouts auto-cycling through real template files](docs/readme/layouts-live.gif)
-
-*The big iframe is loading `templates/single-page/<name>.html` directly and cycling through all 33 layouts every 2.8 seconds.*
+### 47 animations
 
 ![47 animations — 27 CSS + 20 canvas FX](docs/readme/animations.png)
 
-### 27 CSS animations + 20 Canvas FX
+27 named CSS entry effects via `data-anim="fade-up"`, plus 20 canvas FX via
+`data-fx="knowledge-graph"` — particles, confetti, fireworks, starfield,
+matrix rain, force-directed graphs, neural pulses, and more. All of them
+respect `prefers-reduced-motion`.
 
-**CSS (lightweight)** — directional fades, `rise-in`, `zoom-pop`, `blur-in`,
-`glitch-in`, `typewriter`, `neon-glow`, `shimmer-sweep`, `gradient-flow`,
-`stagger-list`, `counter-up`, `path-draw`, `morph-shape`, `parallax-tilt`,
-`card-flip-3d`, `cube-rotate-3d`, `page-turn-3d`, `perspective-zoom`,
-`marquee-scroll`, `kenburns`, `ripple-reveal`, `spotlight`, …
+Catalogue: [references/animations.md](references/animations.md)
 
-**Canvas FX (cinematic)** — `particle-burst`, `confetti-cannon`, `firework`,
-`starfield`, `matrix-rain`, `knowledge-graph` (force-directed physics),
-`neural-net` (signal pulses), `constellation`, `orbit-ring`, `galaxy-swirl`,
-`word-cascade`, `letter-explode`, `chain-react`, `magnetic-field`,
-`data-stream`, `gradient-blob`, `sparkle-trail`, `shockwave`,
-`typewriter-multi`, `counter-explosion`. Each is a real hand-rolled canvas
-module auto-initialised on slide enter via `fx-runtime.js`.
+---
 
-## Quick start (manual, after install or git clone)
+## Offline guarantees
+
+| asset | status |
+|---|---|
+| **Webfonts** (Pretendard 400–900, Noto Serif KR, JetBrains Mono, Playfair Display, Space Grotesk, IBM Plex Mono, Archivo Black) | ✅ vendored in `assets/vendor/fonts/` — 18 files, ~6.6 MB |
+| **Themes, layouts, animations, runtime** | ✅ no network, ever |
+| **Chart.js** (`chart-bar` / `chart-line` / `chart-pie` / `chart-radar`) | ⚠️ CDN `<script>` |
+| **highlight.js** (`code` layout) | ⚠️ CDN `<script>` + stylesheet |
+
+Only those two libraries still reach the network, and only on the five layouts
+that use them. If you are presenting somewhere without wifi and your deck has a
+chart or a code block, vendor them too — drop the UMD build into
+`assets/vendor/` and point the `<script>` at it.
+
+Everything else — every glyph on every slide, in every one of the 36 themes —
+comes off disk.
+
+---
+
+## Rendering to PNG
 
 ```bash
-# Scaffold a new deck from the base template
-./scripts/new-deck.sh my-talk
-
-# Browse everything
-open templates/theme-showcase.html         # all 36 themes (iframe-isolated)
-open templates/layout-showcase.html        # all 33 layouts
-open templates/animation-showcase.html     # all 47 animations
-open templates/full-decks-index.html       # all 14 full decks
-
-# Render any template to PNG via headless Chrome
-./scripts/render.sh templates/theme-showcase.html
-./scripts/render.sh examples/my-talk/index.html 12
+./scripts/render.sh examples/my-talk/index.html all          # every slide
+./scripts/render.sh templates/single-page/kpi-grid.html      # one page
+./scripts/render.sh examples/my-talk/index.html 8 out-dir    # 8 slides, custom dir
 ```
 
-## Keyboard cheat sheet
+Headless Chrome, driven off the `#/N` deep-links that `runtime.js` exposes.
 
-```
-← → ↑ ↓ Space PgUp PgDn Home End   navigate
-F                               fullscreen
-S                               open presenter window (magnetic cards)
-N                               quick notes drawer (bottom)
-R                               reset timer (in presenter window)
-O                               slide overview grid
-T                               cycle themes (syncs to presenter)
-A                               cycle a demo animation on current slide
-#/N (URL)                       deep-link to slide N
-?preview=N (URL)                preview-only mode (single slide, no chrome)
+---
+
+## Verifying a deck
+
+```bash
+./scripts/smoke.sh            # offline checks, ~1s
+./scripts/smoke.sh --render   # + render every deck through headless Chrome
 ```
 
-## Project structure
+These exist because each one caught a real bug that shipped past a green-looking
+run: decks that rendered half their slides, a `<div>` closed before its
+contents, a code layout that highlighted nothing, doc counts drifting off the
+filesystem, a theme that lost its Korean face.
+
+---
+
+## Repository layout
 
 ```
-html-ppt-skill/
-├── SKILL.md                      agent-facing dispatcher
-├── README.md                     this file
-├── references/                   detailed catalogs
-│   ├── themes.md                 36 themes with when-to-use
-│   ├── layouts.md                33 layout types
-│   ├── animations.md             27 CSS + 20 FX catalog
-│   ├── full-decks.md             16 full-deck templates
-│   └── authoring-guide.md        full workflow
+html-ppt/
+├── SKILL.md                     the agent-facing instructions
+├── CONTEXT.md                   vocabulary: deck / slide / chrome / layout
+├── references/                  catalogues, loaded on demand
+│   ├── themes.md                36 themes, with when-to-use
+│   ├── layouts.md               33 layout types
+│   ├── animations.md            27 CSS + 20 canvas FX
+│   ├── full-decks.md            15 full-deck templates
+│   ├── presenter-mode.md        presenter mode + writing the script
+│   ├── authoring-guide.md       the full workflow
+│   └── agent-routing.md         splitting a build across subagents
 ├── assets/
-│   ├── base.css                  shared tokens + primitives
-│   ├── fonts.css                 webfont imports
-│   ├── runtime.js                keyboard + presenter + overview
-│   ├── themes/*.css              36 theme token files
-│   └── animations/
-│       ├── animations.css        27 named CSS animations
-│       ├── fx-runtime.js         auto-init [data-fx] on slide enter
-│       └── fx/*.js               20 canvas FX modules
+│   ├── base.css                 tokens + primitives (don't edit per deck)
+│   ├── layouts.css              CSS owned by the single-page layouts
+│   ├── fonts.css                local @font-face only — no CDN
+│   ├── runtime.js               keyboard, presenter, overview, theme cycling
+│   ├── deck-extras.js           copy buttons, copyright stamps
+│   ├── themes/*.css             36 token overrides
+│   ├── animations/              27 CSS effects + 20 canvas FX modules
+│   └── vendor/fonts/*.woff2     18 vendored faces
 ├── templates/
-│   ├── deck.html                 minimal starter
-│   ├── theme-showcase.html       iframe-isolated theme tour
-│   ├── layout-showcase.html      all 33 layouts
-│   ├── animation-showcase.html   47 animation slides
-│   ├── full-decks-index.html     14-deck gallery
-│   ├── full-decks/<name>/        14 scoped multi-slide decks
-│   └── single-page/*.html        33 layout files with demo data
+│   ├── deck.html                minimal 6-slide starter (Korean)
+│   ├── single-page/*.html       33 layouts with demo data
+│   ├── full-decks/<name>/       15 scoped multi-slide decks
+│   └── *-showcase.html          browse themes / layouts / animations
 ├── scripts/
-│   ├── new-deck.sh               scaffold
-│   ├── render.sh                 headless Chrome → PNG
-│   └── smoke.sh                  markup / counts / fonts / render checks
-└── examples/demo-deck/           complete working deck
+│   ├── new-deck.sh              scaffold
+│   ├── render.sh                headless Chrome → PNG
+│   └── smoke.sh                 run before shipping
+└── examples/                    working decks
 ```
 
-## Philosophy
+---
 
-- **Token-driven design system.** All color, radius, shadow, font decisions
-  live in `assets/base.css` + the current theme file. Change one variable,
-  the whole deck reflows tastefully.
-- **Iframe isolation for previews.** Theme / layout / full-deck showcases all
-  use `<iframe>` per slide so each preview is a real, independent render.
-- **Zero build.** Pure static HTML/CSS/JS. CDN only for webfonts, highlight.js
-  and chart.js (optional).
-- **Senior-designer defaults.** Opinionated type scale, spacing rhythm,
-  gradients and card treatments — no "Corporate PowerPoint 2006" vibes.
-- **Chinese + English first-class.** Noto Sans SC / Noto Serif SC pre-imported.
+## Language
 
-## License
+Korean is the default and English is fully supported. The split is:
 
-MIT © 2026 lewis &lt;sudolewis@gmail.com&gt;.
+- **Deck content and demo copy** — Korean. Set `lang="en"` on `<html>` for an
+  English deck; three full-deck templates (`course-module`, `pitch-deck`,
+  `product-launch`) already are.
+- **Presenter-window chrome** — follows the deck's `lang`. Korean unless the
+  deck says `en`. Add a language by extending `PRESENTER_I18N` in
+  `assets/runtime.js`.
+- **Documentation and code comments** — English, so the repo reads the same way
+  to a person and to an agent.
+- **Korean typography** — `word-break: keep-all` so a heading breaks at word
+  boundaries rather than mid-syllable-block, with roomier line-height (1.22
+  display, 1.75 body). `templates/deck.html` ships this; delete the block for
+  an English deck.
+
+---
+
+## Credit and license
+
+Derived from [lewislulu/html-ppt-skill](https://github.com/lewislulu/html-ppt-skill)
+by way of [aiden-44/html-ppt-skill](https://github.com/aiden-44/html-ppt-skill).
+This fork has since diverged: Chinese content and templates removed, Korean made
+the default throughout, webfonts vendored for offline use, the presenter window
+localised, and a number of layout and rendering bugs fixed. See
+[CHANGELOG.md](./CHANGELOG.md).
+
+MIT — original copyright © 2026 lewis &lt;sudolewis@gmail.com&gt;, retained in
+[LICENSE](./LICENSE). Vendored fonts keep their own licences: Pretendard and
+Noto Serif KR are SIL OFL 1.1; JetBrains Mono, Playfair Display, Space Grotesk,
+IBM Plex Mono and Archivo Black are OFL 1.1.

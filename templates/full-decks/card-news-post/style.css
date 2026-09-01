@@ -1,0 +1,54 @@
+/* card-news-post — 3:4 portrait card-news post */
+.tpl-card-news-post{
+  --bg:#fef7f3;--bg-soft:#fff1ea;--surface:#ffffff;--surface-2:#fff5ef;
+  --border:rgba(90,40,30,.12);--border-strong:rgba(90,40,30,.24);
+  --text-1:#3a1f18;--text-2:#6f4a3e;--text-3:#a68676;
+  --accent:#ff6b8b;--accent-2:#ffa94d;--accent-3:#ffd166;
+  --grad:linear-gradient(135deg,#ffd3e0,#ffe5c7 50%,#d6f0ff);
+  --good:#7bc67b;--warn:#ffb547;--bad:#ff6b6b;
+  --radius:24px;--radius-lg:32px;
+  --shadow:0 14px 36px rgba(90,40,30,.08);
+  font-family:'Pretendard',sans-serif;
+}
+.tpl-card-news-post{background:#f0eae2;display:flex;align-items:center;justify-content:center;min-height:100vh}
+.tpl-card-news-post .deck{width:810px;height:1080px;position:relative;background:transparent}
+.tpl-card-news-post .slide{
+  position:absolute;inset:0;width:810px;height:1080px;aspect-ratio:3/4;
+  padding:70px 64px;border-radius:28px;overflow:hidden;
+  background:var(--bg);
+}
+.tpl-card-news-post .slide::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(45% 30% at 80% 10%,rgba(255,209,102,.35),transparent 70%),
+  radial-gradient(50% 35% at 10% 95%,rgba(255,107,139,.22),transparent 70%),
+  radial-gradient(40% 30% at 90% 85%,rgba(122,200,255,.18),transparent 70%);
+  pointer-events:none;z-index:0}
+/* Lift flow content above .slide::before. This must NOT touch the helpers that
+   position themselves — .page-dot, .sticker and .bottom-bar are absolute, and
+   forcing position:relative on them dropped each one back into the column flex
+   flow, where align-items:stretch blew them out to the full slide width. They
+   set their own z-index, which works without position:relative. */
+.tpl-card-news-post .slide > *:not(.deck-header):not(.deck-footer):not(.page-dot):not(.sticker):not(.bottom-bar){position:relative;z-index:1}
+/* chrome stays absolutely positioned by base.css; only lift it above .slide::before */
+.tpl-card-news-post .slide > .deck-header,.tpl-card-news-post .slide > .deck-footer{z-index:1}
+.tpl-card-news-post .h1{font-size:72px;line-height:1.1;font-weight:900;letter-spacing:-.02em;color:var(--text-1)}
+.tpl-card-news-post .h2{font-size:54px;line-height:1.15;font-weight:800;letter-spacing:-.015em;color:var(--text-1)}
+.tpl-card-news-post .h3{font-size:36px;font-weight:800;color:var(--text-1)}
+.tpl-card-news-post .page-dot{position:absolute;top:40px;right:48px;background:var(--text-1);color:#fff;border-radius:999px;padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;z-index:2}
+.tpl-card-news-post .sticker{position:absolute;padding:10px 18px;background:#fff;border:2.5px dashed var(--text-1);border-radius:18px;font-weight:800;font-size:18px;color:var(--text-1);transform:rotate(-3deg);box-shadow:4px 4px 0 var(--text-1);z-index:2}
+.tpl-card-news-post .sticker.pink{background:#ffd3e0}
+.tpl-card-news-post .sticker.yellow{background:#ffe788}
+.tpl-card-news-post .sticker.blue{background:#cfeaff}
+.tpl-card-news-post .sticker.green{background:#d4f2c8}
+.tpl-card-news-post .hand-box{background:#fff;border:2.5px solid var(--text-1);border-radius:22px;padding:24px 28px;box-shadow:5px 5px 0 var(--text-1)}
+.tpl-card-news-post .lede{color:var(--text-2);font-size:26px;line-height:1.55}
+.tpl-card-news-post .big-emoji{font-size:180px;line-height:1;text-align:center}
+.tpl-card-news-post .num-circle{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:50%;background:var(--accent);color:#fff;font-weight:900;font-size:36px;border:3px solid var(--text-1);box-shadow:4px 4px 0 var(--text-1)}
+.tpl-card-news-post .step-card{background:#fff;border:2.5px solid var(--text-1);border-radius:22px;padding:26px 28px;box-shadow:5px 5px 0 var(--text-1);margin-bottom:24px}
+.tpl-card-news-post .step-card h4{font-size:28px;font-weight:800;margin:0 0 6px}
+.tpl-card-news-post .step-card p{font-size:18px;color:var(--text-2);margin:0}
+.tpl-card-news-post .tag-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.tpl-card-news-post .ht{background:#fff;color:var(--accent);border:2px solid var(--text-1);padding:6px 14px;border-radius:999px;font-weight:700;font-size:16px}
+.tpl-card-news-post .cover-title{background:linear-gradient(180deg,transparent 60%,var(--accent-3) 60%,var(--accent-3) 92%,transparent 92%);padding:0 10px}
+.tpl-card-news-post .heart{color:var(--accent);font-size:28px}
+.tpl-card-news-post .bottom-bar{position:absolute;bottom:40px;left:64px;right:64px;display:flex;justify-content:space-between;align-items:center;font-size:15px;color:var(--text-3);font-family:'JetBrains Mono',monospace;z-index:2}
+.tpl-card-news-post .avatar{width:54px;height:54px;border-radius:50%;background:var(--grad);border:2.5px solid var(--text-1);box-shadow:3px 3px 0 var(--text-1);display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;color:var(--text-1)}

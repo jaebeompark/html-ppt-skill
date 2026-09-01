@@ -1,4 +1,4 @@
-/* theme: cyberpunk-neon — 赛博朋克霓虹 */
+/* theme: cyberpunk-neon — cyberpunk neon */
 :root{
   --bg:#000000;--bg-soft:#0a0a12;--surface:#0f0f1a;--surface-2:#14141f;
   --border:rgba(255,0,170,.25);--border-strong:rgba(0,240,255,.55);
@@ -10,7 +10,7 @@
   --radius:6px;--radius-sm:3px;--radius-lg:10px;
   --shadow:0 0 0 1px rgba(255,43,214,.35),0 0 24px rgba(255,43,214,.35),0 0 48px rgba(0,240,255,.18);
   --shadow-lg:0 0 0 1px rgba(0,240,255,.5),0 0 40px rgba(0,240,255,.45),0 0 80px rgba(255,43,214,.3);
-  --font-sans:'Pretendard','Noto Sans SC',sans-serif;
+  --font-sans:'Pretendard',sans-serif;
   --font-display:'JetBrains Mono','IBM Plex Mono',monospace;
 }
 body{background:

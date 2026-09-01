@@ -28,7 +28,7 @@ Presenter-only prose attached to a slide, hidden from the audience. Never
 visible on the slide itself.
 _Avoid_: comments, annotations
 
-**Speaker script** (逐字稿):
+**Speaker script**:
 Notes written as a near-verbatim spoken delivery, 150–300 words per slide.
 A speaker script is a kind of notes; not all notes are one.
 _Avoid_: transcript, teleprompter text
@@ -84,7 +84,7 @@ _Avoid_: main view, primary window
 **Presenter mode**:
 A second window for the speaker showing the current slide, the next slide, the
 speaker script, and a timer, kept in sync with the audience view.
-_Avoid_: presenter view, speaker view, 演讲者模式
+_Avoid_: presenter view, speaker view
 
 **Preview mode**:
 A stripped rendering of one slide with no chrome, used to embed a true-to-life

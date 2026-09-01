@@ -1,4 +1,4 @@
-/* theme: vaporwave — 蒸汽波 */
+/* theme: vaporwave — vaporwave */
 :root{
   --bg:#1a0938;--bg-soft:#261050;--surface:rgba(255,255,255,.06);--surface-2:rgba(255,255,255,.1);
   --border:rgba(255,110,199,.28);--border-strong:rgba(0,245,255,.5);
@@ -9,7 +9,7 @@
   --radius:18px;--radius-sm:10px;--radius-lg:28px;
   --shadow:0 20px 60px rgba(255,110,199,.2),0 0 1px rgba(0,245,255,.6);
   --shadow-lg:0 30px 80px rgba(255,110,199,.3),0 0 2px rgba(0,245,255,.8);
-  --font-sans:'Space Grotesk','Pretendard','Noto Sans SC',sans-serif;
+  --font-sans:'Space Grotesk','Pretendard',sans-serif;
   --font-display:'Space Grotesk','Pretendard',sans-serif;
 }
 body{background:

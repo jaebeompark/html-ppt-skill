@@ -1,4 +1,4 @@
-/* theme: soft-pastel — 柔和马卡龙 */
+/* theme: soft-pastel — soft macaron pastels */
 :root{
   --bg:#fdf7fb;--bg-soft:#fbeef3;--surface:#ffffff;--surface-2:#fdf0f5;
   --border:rgba(120,70,110,.12);--border-strong:rgba(120,70,110,.22);
@@ -10,5 +10,5 @@
   --radius:24px;--radius-sm:16px;--radius-lg:32px;
   --shadow:0 8px 28px rgba(244,155,184,.18);
   --shadow-lg:0 24px 70px rgba(181,213,240,.3);
-  --font-sans:'Pretendard','Noto Sans SC',sans-serif;
+  --font-sans:'Pretendard',sans-serif;
 }

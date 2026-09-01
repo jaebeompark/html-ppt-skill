@@ -1,4 +1,4 @@
-/* hermes-cyber-terminal — 暗终端 + 霓虹绿青 + 扫描线 */
+/* hermes-cyber-terminal — dark terminal + neon green-teal + scanlines */
 .tpl-hermes-cyber-terminal{
   --hc-bg:#0a0c10;
   --hc-bg2:#15151b;
@@ -13,7 +13,7 @@
   --hc-red:#ff6b6b;
   background:var(--hc-bg);
   color:var(--hc-ink);
-  font-family:'JetBrains Mono','SF Mono','Pretendard','Noto Sans SC',monospace;
+  font-family:'JetBrains Mono','SF Mono','Pretendard',monospace;
 }
 .tpl-hermes-cyber-terminal .slide{background:var(--hc-bg);color:var(--hc-ink);padding:60px 84px;overflow:hidden}
 .tpl-hermes-cyber-terminal .hc-scanlines{position:absolute;inset:0;pointer-events:none;z-index:3;background:repeating-linear-gradient(180deg,transparent 0,transparent 3px,rgba(126,211,164,.025) 3px,rgba(126,211,164,.025) 4px);mix-blend-mode:screen}
@@ -33,7 +33,7 @@
 .tpl-hermes-cyber-terminal .hc-h1{font-family:'JetBrains Mono',monospace;font-size:72px;font-weight:700;line-height:1.05;letter-spacing:-.02em;color:var(--hc-green);text-shadow:0 0 30px rgba(126,211,164,.35),0 0 60px rgba(126,211,164,.1);margin:14px 0 12px}
 .tpl-hermes-cyber-terminal .hc-h2{font-size:46px;font-weight:600;color:var(--hc-ink);margin:0 0 10px;letter-spacing:-.015em}
 .tpl-hermes-cyber-terminal .hc-h3{font-size:22px;font-weight:600;color:var(--hc-amber);margin:0 0 10px}
-.tpl-hermes-cyber-terminal .hc-lede{font-size:18px;line-height:1.7;color:var(--hc-ink2);max-width:780px;font-family:'Pretendard','Noto Sans SC',sans-serif}
+.tpl-hermes-cyber-terminal .hc-lede{font-size:18px;line-height:1.7;color:var(--hc-ink2);max-width:780px;font-family:'Pretendard',sans-serif}
 .tpl-hermes-cyber-terminal .hc-cursor{display:inline-block;width:12px;height:1em;background:var(--hc-green);vertical-align:middle;margin-left:6px;animation:hcBlink 1s steps(2) infinite}
 @keyframes hcBlink{50%{opacity:0}}
 .tpl-hermes-cyber-terminal .hc-card{background:var(--hc-surface);border:1px solid var(--hc-border);border-radius:10px;padding:20px 24px;position:relative}

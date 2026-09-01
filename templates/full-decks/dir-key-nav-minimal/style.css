@@ -1,6 +1,6 @@
-/* dir-key-nav-minimal — 方向键极简 · 8 种 mono-background 切换 */
+/* dir-key-nav-minimal — arrow-key minimal, 8 mono backgrounds */
 .tpl-dir-key-nav-minimal{
-  --dk-font:'Pretendard','Noto Sans SC','PingFang SC',-apple-system,sans-serif;
+  --dk-font:'Pretendard',-apple-system,sans-serif;
   --dk-mono:'JetBrains Mono',monospace;
   background:#000;
   color:#fff;

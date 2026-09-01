@@ -1,4 +1,4 @@
-/* theme: xiaohongshu-white — 小红书白底高级感 */
+/* theme: clean-white — clean white, card-news polish */
 :root{
   --bg:#fffdfb;--bg-soft:#fff6f1;--surface:#ffffff;--surface-2:#fff1ea;
   --border:rgba(60,30,20,.1);--border-strong:rgba(60,30,20,.22);
@@ -10,7 +10,7 @@
   --radius:20px;--radius-sm:14px;--radius-lg:28px;
   --shadow:0 12px 30px rgba(255,39,66,.08);
   --shadow-lg:0 24px 60px rgba(255,39,66,.14);
-  --font-sans:'Pretendard','Noto Sans SC',sans-serif;
-  --font-display:'Noto Serif KR','Noto Serif SC','Playfair Display',serif;
+  --font-sans:'Pretendard',sans-serif;
+  --font-display:'Noto Serif KR','Playfair Display',serif;
   --letter-tight:-.02em;
 }

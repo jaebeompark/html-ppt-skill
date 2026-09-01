@@ -1,4 +1,4 @@
-/* theme: magazine-bold — 杂志大标题 */
+/* theme: magazine-bold — magazine, oversized headlines */
 :root{
   --bg:#f5efe2;--bg-soft:#ebe4d2;--surface:#fbf6e8;--surface-2:#ede5d0;
   --border:rgba(10,10,10,.16);--border-strong:#0a0a0a;
@@ -10,9 +10,9 @@
   --radius:0px;--radius-sm:0px;--radius-lg:2px;
   --shadow:none;
   --shadow-lg:6px 6px 0 var(--accent);
-  --font-sans:'Pretendard','Noto Sans SC',sans-serif;
-  --font-serif:'Playfair Display','Noto Serif KR','Noto Serif SC',Georgia,serif;
-  --font-display:'Playfair Display','Noto Serif KR','Noto Serif SC',Georgia,serif;
+  --font-sans:'Pretendard',sans-serif;
+  --font-serif:'Playfair Display','Noto Serif KR',Georgia,serif;
+  --font-display:'Playfair Display','Noto Serif KR',Georgia,serif;
 }
 h1.title,.h1{font-size:120px;line-height:.92;font-weight:900;letter-spacing:-.04em;font-family:var(--font-serif)}
 h2.title,.h2{font-size:72px;font-weight:800;font-family:var(--font-serif)}

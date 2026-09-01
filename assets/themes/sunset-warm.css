@@ -1,4 +1,4 @@
-/* theme: sunset-warm — 暖色调 橘/珊瑚/琥珀 */
+/* theme: sunset-warm — warm orange, coral and amber */
 :root{
   --bg:#fff7ef;--bg-soft:#ffeedc;--surface:#ffffff;--surface-2:#fff2e0;
   --border:rgba(120,60,20,.12);--border-strong:rgba(120,60,20,.22);
@@ -10,5 +10,5 @@
   --radius:18px;--radius-sm:12px;--radius-lg:28px;
   --shadow:0 12px 32px rgba(227,106,45,.16);
   --shadow-lg:0 24px 64px rgba(227,106,45,.22);
-  --font-sans:'Pretendard','Noto Sans SC',sans-serif;
+  --font-sans:'Pretendard',sans-serif;
 }

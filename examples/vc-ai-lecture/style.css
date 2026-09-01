@@ -1,0 +1,47 @@
+/* vc-ai-lecture — 벤처캐피털의 AI 활용 · 한국어 강의용 덱
+ *
+ * 이 파일이 하는 일은 두 가지뿐입니다.
+ *   1) 한글 조판 — word-break:keep-all. 브라우저 기본값은 한글을 아무 글자에서나
+ *      끊습니다. "벤처캐피털이" 가 "벤처캐피" / "털이" 로 갈리면 읽는 리듬이
+ *      무너집니다. 어절 단위로 넘어가게 하고, 행간을 라틴보다 넉넉히 잡습니다.
+ *   2) 템플릿 사용자용 보조 표시 — 데모 데이터 배지, 레이아웃 이름표.
+ *
+ * 색은 한 줄도 직접 쓰지 않습니다. 전부 토큰(var(--accent) 등)에서 옵니다.
+ * T 키로 테마를 바꿔도 이 파일은 그대로 따라옵니다.
+ */
+.tpl-vc-ai-lecture{word-break:keep-all;overflow-wrap:anywhere}
+.tpl-vc-ai-lecture .slide{padding:76px 100px}
+
+.tpl-vc-ai-lecture .h1{font-size:72px;line-height:1.22;letter-spacing:-.03em}
+.tpl-vc-ai-lecture .h2{font-size:46px;line-height:1.3;letter-spacing:-.025em}
+.tpl-vc-ai-lecture .lede{font-size:20px;line-height:1.75;color:var(--text-2)}
+.tpl-vc-ai-lecture li{line-height:1.8}
+.tpl-vc-ai-lecture .card p.dim{line-height:1.75}
+
+/* 코드·표의 숫자까지 어절 단위로 끊으면 오히려 깨집니다. 되돌립니다. */
+.tpl-vc-ai-lecture pre,
+.tpl-vc-ai-lecture code,
+.tpl-vc-ai-lecture .t .num,
+.tpl-vc-ai-lecture .mono{word-break:normal}
+
+/* 데모 데이터 배지 — 발표 멘트가 아니라 "이 숫자는 예시다"라는 템플릿 표시입니다.
+   실제 수치로 갈아끼운 뒤 이 배지를 지우세요. */
+.tpl-vc-ai-lecture .demo{display:inline-flex;align-items:center;gap:6px;margin-left:12px;
+  padding:3px 11px;border-radius:999px;vertical-align:middle;
+  border:1px dashed var(--border-strong);color:var(--text-3);
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.02em}
+
+/* 레이아웃 이름표 — 이 페이지가 어느 single-page 템플릿에서 왔는지 표시합니다.
+   레이아웃을 고르고 나면 README의 한 줄 sed 로 전부 지울 수 있습니다. */
+.tpl-vc-ai-lecture .lay{color:var(--text-3);font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;opacity:.75}
+
+/* 인용 페이지 — 서체만 세리프로 떨어뜨립니다. */
+.tpl-vc-ai-lecture blockquote{word-break:keep-all}
+
+/* 체크리스트 — 기본 820px는 영문 demo 기준입니다. 한글 문장이 길어 태그가
+   "#" / "보안" 두 줄로 갈라졌습니다. 폭을 넓히고 태그 줄바꿈을 끕니다. */
+.tpl-vc-ai-lecture .todo{max-width:1220px}
+.tpl-vc-ai-lecture .todo li .t{font-size:19px}
+.tpl-vc-ai-lecture .todo li .tag{flex:none;white-space:nowrap;padding-left:24px}
+/* 완료 항목도 뒷줄에서 읽혀야 합니다. 기본 --text-3은 빔프로젝터에서 흐립니다. */
+.tpl-vc-ai-lecture .todo li.done .t{color:var(--text-2)}

@@ -1,7 +1,7 @@
-# ko-presenter-reveal · 한국어 발표자 모드 템플릿
+# presenter-reveal · 한국어 발표자 모드 템플릿
 
-**逐字稿를 보면서 발표하는** 한국어 기술 공유용 full-deck 템플릿입니다.
-`presenter-mode-reveal`(중국어)의 한국어 대응판이고, 한글 조판과 한국 사내 발표의
+**대본을 보면서 발표하는** 한국어 기술 공유용 full-deck 템플릿입니다.
+`presenter-reveal`(중국어)의 한국어 대응판이고, 한글 조판과 한국 사내 발표의
 흐름에 맞춰 다시 짰습니다.
 
 ## 사용 시나리오
@@ -14,7 +14,7 @@
 ## 시작하기
 
 ```bash
-cp -r templates/full-decks/ko-presenter-reveal examples/my-talk
+cp -r templates/full-decks/presenter-reveal examples/my-talk
 open examples/my-talk/index.html
 ```
 
@@ -25,7 +25,7 @@ open examples/my-talk/index.html
 
 | 키 | 동작 |
 |---|---|
-| `S` | 발표자 창 열기 (현재 / 다음 / 逐字稿 / 타이머) |
+| `S` | 발표자 창 열기 (현재 / 다음 / 발표 대본 / 타이머) |
 | `←` `→` / `↑` `↓` | 페이지 이동 (두 창 동기화) |
 | `T` | 테마 순환 — tokyo-night · catppuccin-mocha · dracula · nord · corporate-clean |
 | `F` | 전체화면 |
@@ -52,9 +52,9 @@ open examples/my-talk/index.html
 각 `<aside class="notes">` 끝에 `[리허설: …]` 줄이 있습니다. 시간 배분과
 "여기서 서두르지 말 것" 같은 진행 메모라, 실제 발표문을 쓸 때 같이 갈아끼우세요.
 
-## 逐字稿 쓰는 법
+## 발표 대본 쓰는 법
 
-이 템플릿의 예시 逐字稿는 세 가지를 지킵니다.
+이 템플릿의 예시 대본은 세 가지를 지킵니다.
 
 1. **읽는 글이 아니라 신호** — 핵심어를 `<strong>`으로 굵게 두고, 전환 문장은
    문단을 나눕니다. 발표자 창에서 눈이 한 번에 잡습니다.

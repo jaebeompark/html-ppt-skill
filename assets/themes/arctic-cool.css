@@ -1,4 +1,4 @@
-/* theme: arctic-cool — 冷色调 蓝/青/石板灰 */
+/* theme: arctic-cool — cool blues, teal and slate */
 :root{
   --bg:#f2f6fb;--bg-soft:#e7eef7;--surface:#ffffff;--surface-2:#edf3fa;
   --border:rgba(40,70,110,.12);--border-strong:rgba(40,70,110,.24);
@@ -10,5 +10,5 @@
   --radius:14px;--radius-sm:10px;--radius-lg:22px;
   --shadow:0 10px 28px rgba(40,70,110,.12);
   --shadow-lg:0 24px 60px rgba(40,70,110,.18);
-  --font-sans:'Pretendard','Noto Sans SC',sans-serif;
+  --font-sans:'Pretendard',sans-serif;
 }

@@ -1,4 +1,4 @@
-/* theme: aurora — 极光渐变 */
+/* theme: aurora — aurora gradient */
 :root{
   --bg:#06091c;--bg-soft:#0a1130;--surface:rgba(255,255,255,.05);--surface-2:rgba(255,255,255,.08);
   --border:rgba(180,220,255,.14);--border-strong:rgba(180,220,255,.28);
@@ -10,7 +10,7 @@
   --radius:20px;--radius-sm:14px;--radius-lg:28px;
   --shadow:0 20px 60px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.08);
   --shadow-lg:0 30px 80px rgba(0,0,0,.55);
-  --font-sans:'Pretendard','Noto Sans SC',sans-serif;
+  --font-sans:'Pretendard',sans-serif;
 }
 body{background:
   radial-gradient(60% 50% at 20% 10%,rgba(94,242,198,.35),transparent 70%),

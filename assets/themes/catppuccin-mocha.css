@@ -1,4 +1,4 @@
-/* theme: catppuccin-mocha — catppuccin 深 */
+/* theme: catppuccin-mocha — catppuccin, dark */
 :root{
   --bg:#1e1e2e;--bg-soft:#181825;--surface:#313244;--surface-2:#45475a;
   --border:rgba(205,214,244,.12);--border-strong:rgba(205,214,244,.24);
@@ -10,5 +10,5 @@
   --radius:14px;--radius-sm:10px;--radius-lg:22px;
   --shadow:0 10px 30px rgba(0,0,0,.35);
   --shadow-lg:0 24px 60px rgba(0,0,0,.5);
-  --font-sans:'Pretendard','Noto Sans SC',sans-serif;
+  --font-sans:'Pretendard',sans-serif;
 }

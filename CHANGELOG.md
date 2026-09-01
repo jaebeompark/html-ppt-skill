@@ -1,10 +1,77 @@
 # Changelog
 
-Changes in this Korean-optimized fork, relative to upstream
-[lewislulu/html-ppt-skill](https://github.com/lewislulu/html-ppt-skill).
-Everything upstream provides still works; only the entries below differ.
+This fork started as a Korean-optimised build of
+[lewislulu/html-ppt-skill](https://github.com/lewislulu/html-ppt-skill) and has
+since separated from it. Entries below the 2026-09-01 release describe the
+period when upstream parity still held.
 
 Newest first.
+
+## 2026-09-01 — separated from upstream
+
+### Chinese removed; Korean is the default
+
+Every Chinese string is gone from the skill — roughly 15,000 characters across
+110 files: layout demo copy, full-deck content, theme comments, showcase pages
+and documentation.
+
+- **Deleted** `presenter-mode-reveal` (the Chinese presenter template, now
+  redundant) and `README.zh-CN.md`.
+- **Renamed** the three Xiaohongshu-branded templates to `card-news-editorial`,
+  `card-news-pastel` and `card-news-post`, and `xiaohongshu-white.css` to
+  `clean-white.css`. The 3:4 portrait format is genuinely useful for Korean
+  card news and Instagram carousels, so the format was kept and only the
+  platform-specific identity dropped.
+- **Renamed** `ko-presenter-reveal` to `presenter-reveal` — with Korean as the
+  default, the `ko-` prefix no longer distinguishes anything.
+- Full-deck count is now **15**, down from 16.
+- `Noto Sans SC` and `Noto Serif SC` were removed from every font stack, along
+  with the `PingFang SC` fallbacks. This supersedes the 2026-08-24 entries
+  below, which said both families would stay.
+
+### The presenter window speaks the deck's language
+
+`runtime.js` gained a `PRESENTER_I18N` table. The presenter window's chrome —
+card titles, buttons, hint bar, the end-of-deck and empty-script strings, the
+reset-layout confirm — now follows the deck's `<html lang>`. **Korean is the
+default**; English is opt-in with `lang="en"`. Only the chrome is translated;
+the speaker script comes from the deck.
+
+### Webfonts are vendored — the skill is offline
+
+`assets/fonts.css` no longer imports anything. All 18 faces (Pretendard
+400–900, Noto Serif KR, JetBrains Mono, Playfair Display, Space Grotesk, IBM
+Plex Mono, Archivo Black) live in `assets/vendor/fonts/` as local
+`@font-face` declarations — about 6.6 MB.
+
+The failure this removes: with a CDN import, presenting from a room with no
+working wifi meant Hangul silently fell back to a system face mid-talk. The
+presenter window, which is `document.write`n into a popup, now links the deck's
+own resolved `fonts.css` URL rather than carrying an import of its own.
+
+Chart.js and highlight.js are still fetched from a CDN by the five layouts that
+use them; nothing else touches the network.
+
+### Fixed
+
+- **`card-news-post` positioned helpers collapsed.** A blanket
+  `.slide > *{position:relative}` rule — added to lift content above the
+  gradient wash — outweighed the `position:absolute` on `.page-dot`,
+  `.sticker` and `.bottom-bar`, dropping all three back into the column flex
+  flow where `align-items:stretch` blew them to the full slide width. Stickers
+  rendered as full-width bars and the page badge as a header stripe. The rule
+  now excludes the three, which set their own `z-index` and never needed
+  `position:relative`.
+- **Stale counts in slide demo copy** — several layouts still advertised 31
+  layouts and 24 themes.
+- **README screenshots** regenerated from the Korean templates. The two hero
+  GIFs were recordings of Chinese decks and were removed.
+
+### Documentation
+
+`README.md` was rewritten as a standalone document rather than a stack of fork
+banners over the upstream text. `references/presenter-mode.md` was rewritten in
+English. Attribution to lewis and aiden-44 is kept, and `LICENSE` is unchanged.
 
 ## 2026-08-24
 

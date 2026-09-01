@@ -7,7 +7,7 @@
   --grad:linear-gradient(135deg,#2d7d6e,#4ea893);
   --radius:14px;--radius-lg:20px;
   --shadow:0 12px 30px rgba(60,45,20,.07);
-  font-family:'Pretendard','Noto Sans SC',sans-serif;
+  font-family:'Pretendard',sans-serif;
 }
 .tpl-course-module .slide{padding:64px 80px;background:var(--bg);display:grid;grid-template-columns:260px 1fr;gap:56px;align-content:start}
 .tpl-course-module .slide.full{grid-template-columns:1fr;display:flex;flex-direction:column;justify-content:center}

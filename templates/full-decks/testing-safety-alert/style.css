@@ -1,4 +1,4 @@
-/* testing-safety-alert — 红/琥珀 警示风 · 白底高对比 */
+/* testing-safety-alert — red/amber alert, high-contrast on white */
 .tpl-testing-safety-alert{
   --ts-bg:#fffaf7;
   --ts-ink:#14141a;
@@ -13,7 +13,7 @@
   --ts-green-soft:#e8f8ee;
   background:var(--ts-bg);
   color:var(--ts-ink);
-  font-family:'Pretendard','Noto Sans SC','PingFang SC',-apple-system,sans-serif;
+  font-family:'Pretendard',-apple-system,sans-serif;
 }
 .tpl-testing-safety-alert .slide{background:var(--ts-bg);color:var(--ts-ink);padding:64px 84px}
 .tpl-testing-safety-alert .ts-stripe{position:absolute;top:0;left:0;right:0;height:14px;background:repeating-linear-gradient(45deg,var(--ts-red) 0 18px,#111318 18px 36px)}

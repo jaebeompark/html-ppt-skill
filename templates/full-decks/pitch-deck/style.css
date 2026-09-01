@@ -8,7 +8,7 @@
   --grad-soft:linear-gradient(135deg,#eef1ff,#f4edff 55%,#fbedff);
   --radius:20px;--radius-lg:28px;
   --shadow:0 14px 40px rgba(20,25,60,.08),0 2px 8px rgba(20,25,60,.04);
-  font-family:'Pretendard','Noto Sans SC',sans-serif;
+  font-family:'Pretendard',sans-serif;
 }
 .tpl-pitch-deck .slide{padding:88px 112px}
 .tpl-pitch-deck .kicker{color:var(--accent);font-weight:700}

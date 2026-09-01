@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,13 +14,13 @@
   <!-- 1. COVER -->
   <section class="slide is-active">
     <div class="ts-stripe"></div>
-    <div class="ts-chrome"><span class="ts-alert-tag">ai safety · 高优先级</span><span class="ts-page">01 / 08</span></div>
-    <div class="ts-kicker">2026 年最重要的一条判断</div>
-    <h1 class="ts-h1">别再追问<br><span class="strike">AI 会不会干活</span><br>开始问：<span class="red">它出事谁负责</span></h1>
-    <p class="ts-sub">AI 出错的代价，不再是一次 bad response 这么简单 —— 它可能一次性写 300 份工单、提 80 个 PR、发 5000 封邮件。</p>
+    <div class="ts-chrome"><span class="ts-alert-tag">ai safety · 최우선</span><span class="ts-page">01 / 08</span></div>
+    <div class="ts-kicker">2026년 가장 중요한 판단 하나</div>
+    <h1 class="ts-h1"><span class="strike">AI 가 일을 할 수 있나</span><br>는 그만 묻고<br><span class="red">사고 나면 누가 책임지나</span>를 물으세요</h1>
+    <p class="ts-sub">AI 가 틀렸을 때의 대가는 나쁜 답변 하나로 끝나지 않습니다. 한 번에 티켓 300건을 쓰고, PR 80개를 올리고, 메일 5,000통을 보낼 수 있습니다.</p>
     <div class="ts-alert-box">
-      <h3>风险已经规模化</h3>
-      <p>「做错」成本 × N；「做对」收益 × N。<br>这就是为什么 <b>测试、验收、安全、风控</b> 会变成未来 3 年最贵的能力。</p>
+      <h3>위험은 이미 규모를 얻었습니다</h3>
+      <p>틀렸을 때의 비용도 × N, 맞았을 때의 이득도 × N.<br>그래서 <b>테스트·검수·보안·리스크</b>가 앞으로 3년간 가장 비싼 능력이 됩니다.</p>
     </div>
     <div class="ts-stripe-b"></div>
     <div class="ts-footer"><span>AI SAFETY BRIEF · LEWIS · 2026.04</span><span>01 / 08</span></div>
@@ -29,11 +29,11 @@
   <!-- 2. SECTION -->
   <section class="slide">
     <div class="ts-stripe"></div>
-    <div class="ts-chrome"><span class="ts-alert-tag amber">section · risk 分级</span><span class="ts-page">02 / 08</span></div>
+    <div class="ts-chrome"><span class="ts-alert-tag amber">section · 위험 등급</span><span class="ts-page">02 / 08</span></div>
     <div style="margin:auto 0">
       <div class="ts-kicker">Chapter One</div>
-      <h1 class="ts-h1" style="font-size:130px">先分 <span class="red">等级</span></h1>
-      <p class="ts-sub" style="font-size:28px">不是所有 AI 行为都同等危险。<br>先把「可撤销」和「不可撤销」分开，再谈流程。</p>
+      <h1 class="ts-h1" style="font-size:130px">먼저 <span class="red">등급</span>부터</h1>
+      <p class="ts-sub" style="font-size:28px">모든 AI 행동이 똑같이 위험하지는 않습니다.<br>되돌릴 수 있는 것과 없는 것을 먼저 가르고, 절차는 그다음입니다.</p>
     </div>
     <div class="ts-stripe-b"></div>
     <div class="ts-footer"><span>section · level taxonomy</span><span>02 / 08</span></div>
@@ -42,16 +42,16 @@
   <!-- 3. CONTENT risk levels -->
   <section class="slide">
     <div class="ts-stripe"></div>
-    <div class="ts-chrome"><span class="ts-alert-tag">风险分级 · 3 levels</span><span class="ts-page">03 / 08</span></div>
-    <h2 class="ts-h2">三档风险，三种处理</h2>
+    <div class="ts-chrome"><span class="ts-alert-tag">위험 등급 · 3 levels</span><span class="ts-page">03 / 08</span></div>
+    <h2 class="ts-h2">세 등급, 세 가지 대응</h2>
     <div class="ts-grid-3">
-      <div class="ts-card" style="border-top:4px solid var(--ts-green)"><div class="lbl">L1 · 绿色</div><h4>可撤销</h4><p>写 draft、生成图片、起草文档。<br>错了 Ctrl+Z，零代价。<br><b style="color:var(--ts-green)">策略：放开跑</b></p></div>
-      <div class="ts-card" style="border-top:4px solid var(--ts-amber)"><div class="lbl">L2 · 琥珀</div><h4>半可撤销</h4><p>发 draft 邮件、提 PR、改 staging 数据。<br>错了要道歉 / 回滚。<br><b style="color:var(--ts-amber)">策略：人工复核</b></p></div>
-      <div class="ts-card" style="border-top:4px solid var(--ts-red)"><div class="lbl">L3 · 红色</div><h4>不可撤销</h4><p>发真实邮件、付款、删库、删 prod 数据。<br>错了就真错了。<br><b style="color:var(--ts-red)">策略：硬卡 + 双人审</b></p></div>
+      <div class="ts-card" style="border-top:4px solid var(--ts-green)"><div class="lbl">L1 · 초록</div><h4>되돌릴 수 있음</h4><p>초안 쓰기, 이미지 생성, 문서 기초.<br>틀리면 Ctrl+Z, 비용 0.<br><b style="color:var(--ts-green)">방침: 그냥 돌린다</b></p></div>
+      <div class="ts-card" style="border-top:4px solid var(--ts-amber)"><div class="lbl">L2 · 호박</div><h4>일부만 되돌릴 수 있음</h4><p>초안 메일 발송, PR 등록, staging 데이터 수정.<br>틀리면 사과하거나 롤백해야 합니다.<br><b style="color:var(--ts-amber)">방침: 사람이 검토</b></p></div>
+      <div class="ts-card" style="border-top:4px solid var(--ts-red)"><div class="lbl">L3 · 빨강</div><h4>되돌릴 수 없음</h4><p>실제 메일 발송, 결제, DB 삭제, prod 데이터 삭제.<br>틀리면 그걸로 끝입니다.<br><b style="color:var(--ts-red)">방침: 강제 차단 + 2인 승인</b></p></div>
     </div>
     <div class="ts-alert-box amber">
-      <h3>绝不要让 agent 自己升级</h3>
-      <p>L1 的任务不能自己变成 L2。授权必须是显式的、可撤销的、带过期时间的。</p>
+      <h3>agent 가 스스로 등급을 올리게 두지 마세요</h3>
+      <p>L1 작업이 스스로 L2 가 되어서는 안 됩니다. 권한은 명시적이고, 회수할 수 있고, 만료 시각이 있어야 합니다.</p>
     </div>
     <div class="ts-stripe-b"></div>
     <div class="ts-footer"><span>risk · 3 levels</span><span>03 / 08</span></div>
@@ -61,8 +61,8 @@
   <section class="slide">
     <div class="ts-stripe"></div>
     <div class="ts-chrome"><span class="ts-alert-tag">policy as code</span><span class="ts-page">04 / 08</span></div>
-    <div class="ts-kicker">别用文档管规则 · 用代码管规则</div>
-    <h2 class="ts-h2">三十行 YAML，<br><span class="ts-highlight-red">红线硬卡</span></h2>
+    <div class="ts-kicker">규칙은 문서가 아니라 코드로</div>
+    <h2 class="ts-h2">YAML 서른 줄로<br><span class="ts-highlight-red">레드라인을 강제 차단</span></h2>
     <pre class="ts-codebox"><span class="cm"># safety-policy.yaml · compiled → runtime guard</span>
 <span class="kw">level_1_allow</span>:
   - tools: [<span class="st">write_draft</span>, <span class="st">generate_image</span>, <span class="st">read_docs</span>]
@@ -87,8 +87,8 @@
   <section class="slide">
     <div class="ts-stripe"></div>
     <div class="ts-chrome"><span class="ts-alert-tag amber">incident report · q1</span><span class="ts-page">05 / 08</span></div>
-    <h2 class="ts-h2">我们 Q1 的 <span class="red">12 起 AI 事故</span></h2>
-    <p class="ts-sub">幸好全部捕获在 staging。但每一起都能上生产。</p>
+    <h2 class="ts-h2">1분기 <span class="red">AI 사고 12건</span></h2>
+    <p class="ts-sub">다행히 전부 staging 에서 잡혔습니다. 하지만 하나같이 운영으로 갈 수 있었습니다.</p>
     <svg viewBox="0 0 1040 360" style="width:100%;max-width:1040px;margin-top:18px" xmlns="http://www.w3.org/2000/svg">
       <g font-family="Inter,sans-serif" font-size="14" fill="#4a4955">
         <line x1="70" y1="320" x2="1000" y2="320" stroke="#eaecf3" stroke-width="2"/>
@@ -116,11 +116,11 @@
         </g>
         <!-- legend -->
         <g transform="translate(720,60)">
-          <rect x="0" y="0" width="16" height="16" fill="#e0314a"/><text x="24" y="13" font-weight="700">L3 不可撤销 (3)</text>
-          <rect x="0" y="26" width="16" height="16" fill="#d97706"/><text x="24" y="39" font-weight="700">L2 需复核 (4)</text>
-          <rect x="0" y="52" width="16" height="16" fill="#067647"/><text x="24" y="65" font-weight="700">L1 可恢复 (5)</text>
-          <text x="0" y="100" font-size="13" fill="#8a8892">全部被 safety-policy 在 runtime 拦下，</text>
-          <text x="0" y="118" font-size="13" fill="#8a8892">未进 prod。但 3 起 L3 非常惊险。</text>
+          <rect x="0" y="0" width="16" height="16" fill="#e0314a"/><text x="24" y="13" font-weight="700">L3 되돌릴 수 없음 (3)</text>
+          <rect x="0" y="26" width="16" height="16" fill="#d97706"/><text x="24" y="39" font-weight="700">L2 검토 필요 (4)</text>
+          <rect x="0" y="52" width="16" height="16" fill="#067647"/><text x="24" y="65" font-weight="700">L1 복구 가능 (5)</text>
+          <text x="0" y="100" font-size="13" fill="#8a8892">전부 safety-policy 가 runtime 에서 막았고,</text>
+          <text x="0" y="118" font-size="13" fill="#8a8892">운영에는 안 갔습니다. 다만 L3 세 건은 아슬아슬했습니다.</text>
         </g>
       </g>
     </svg>
@@ -132,15 +132,15 @@
   <section class="slide">
     <div class="ts-stripe"></div>
     <div class="ts-chrome"><span class="ts-alert-tag green">red-team checklist</span><span class="ts-page">06 / 08</span></div>
-    <h2 class="ts-h2">上线前 <span class="red">必过 7 道题</span></h2>
+    <h2 class="ts-h2">배포 전 <span class="red">반드시 통과할 7문항</span></h2>
     <div class="ts-checklist">
-      <div class="ts-check ok"><div class="box">✓</div><div class="txt">它能删除东西吗？有人类 review 吗？能 60 秒内回滚吗？</div></div>
-      <div class="ts-check ok"><div class="box">✓</div><div class="txt">它的 prompt 注入能让它越权吗？（跑过红队提示词）</div></div>
-      <div class="ts-check"><div class="box">!</div><div class="txt">它处理 PII 吗？日志里是不是也有 PII？</div></div>
-      <div class="ts-check ok"><div class="box">✓</div><div class="txt">上下游失败时，它会不会开始乱改其他资源？</div></div>
-      <div class="ts-check"><div class="box">!</div><div class="txt">并发 100 个 agent 一起跑会不会死锁？</div></div>
-      <div class="ts-check ok"><div class="box">✓</div><div class="txt">错了能不能 <b>立刻</b> 停？（kill switch 能 2 秒内生效吗）</div></div>
-      <div class="ts-check"><div class="box">!</div><div class="txt">出事时有没有人值班？值班手册有没有 agent 专属章节？</div></div>
+      <div class="ts-check ok"><div class="box">✓</div><div class="txt">무언가를 지울 수 있나? 사람이 검토하나? 60초 안에 롤백되나?</div></div>
+      <div class="ts-check ok"><div class="box">✓</div><div class="txt">프롬프트 주입으로 권한을 넘길 수 있나? (레드팀 문구를 돌려봤나)</div></div>
+      <div class="ts-check"><div class="box">!</div><div class="txt">개인정보를 다루나? 로그에도 개인정보가 남나?</div></div>
+      <div class="ts-check ok"><div class="box">✓</div><div class="txt">앞뒤 단계가 실패하면 엉뚱한 자원을 건드리기 시작하나?</div></div>
+      <div class="ts-check"><div class="box">!</div><div class="txt">agent 100개를 동시에 돌리면 교착이 생기나?</div></div>
+      <div class="ts-check ok"><div class="box">✓</div><div class="txt">틀렸을 때 <b>즉시</b> 멈출 수 있나? (kill switch 가 2초 안에 듣나)</div></div>
+      <div class="ts-check"><div class="box">!</div><div class="txt">사고 때 당직이 있나? 당직 매뉴얼에 agent 전용 장이 있나?</div></div>
     </div>
     <div class="ts-stripe-b"></div>
     <div class="ts-footer"><span>checklist · pre-launch</span><span>06 / 08</span></div>
@@ -149,16 +149,16 @@
   <!-- 7. CTA -->
   <section class="slide">
     <div class="ts-stripe"></div>
-    <div class="ts-chrome"><span class="ts-alert-tag green">今晚就能动</span><span class="ts-page">07 / 08</span></div>
-    <h2 class="ts-h2">今晚先做 <span class="ts-highlight-red">三件事</span></h2>
+    <div class="ts-chrome"><span class="ts-alert-tag green">오늘 밤 할 수 있는 것</span><span class="ts-page">07 / 08</span></div>
+    <h2 class="ts-h2">오늘 밤 먼저 할 <span class="ts-highlight-red">세 가지</span></h2>
     <div class="ts-grid-3">
-      <div class="ts-card"><div class="lbl">1 · 分级</div><h4>给你的 agent<br>写 L1/L2/L3</h4><p>把所有工具列出来，标上等级。不标的一律按 L3。</p></div>
-      <div class="ts-card"><div class="lbl">2 · 写 policy</div><h4>policy.yaml<br>接 runtime</h4><p>不要信 prompt 里的 "be careful"，要信执行层的硬卡。</p></div>
-      <div class="ts-card"><div class="lbl">3 · kill switch</div><h4>红按钮<br>能在 2 秒内停</h4><p>CTO / on-call 都得知道怎么按。演练一次。</p></div>
+      <div class="ts-card"><div class="lbl">1 · 등급 매기기</div><h4>agent 에<br>L1/L2/L3 를</h4><p>도구를 전부 나열하고 등급을 답니다. 안 단 것은 모두 L3 로 봅니다.</p></div>
+      <div class="ts-card"><div class="lbl">2 · policy 쓰기</div><h4>policy.yaml 을<br>runtime 에 연결</h4><p>프롬프트 안의 "be careful" 을 믿지 말고, 실행 계층의 강제 차단을 믿으세요.</p></div>
+      <div class="ts-card"><div class="lbl">3 · kill switch</div><h4>빨간 버튼이<br>2초 안에 멈추게</h4><p>CTO 도 on-call 도 누르는 법을 알아야 합니다. 한 번은 연습하세요.</p></div>
     </div>
     <div class="ts-alert-box green">
-      <h3>真正的安全不是 prompt，是流程</h3>
-      <p>prompt 会被注入，流程不会。—— 把保护放在不可被说服的一层。</p>
+      <h3>진짜 안전은 프롬프트가 아니라 절차입니다</h3>
+      <p>프롬프트는 주입당하지만 절차는 그렇지 않습니다. 설득당하지 않는 층에 보호를 두세요.</p>
     </div>
     <div class="ts-stripe-b"></div>
     <div class="ts-footer"><span>cta · tonight</span><span>07 / 08</span></div>
@@ -170,8 +170,8 @@
     <div class="ts-chrome"><span class="ts-alert-tag amber">please stay safe</span><span class="ts-page">08 / 08</span></div>
     <div style="margin:auto 0">
       <div class="ts-kicker">end of brief</div>
-      <h1 class="ts-h1" style="font-size:140px">谢谢 <span class="red">·</span> thanks</h1>
-      <p class="ts-sub" style="font-size:24px">policy.yaml 模板、红队 prompt 清单、事故复盘模板 —— 评论区扣「安全」。</p>
+      <h1 class="ts-h1" style="font-size:140px">감사합니다 <span class="red">·</span> thanks</h1>
+      <p class="ts-sub" style="font-size:24px">policy.yaml 템플릿, 레드팀 프롬프트 목록, 사고 회고 템플릿 — 댓글로 요청해 주세요.</p>
     </div>
     <div class="ts-stripe-b"></div>
     <div class="ts-footer"><span>end of brief</span><span>08 / 08</span></div>

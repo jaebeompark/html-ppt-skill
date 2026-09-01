@@ -1,4 +1,4 @@
-/* theme: swiss-grid — 瑞士网格，Helvetica 感 */
+/* theme: swiss-grid — Swiss grid, Helvetica feel */
 :root{
   --bg:#ffffff;--bg-soft:#f4f4f4;--surface:#ffffff;--surface-2:#f4f4f4;
   --border:#111111;--border-strong:#111111;
@@ -9,7 +9,7 @@
   --grad-soft:linear-gradient(135deg,#f4f4f4,#fff);
   --radius:0;--radius-sm:0;--radius-lg:0;
   --shadow:none;--shadow-lg:none;
-  --font-sans:'Pretendard','Helvetica Neue',Helvetica,'Noto Sans SC',sans-serif;
+  --font-sans:'Pretendard','Helvetica Neue',Helvetica,sans-serif;
   --font-display:'Pretendard','Helvetica Neue',Helvetica,sans-serif;
   --letter-tight:-.04em;
 }

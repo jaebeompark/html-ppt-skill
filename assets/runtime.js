@@ -304,11 +304,49 @@
     /* Opens a new window with 4 draggable, resizable cards:
      *   CURRENT  — iframe(?preview=N)   pixel-perfect preview of current slide
      *   NEXT     — iframe(?preview=N+1) pixel-perfect preview of next slide
-     *   SCRIPT   — large speaker notes (逐字稿)
+     *   SCRIPT   — large speaker notes
      *   TIMER    — elapsed timer + page counter + controls
      * Cards remember position/size in localStorage.
      * Two windows sync via BroadcastChannel.
      */
+    /* Presenter-view UI language.
+     * The presenter window is written from a template string here, so its
+     * chrome would otherwise be hard-coded in one language while the deck is
+     * in another. Key it off the deck's <html lang> instead: an en deck gets
+     * the English chrome, everything else Korean. Only the chrome is
+     * translated — the speaker script itself comes from the deck. */
+    const PRESENTER_I18N = {
+      ko: {
+        tag: 'ko', title: '발표자 화면',
+        current: '현재', next: '다음', script: '발표 대본', timer: '타이머',
+        slide: '슬라이드', prev: '← 이전', nextBtn: '다음 →', reset: '⏱ 초기화',
+        hintNav: '페이지 이동', hintReset: '타이머 초기화', hintClose: '닫기',
+        hintDrag: '카드 머리를 끌어 이동 · 오른쪽 아래 모서리를 끌어 크기 조절',
+        resetLayout: '배치 초기화', confirmReset: '카드 배치를 기본값으로 되돌릴까요?',
+        endOfDeck: '— 마지막 슬라이드입니다 —', end: '끝',
+        noNotes: '（이 슬라이드에는 대본이 없습니다）',
+        popupBlocked: '발표자 화면을 쓰려면 팝업을 허용해 주세요'
+      },
+      en: {
+        tag: 'en', title: 'Presenter View',
+        current: 'CURRENT', next: 'NEXT', script: 'SPEAKER SCRIPT', timer: 'TIMER',
+        slide: 'Slide', prev: '← Prev', nextBtn: 'Next →', reset: '⏱ Reset',
+        hintNav: 'navigate', hintReset: 'reset timer', hintClose: 'close',
+        hintDrag: 'drag a card header to move · drag the bottom-right corner to resize',
+        resetLayout: 'Reset layout', confirmReset: 'Restore the default card layout?',
+        endOfDeck: '— END OF DECK —', end: 'END',
+        noNotes: '(no speaker script on this slide)',
+        popupBlocked: 'Please allow pop-ups to use the presenter view'
+      }
+    };
+    /* Korean is the default: an unset or unrecognised <html lang> lands
+     * there. English is opt-in with lang="en". */
+    function presenterStrings() {
+      const lang = (root.getAttribute('lang') || '').toLowerCase();
+      if (lang.startsWith('en')) return PRESENTER_I18N.en;
+      return PRESENTER_I18N.ko;
+    }
+
     let presenterWin = null;
 
     function openPresenterWindow() {
@@ -336,7 +374,7 @@
 
       presenterWin = window.open('', 'html-ppt-presenter', 'width=1280,height=820,menubar=no,toolbar=no');
       if (!presenterWin) {
-        alert('请允许弹出窗口以使用演讲者视图');
+        alert(presenterStrings().popupBlocked);
         return;
       }
       presenterWin.document.open();
@@ -350,13 +388,26 @@
       const channelJSON = JSON.stringify(channelName);
       const themeJSON = JSON.stringify(currentTheme || '');
       const storageKey = 'html-ppt-presenter:' + location.pathname;
+      /* The popup is document.write'n into about:blank, so a relative href
+       * would not resolve. Take the absolute URL of the deck's own fonts.css
+       * (the .href property is already resolved) so the presenter window uses
+       * the same local Pretendard the audience window does — no CDN, works
+       * with the network down. */
+      const fontsEl = document.querySelector('link[href$="fonts.css"]');
+      const fontsHref = fontsEl ? fontsEl.href : '';
+      const fontsTag = fontsHref
+        ? '<link rel="stylesheet" href="' + fontsHref.replace(/"/g, '&quot;') + '">'
+        : '';
+      const L = presenterStrings();
+      const lJSON = JSON.stringify(L);
 
       // Build the document as a single template string for clarity
       return `<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="${L.tag}">
 <head>
 <meta charset="utf-8">
-<title>Presenter View</title>
+<title>${L.title}</title>
+${fontsTag}
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
@@ -366,7 +417,7 @@
       radial-gradient(circle at 20% 30%, rgba(88,166,255,.04), transparent 50%),
       radial-gradient(circle at 80% 70%, rgba(188,140,255,.04), transparent 50%);
     color: #e6edf3;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
   /* Stage: positioned area where cards live */
   #stage { position: absolute; inset: 0; overflow: hidden; }
@@ -429,7 +480,7 @@
     overflow-y: auto;
     font-size: 18px; line-height: 1.75;
     color: #d0d7de;
-    font-family: "Noto Sans SC", -apple-system, sans-serif;
+    font-family: Pretendard, -apple-system, sans-serif;
   }
   .pcard-notes .pcard-body p { margin: 0 0 .7em 0; }
   .pcard-notes .pcard-body strong { color: #f0883e; }
@@ -519,7 +570,7 @@
   <div class="pcard pcard-preview" id="card-cur" style="--dot-color:#58a6ff">
     <div class="pcard-head" data-drag>
       <span class="pcard-dot"></span>
-      <span class="pcard-title">CURRENT</span>
+      <span class="pcard-title">${L.current}</span>
       <span class="pcard-meta" id="cur-meta">—</span>
     </div>
     <div class="pcard-body"><iframe id="iframe-cur"></iframe></div>
@@ -529,7 +580,7 @@
   <div class="pcard pcard-preview" id="card-nxt" style="--dot-color:#bc8cff">
     <div class="pcard-head" data-drag>
       <span class="pcard-dot"></span>
-      <span class="pcard-title">NEXT</span>
+      <span class="pcard-title">${L.next}</span>
       <span class="pcard-meta" id="nxt-meta">—</span>
     </div>
     <div class="pcard-body"><iframe id="iframe-nxt"></iframe></div>
@@ -539,7 +590,7 @@
   <div class="pcard pcard-notes" id="card-notes" style="--dot-color:#f0883e">
     <div class="pcard-head" data-drag>
       <span class="pcard-dot"></span>
-      <span class="pcard-title">SPEAKER SCRIPT · 逐字稿</span>
+      <span class="pcard-title">${L.script}</span>
     </div>
     <div class="pcard-body" id="notes-body"></div>
     <div class="pcard-resize" data-resize></div>
@@ -548,18 +599,18 @@
   <div class="pcard pcard-timer" id="card-timer" style="--dot-color:#3fb950">
     <div class="pcard-head" data-drag>
       <span class="pcard-dot"></span>
-      <span class="pcard-title">TIMER</span>
+      <span class="pcard-title">${L.timer}</span>
     </div>
     <div class="pcard-body">
       <div class="timer-display" id="timer-display">00:00</div>
       <div class="timer-row">
-        <span class="label">Slide</span>
+        <span class="label">${L.slide}</span>
         <span class="val" id="timer-count">1 / ${total}</span>
       </div>
       <div class="timer-controls">
-        <button class="timer-btn" id="btn-prev">← Prev</button>
-        <button class="timer-btn" id="btn-next">Next →</button>
-        <button class="timer-btn" id="btn-reset">⏱ Reset</button>
+        <button class="timer-btn" id="btn-prev">${L.prev}</button>
+        <button class="timer-btn" id="btn-next">${L.nextBtn}</button>
+        <button class="timer-btn" id="btn-reset">${L.reset}</button>
       </div>
     </div>
     <div class="pcard-resize" data-resize></div>
@@ -567,15 +618,16 @@
 </div>
 
 <div class="hint-bar">
-  <span><kbd>← → ↑ ↓</kbd> 翻页</span>
-  <span><kbd>R</kbd> 重置计时</span>
-  <span><kbd>Esc</kbd> 关闭</span>
-  <span style="color:#6e7681">拖动卡片头部移动 · 拖动右下角调整大小</span>
-  <button class="reset-layout" id="reset-layout">重置布局</button>
+  <span><kbd>← → ↑ ↓</kbd> ${L.hintNav}</span>
+  <span><kbd>R</kbd> ${L.hintReset}</span>
+  <span><kbd>Esc</kbd> ${L.hintClose}</span>
+  <span style="color:#6e7681">${L.hintDrag}</span>
+  <button class="reset-layout" id="reset-layout">${L.resetLayout}</button>
 </div>
 
 <script>
 (function(){
+  var L = ${lJSON};
   var slideMeta = ${metaJSON};
   var total = ${total};
   var idx = ${startIdx};
@@ -779,15 +831,15 @@
       if (body && !body.querySelector('.preview-end')) {
         var end = document.createElement('div');
         end.className = 'preview-end';
-        end.textContent = '— END OF DECK —';
+        end.textContent = L.endOfDeck;
         body.appendChild(end);
       }
-      nxtMeta.textContent = 'END';
+      nxtMeta.textContent = L.end;
     }
 
     /* Notes */
     var note = slideMeta[n].notes;
-    notesBody.innerHTML = note || '<span class="empty">（这一页还没有逐字稿）</span>';
+    notesBody.innerHTML = note || '<span class="empty">' + L.noNotes + '</span>';
 
     /* Timer count */
     timerCount.textContent = (n + 1) + ' / ' + total;
@@ -829,7 +881,7 @@
   document.getElementById('btn-next').addEventListener('click', function(){ go(idx + 1); });
   document.getElementById('btn-reset').addEventListener('click', resetTimer);
   document.getElementById('reset-layout').addEventListener('click', function(){
-    if (confirm('恢复默认卡片布局？')) {
+    if (confirm(L.confirmReset)) {
       try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
       applyLayout(defaultLayout());
     }
@@ -861,7 +913,7 @@
   iframeCur.src = deckUrl + '?preview=' + (idx + 1);
   if (idx + 1 < total) iframeNxt.src = deckUrl + '?preview=' + (idx + 2);
   /* Initialize notes/timer/count without touching iframes */
-  notesBody.innerHTML = slideMeta[idx].notes || '<span class="empty">（这一页还没有逐字稿）</span>';
+  notesBody.innerHTML = slideMeta[idx].notes || '<span class="empty">' + L.noNotes + '</span>';
   curMeta.textContent = (idx + 1) + '/' + total;
   nxtMeta.textContent = (idx + 2) + '/' + total;
   timerCount.textContent = (idx + 1) + ' / ' + total;

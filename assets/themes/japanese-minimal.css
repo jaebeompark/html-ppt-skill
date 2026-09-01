@@ -1,4 +1,4 @@
-/* theme: japanese-minimal — 和风极简 */
+/* theme: japanese-minimal — Japanese minimal */
 :root{
   --bg:#fafaf5;--bg-soft:#f2f0e6;--surface:#ffffff;--surface-2:#f5f3ea;
   --border:rgba(40,30,20,.1);--border-strong:rgba(40,30,20,.3);
@@ -10,9 +10,9 @@
   --radius:0px;--radius-sm:0px;--radius-lg:2px;
   --shadow:none;
   --shadow-lg:0 1px 0 rgba(40,30,20,.12);
-  --font-sans:'Pretendard','Noto Sans SC',sans-serif;
-  --font-serif:'Noto Serif KR','Noto Serif SC','Playfair Display',serif;
-  --font-display:'Noto Serif KR','Noto Serif SC','Playfair Display',serif;
+  --font-sans:'Pretendard',sans-serif;
+  --font-serif:'Noto Serif KR','Playfair Display',serif;
+  --font-display:'Noto Serif KR','Playfair Display',serif;
 }
 h1.title,h2.title,.h1,.h2{font-weight:500;letter-spacing:.04em}
 .card{border:1px solid var(--border);box-shadow:none;padding:36px 40px}

@@ -1,4 +1,4 @@
-/* tech-sharing — 技术分享 dark, code-forward */
+/* tech-sharing — tech-sharing dark, code-forward */
 .tpl-tech-sharing{
   --bg:#0d1117;--bg-soft:#161b22;--surface:#161b22;--surface-2:#1c2230;
   --border:rgba(139,148,158,.22);--border-strong:rgba(139,148,158,.4);
@@ -7,7 +7,7 @@
   --grad:linear-gradient(120deg,#7ee787 0%,#79c0ff 60%,#d2a8ff 100%);
   --radius:14px;--radius-lg:20px;
   --shadow:0 20px 60px rgba(0,0,0,.5);
-  font-family:'Pretendard','Noto Sans SC',sans-serif;
+  font-family:'Pretendard',sans-serif;
 }
 .tpl-tech-sharing{background:#0d1117;color:var(--text-1)}
 .tpl-tech-sharing .slide{padding:72px 96px;background:#0d1117;color:var(--text-1)}
