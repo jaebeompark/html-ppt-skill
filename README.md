@@ -148,6 +148,25 @@ dropping it.
 
 ---
 
+## Regenerating one slide
+
+```bash
+./scripts/slide.sh list examples/my-talk            # numbers, titles, sizes
+./scripts/slide.sh get  examples/my-talk 8          # just that slide
+./scripts/slide.sh set  examples/my-talk 8 new.html # replace it
+```
+
+A slide is a contiguous byte range in the file, so a replacement splices at
+that range and the other slides cannot move — by construction, not by care.
+`set` prints the confirmation anyway (`23 other slides byte-identical`), and
+refuses anything that is not exactly one `<section class="slide">`.
+
+Address a slide by number or by its `data-title`. This is what an agent should
+reach for when you ask it to redo one slide: it reads 40 lines instead of 900,
+and cannot disturb the rest.
+
+---
+
 ## Keyboard
 
 ```
@@ -290,6 +309,7 @@ html-ppt/
 │   └── *-showcase.html          browse themes / layouts / animations
 ├── scripts/
 │   ├── new-deck.sh              scaffold
+│   ├── slide.sh                 read/replace one slide, provably
 │   ├── edit.sh                  serve a deck with in-browser editing
 │   ├── edit-server.py           its save/image endpoints
 │   ├── render.sh                headless Chrome → PNG

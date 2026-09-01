@@ -388,17 +388,55 @@ sys.exit(1 if bad else 0)
 PY
 
 # --------------------------------------------------------------- 11. js unit
-head_ "11. Editor patch unit tests"
+head_ "11. Unit tests"
 if command -v node >/dev/null 2>&1; then
-  if out="$(node --test tests/editor-patch.test.mjs 2>&1)"; then
-    pass "$(printf '%s' "$out" | sed -n 's/^# pass \([0-9]*\)/\1/p') editor-patch assertions"
+  if out="$(node --test tests/*.test.mjs 2>&1)"; then
+    pass "$(printf '%s' "$out" | sed -n 's/^# pass \([0-9]*\)/\1/p') assertions across $(ls tests/*.test.mjs | wc -l | tr -d ' ') files"
   else
     printf '%s\n' "$out" | sed -n '/^not ok/,/^  \.\.\./p' | head -40
-    fail "editor-patch unit tests"
+    fail "unit tests"
   fi
 else
-  fail "node not found — cannot run the editor unit tests"
+  fail "node not found — cannot run the unit tests"
 fi
+
+# --------------------------------------------------------------- 12. slides
+# slide.sh's whole promise is that replacing one slide cannot disturb the
+# others. That is true by construction — it splices at a byte range — but a
+# refactor could quietly reintroduce a whole-file rewrite, and the failure
+# would look like a successful edit. So prove it on a real deck every run.
+head_ "12. Replacing one slide leaves the others byte-identical"
+python3 - <<'PY' && pass "slide.sh round-trips a real deck, touching exactly one slide" || fail "slide.sh disturbed slides it should not have"
+import subprocess, sys, hashlib, tempfile, shutil, os
+
+DECK = 'examples/vc-ai-lecture/index.html'
+def slide(n, path=DECK):
+    r = subprocess.run(['./scripts/slide.sh', 'get', path, str(n)],
+                       capture_output=True, text=True)
+    return hashlib.sha256(r.stdout.encode()).hexdigest()
+
+work = tempfile.mkdtemp()
+try:
+    tmp = os.path.join(work, 'index.html')
+    shutil.copy(DECK, tmp)
+    before = [slide(n, tmp) for n in range(1, 25)]
+
+    repl = os.path.join(work, 'r.html')
+    open(repl, 'w').write(
+        '<section class="slide" data-title="smoke">\n  <h2 class="h2">교체</h2>\n</section>')
+    r = subprocess.run(['./scripts/slide.sh', 'set', tmp, '9', repl],
+                       capture_output=True, text=True)
+    if r.returncode != 0:
+        print('    set failed:', r.stderr.strip()); sys.exit(1)
+
+    after = [slide(n, tmp) for n in range(1, 25)]
+    moved = [i + 1 for i in range(24) if before[i] != after[i]]
+    if moved != [9]:
+        print('    expected only slide 9 to change, got', moved); sys.exit(1)
+finally:
+    shutil.rmtree(work, ignore_errors=True)
+sys.exit(0)
+PY
 
 if [[ "$FAIL" == "0" ]]; then
   printf '\n\033[32mall checks passed\033[0m\n'

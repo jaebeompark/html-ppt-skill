@@ -228,6 +228,8 @@ html-ppt/
 │   └── single-page/*.html         (33 layout files with demo data)
 ├── scripts/
 │   ├── new-deck.sh                (scaffold a deck from deck.html)
+│   ├── slide.sh                   (read/replace ONE slide, provably)
+│   ├── edit.sh                    (serve a deck with in-browser editing)
 │   ├── render.sh                  (headless Chrome → PNG)
 │   └── smoke.sh                   (markup, counts, fonts, render — run before shipping)
 └── examples/demo-deck/            (complete working deck)
@@ -250,6 +252,28 @@ DOM, so the diff stays to the lines that actually changed.
 
 Font size and free placement are intentionally not editable: both are layout
 decisions, and making them per-slide would desync a deck from its own tokens.
+
+## Regenerating one slide
+
+Rewriting a whole deck to change one slide is slow and unverifiable — "I only
+touched slide 8" is a claim, not a guarantee. `scripts/slide.sh` makes it a
+guarantee: a slide is a contiguous byte range, so replacing one splices at that
+range and the others cannot move.
+
+```bash
+./scripts/slide.sh list examples/my-talk            # numbers, titles, sizes
+./scripts/slide.sh get  examples/my-talk 8          # just that slide's source
+./scripts/slide.sh set  examples/my-talk 8 new.html # replace it
+```
+
+Address a slide by number or by its `data-title`. `set` refuses anything that
+is not exactly one `<section class="slide">…</section>`, refuses if the slide
+count would change, and prints how many other slides stayed byte-identical.
+
+**Use this instead of rewriting the deck** when the user asks to redo a
+specific slide. Read only that slide with `get`, write the new one, hand it back
+with `set` — the other slides are then untouched by construction rather than by
+care.
 
 ## Rendering to PNG
 
