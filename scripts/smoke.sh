@@ -86,7 +86,7 @@ actual = {
 # number, or on markup examples.
 PAT = {
   'themes'    : r'(\d+)\s*(?:themes|개 테마|套主题)',
-  'layouts'   : r'(\d+)\s*(?:layouts|layout types|layout files|(?i:single-page layouts)|page layouts|种可复用单页|种单页布局|种布局|种版式|个布局文件|布局|개 레이아웃)',
+  'layouts'   : r'(\d+)\s*(?:layouts|layout types|layout files|(?i:single-page layouts)|page layouts|种可复用单页|种单页布局|种页面布局|种布局|种版式|个布局文件|布局|개 레이아웃)',
   'full-decks': r'(\d+)\s*(?:full-deck templates|套完整 deck 模板|个完整 deck|个 scoped 多页 deck 模板|deck gallery)',
   'fx'        : r'(\d+)\s*(?:canvas FX|个 Canvas FX|Canvas FX)',
 }
