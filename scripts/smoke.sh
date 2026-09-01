@@ -222,6 +222,54 @@ if [[ "$RENDER" == "1" ]]; then
   [[ "$bads" == "0" ]] && pass "$n decks rendered every slide, none blank" || fail "$bads of $n decks rendered wrong"
 fi
 
+# -------------------------------------------------------- 8. deck-extras
+head_ "8. deck-extras.js initialises"
+CHROME_BIN="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+if [[ ! -x "$CHROME_BIN" ]]; then
+  fail "Chrome not found at $CHROME_BIN — cannot verify deck-extras.js"
+else
+  FIXDIR="$(mktemp -d)"
+  REPO="$(pwd)"
+  cat > "$FIXDIR/fixture.html" <<HTML
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="file://$REPO/assets/base.css"></head><body>
+<div class="deck" data-copyright="SENTINEL-NOTICE">
+  <section class="slide is-active"><h1>one</h1></section>
+  <section class="slide"><h1>two</h1></section>
+</div>
+<script src="file://$REPO/assets/deck-extras.js"></script>
+</body></html>
+HTML
+  DOM="$("$CHROME_BIN" --headless=new --disable-gpu --no-sandbox \
+        --virtual-time-budget=2000 --dump-dom "file://$FIXDIR/fixture.html" 2>/dev/null)"
+  rm -rf "$FIXDIR"
+
+  got=$(grep -c 'class="deck-copyright"' <<<"$DOM" || true)
+  [[ "$got" == "2" ]] \
+    && pass "data-copyright stamps every slide (2/2)" \
+    || fail "deck-copyright landed on $got of 2 slides"
+
+  grep -q 'SENTINEL-NOTICE' <<<"$DOM" \
+    && pass "the notice text is the attribute's value" \
+    || fail "stamped element does not carry the attribute text"
+
+  grep -q '\.deck-copyright' assets/layouts.css \
+    && pass ".deck-copyright is styled in layouts.css" \
+    || fail ".deck-copyright has no CSS"
+
+  # base.css hides .deck-footer when printing. The notice must NOT be hidden
+  # with it — a handout without its copyright line is the bug this guards.
+  python3 - <<'PY' && pass "print CSS keeps .deck-copyright visible" || fail "print CSS would hide the notice"
+import io, re, sys
+s = io.open('assets/base.css', encoding='utf-8').read()
+m = re.search(r'@media print\{(.*?)\n\}', s, re.S)
+if not m:
+    print('    assets/base.css has no @media print block'); sys.exit(1)
+if 'deck-copyright' in m.group(1):
+    print('    assets/base.css @media print hides .deck-copyright'); sys.exit(1)
+PY
+fi
+
 # ---------------------------------------------------------------- summary
 if [[ "$FAIL" == "0" ]]; then
   printf '\n\033[32mall checks passed\033[0m\n'
