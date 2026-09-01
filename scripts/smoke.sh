@@ -249,7 +249,7 @@ HTML
     && pass "data-copyright stamps every slide (2/2)" \
     || fail "deck-copyright landed on $got of 2 slides"
 
-  grep -q 'SENTINEL-NOTICE' <<<"$DOM" \
+  grep -q 'class="deck-copyright">SENTINEL-NOTICE<' <<<"$DOM" \
     && pass "the notice text is the attribute's value" \
     || fail "stamped element does not carry the attribute text"
 

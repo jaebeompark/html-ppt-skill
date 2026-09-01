@@ -164,9 +164,12 @@
 /* ---- deck-copyright (stamped by deck-extras.js from [data-copyright]) ---- */
 /* Sits inside each .slide, not in .deck-footer: base.css hides the footer in
    print and the notice has to reach the handout. Right inset clears the
-   slide number. */
-.deck-copyright{position:absolute;left:40px;right:132px;bottom:8px;
-  font-size:10px;line-height:1.4;letter-spacing:0;
+   slide number. bottom/line-height are tuned to keep >=6px clearance under
+   .deck-footer (bottom:24px in base.css) — do not raise bottom or
+   line-height here without re-measuring that gap; do not move .deck-footer
+   to compensate, it is shared skill chrome. */
+.deck-copyright{position:absolute;left:40px;right:132px;bottom:4px;
+  font-size:10px;line-height:1.2;letter-spacing:0;
   color:var(--text-3);opacity:.85;z-index:10;pointer-events:none}
 @media print{
   .deck-copyright{opacity:1;color:#666}
