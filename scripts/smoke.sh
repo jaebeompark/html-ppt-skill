@@ -347,7 +347,7 @@ if not items:
 bad = []
 for tag in items:
     external = 'is-external' in tag
-    has_dl = re.search(r'\bdownload\b', tag) is not None
+    has_dl = re.search(r'(?:^|\s)download(?=[\s>=])', tag) is not None
     if external and has_dl:
         bad.append('    external card must not set download: %s' % tag[:90])
     if not external and not has_dl:
