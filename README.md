@@ -115,7 +115,7 @@ that supports AgentSkills can author presentations by asking things like:
 | 🎤 **Presenter mode** | **NEW** | `S` key / `?preview=N` |
 | 🎨 **Themes** | **36** | `assets/themes/*.css` |
 | 📑 **Full-deck templates** | **16** | `templates/full-decks/<name>/` |
-| 🧩 **Single-page layouts** | **31** | `templates/single-page/*.html` |
+| 🧩 **Single-page layouts** | **32** | `templates/single-page/*.html` |
 | ✨ **CSS animations** | **27** | `assets/animations/animations.css` |
 | 💥 **Canvas FX animations** | **20** | `assets/animations/fx/*.js` |
 | 🖼️ **Showcase decks** | 4 | `templates/*-showcase.html` |
@@ -163,9 +163,9 @@ Each is a self-contained folder with scoped `.tpl-<name>` CSS so multiple
 decks can be previewed side-by-side without collisions. Browse the full
 gallery in `templates/full-decks-index.html`.
 
-![31 single-page layouts](docs/readme/layouts.png)
+![32 single-page layouts](docs/readme/layouts.png)
 
-### 31 Single-page layouts
+### 32 Single-page layouts
 
 cover · toc · section-divider · bullets · two-column · three-column ·
 big-quote · stat-highlight · kpi-grid · table · code · diff · terminal ·
@@ -258,7 +258,7 @@ html-ppt-skill/
 │   ├── animation-showcase.html   47 animation slides
 │   ├── full-decks-index.html     14-deck gallery
 │   ├── full-decks/<name>/        14 scoped multi-slide decks
-│   └── single-page/*.html        31 layout files with demo data
+│   └── single-page/*.html        32 layout files with demo data
 ├── scripts/
 │   ├── new-deck.sh               scaffold
 │   ├── render.sh                 headless Chrome → PNG

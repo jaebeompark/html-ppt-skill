@@ -80,18 +80,34 @@ actual = {
   'fx'         : len([f for f in glob.glob('assets/animations/fx/*.js')
                       if not f.split('/')[-1].startswith('_')]),
 }
-# unit words as they appear across the English, Korean and Chinese docs
+# unit words as they appear across the English, Korean and Chinese docs.
+# Kept as an enumerated whitelist, not a fuzzy \d+.*layout: a loose pattern
+# would false-positive on any line that mentions a layout near an unrelated
+# number, or on markup examples.
 PAT = {
   'themes'    : r'(\d+)\s*(?:themes|개 테마|套主题)',
-  'layouts'   : r'(\d+)\s*(?:layouts|layout types|page layouts|种可复用单页|种单页布局|种布局|种版式|개 레이아웃)',
+  'layouts'   : r'(\d+)\s*(?:layouts|layout types|layout files|(?i:single-page layouts)|page layouts|种可复用单页|种单页布局|种布局|种版式|个布局文件|布局|개 레이아웃)',
   'full-decks': r'(\d+)\s*(?:full-deck templates|套完整 deck 模板|个完整 deck|个 scoped 多页 deck 模板|deck gallery)',
   'fx'        : r'(\d+)\s*(?:canvas FX|个 Canvas FX|Canvas FX)',
+}
+# Table rows put the unit label and the number in different cells
+# (| 🧩 **Single-page layouts** | **31** | ...), so the number never sits
+# adjacent to its unit word — PAT's \d+-then-unit-word shape can't see it.
+TABLE_PAT = {
+  'layouts': r'\|[^\n|]*(?:Single-page layouts|单页布局)[^\n|]*\|\s*\*\*(\d+)\*\*\s*\|',
 }
 docs = ['SKILL.md','README.md','README.zh-CN.md'] + sorted(glob.glob('references/*.md'))
 bad=[]
 for f in docs:
     s = io.open(f,encoding='utf-8').read()
     for key,pat in PAT.items():
+        for m in re.finditer(pat,s):
+            n=int(m.group(1))
+            if n != actual[key]:
+                line = s[:m.start()].count('\n')+1
+                bad.append('    %s:%d  says %d %s, filesystem has %d'
+                           %(f,line,n,key,actual[key]))
+    for key,pat in TABLE_PAT.items():
         for m in re.finditer(pat,s):
             n=int(m.group(1))
             if n != actual[key]:

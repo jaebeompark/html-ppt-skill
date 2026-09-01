@@ -151,7 +151,7 @@ cannot see a title that wrapped badly or a chart nobody can read.
 
 **Run this skill at medium effort.** Building a deck is selection, not
 open-ended problem solving: the theme comes from an audience table, the layout
-for each page from a catalogue of 31, the animation from a per-slide-type
+for each page from the layout catalogue, the animation from a per-slide-type
 default. Higher settings spend their budget re-deriving choices the catalogue has
 already made, and the deck lands in the same place. Set the level with `/model`
 before a build. The one place to spend more is content you are reasoning about
@@ -169,7 +169,7 @@ each dispatch, since replacing demo data in a copied layout needs no more.
   from CSS variables defined in `assets/base.css` and overridden by a theme.
   Good: `color: var(--text-1)`. Bad: `color: #111`.
 - **Don't invent new layout files.** Prefer composing existing ones. Only add
-  a new `templates/single-page/*.html` if none of the 31 fit.
+  a new `templates/single-page/*.html` if none of the existing layouts fit.
 - **Respect chrome slots.** `.deck-header`, `.deck-footer`, `.slide-number`
   and the progress bar are provided by `assets/base.css` + `runtime.js`.
 - **Keyboard-first.** Always include `<script src="../assets/runtime.js"></script>`
@@ -224,7 +224,7 @@ html-ppt/
 │   ├── animation-showcase.html    (20 FX + 27 CSS animation slides)
 │   ├── full-decks-index.html      (gallery of all 16 full-deck templates)
 │   ├── full-decks/<name>/         (16 scoped multi-slide deck templates)
-│   └── single-page/*.html         (31 layout files with demo data)
+│   └── single-page/*.html         (32 layout files with demo data)
 ├── scripts/
 │   ├── new-deck.sh                (scaffold a deck from deck.html)
 │   ├── render.sh                  (headless Chrome → PNG)
