@@ -7,22 +7,20 @@
 # filesystem. All of them printed no error.
 #
 # Usage:
-#   smoke.sh              # offline checks, ~1s
-#   smoke.sh --net        # + CDN reachability
+#   smoke.sh              # static checks, ~1s
 #   smoke.sh --render     # + render every deck via headless Chrome (slow)
-#   smoke.sh --all        # everything
+#   smoke.sh --all        # same as --render
 #
 # Exits non-zero if any check fails.
 
 set -uo pipefail
 cd "$(dirname "$0")/.."
 
-NET=0; RENDER=0
+RENDER=0
 for a in "$@"; do
   case "$a" in
-    --net) NET=1 ;;
     --render) RENDER=1 ;;
-    --all) NET=1; RENDER=1 ;;
+    --all) RENDER=1 ;;
     -h|--help) sed -n '2,16p' "$0"; exit 0 ;;
     *) echo "unknown flag: $a" >&2; exit 2 ;;
   esac
@@ -185,37 +183,45 @@ if bad:
     print('\n'.join(bad)); sys.exit(1)
 PY
 
-# -------------------------------------------------------------------- 6. net
-if [[ "$NET" == "1" ]]; then
-  head_ "6. External assets reachable"
-  URLS="$(mktemp)"
-  python3 - "$URLS" <<'PY'
+# ---------------------------------------------------------------- 6. offline
+# Every font, script and stylesheet this skill needs is vendored under
+# assets/vendor/. That is the whole point: a deck presented from a room with no
+# working wifi must render identically. A single re-introduced CDN reference
+# breaks that silently — the deck looks fine on the laptop that has the file
+# cached and falls apart on the projector. So fail on any external
+# href/src/@import in a shipped file.
+head_ "6. No external dependencies"
+python3 - <<'PY' && pass "no deck or asset fetches anything over the network" || fail "external references found (see above)"
 import glob, io, re, sys
-srcs = (glob.glob('assets/**/*', recursive=True)
+srcs = (glob.glob('assets/**/*.css', recursive=True)
+        + glob.glob('assets/**/*.js', recursive=True)
         + glob.glob('templates/**/*.html', recursive=True)
-        + glob.glob('examples/**/*.html', recursive=True))
-out = set()
-for f in srcs:
-    try: s = io.open(f, encoding='utf-8').read()
-    except Exception: continue
-    # drop code blocks: a URL printed as slide copy is not a dependency
+        + glob.glob('examples/**/*.html', recursive=True)
+        + glob.glob('docs/**/*.html', recursive=True))
+bad = []
+for f in sorted(srcs):
+    # the vendored libraries carry attribution URLs in their own comments
+    if '/vendor/' in f:
+        continue
+    try:
+        s = io.open(f, encoding='utf-8').read()
+    except Exception:
+        continue
+    # a URL printed as slide copy is content, not a dependency
     s = re.sub(r'<pre.*?</pre>', '', s, flags=re.S)
-    for line in s.splitlines():
-        if re.search(r'href=|src=|@import', line):
-            out |= set(re.findall(
-                r'https://(?:cdn\.jsdelivr\.net|fonts\.googleapis\.com)[^"\' )]+', line))
-io.open(sys.argv[1], 'w').write('\n'.join(sorted(out)))
+    s = re.sub(r'<code.*?</code>', '', s, flags=re.S)
+    for i, line in enumerate(s.splitlines(), 1):
+        if not re.search(r'href=|src=|@import', line):
+            continue
+        for u in re.findall(r'https?://\S+', line):
+            # cut the URL at whatever attribute or tag delimiter follows it
+            for d in [chr(34), chr(39), '<', '>', ')', ';', ',']:
+                u = u.split(d)[0]
+            bad.append('    %s:%d  %s' % (f, i, u))
+if bad:
+    print(chr(10).join(bad))
+sys.exit(1 if bad else 0)
 PY
-  n=0; bads=0
-  while IFS= read -r u; do
-    [[ -z "$u" ]] && continue
-    n=$((n+1))
-    code=$(curl -s -o /dev/null -w '%{http_code}' -L --max-time 20 "$u" || echo 000)
-    [[ "$code" == "200" ]] || { echo "    $code  $u"; bads=$((bads+1)); }
-  done < "$URLS"
-  rm -f "$URLS"
-  [[ "$bads" == "0" ]] && pass "$n CDN URLs return 200" || fail "$bads of $n CDN URLs unreachable"
-fi
 
 # ----------------------------------------------------------------- 7. render
 if [[ "$RENDER" == "1" ]]; then

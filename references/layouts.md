@@ -12,16 +12,17 @@ use. Copying the `<section>` is enough — nothing else comes with it.
 
 ## Layouts that pull an external library
 
-Five more need a CDN `<script>`/`<link>` from the layout file's `<head>`,
-copied into your deck alongside the markup:
+Five need a `<script>`/`<link>` from the layout file's `<head>`, copied into
+your deck alongside the markup. Both libraries are **vendored** under
+`assets/vendor/`, so nothing here touches the network:
 
 | layout | needs |
 |---|---|
-| `code` | highlight.js — the **cdn-release browser bundle** plus a theme stylesheet. Do not use the npm package's `lib/core.min.js` + `lib/languages/*.min.js`: those are CommonJS and load to nothing in a plain `<script>`, leaving the code unhighlighted. |
-| `chart-bar`, `chart-line`, `chart-pie`, `chart-radar` | Chart.js |
+| `code` | `assets/vendor/highlight.min.js` + `assets/vendor/highlight-tokyo-night-dark.min.css`. This is the **cdn-release browser bundle**, which defines `window.hljs`. Do not swap in the npm package's `lib/core.min.js` + `lib/languages/*.min.js`: those are CommonJS and load to nothing in a plain `<script>`, leaving the code unhighlighted. |
+| `chart-bar`, `chart-line`, `chart-pie`, `chart-radar` | `assets/vendor/chart.umd.min.js` (Chart.js 4.4.3 UMD) |
 
-Everything else is built purely from `base.css` primitives and needs nothing
-beyond the markup.
+Adjust the `../../` prefix to your deck's depth. Everything else is built purely
+from `base.css` primitives and needs nothing beyond the markup.
 
 ## Openers & transitions
 

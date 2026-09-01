@@ -163,18 +163,17 @@ Catalogue: [references/animations.md](references/animations.md)
 
 | asset | status |
 |---|---|
-| **Webfonts** (Pretendard 400–900, Noto Serif KR, JetBrains Mono, Playfair Display, Space Grotesk, IBM Plex Mono, Archivo Black) | ✅ vendored in `assets/vendor/fonts/` — 18 files, ~6.6 MB |
+| **Webfonts** (Pretendard 400–900, Noto Serif KR, JetBrains Mono, Playfair Display, Space Grotesk, IBM Plex Mono, Archivo Black) | ✅ `assets/vendor/fonts/` — 18 files, ~6.6 MB |
+| **Chart.js 4.4.3** (`chart-bar` / `chart-line` / `chart-pie` / `chart-radar`) | ✅ `assets/vendor/chart.umd.min.js` — 201 KB |
+| **highlight.js 11.10.0** (`code` layout) | ✅ `assets/vendor/highlight.min.js` + theme CSS — 123 KB |
 | **Themes, layouts, animations, runtime** | ✅ no network, ever |
-| **Chart.js** (`chart-bar` / `chart-line` / `chart-pie` / `chart-radar`) | ⚠️ CDN `<script>` |
-| **highlight.js** (`code` layout) | ⚠️ CDN `<script>` + stylesheet |
 
-Only those two libraries still reach the network, and only on the five layouts
-that use them. If you are presenting somewhere without wifi and your deck has a
-chart or a code block, vendor them too — drop the UMD build into
-`assets/vendor/` and point the `<script>` at it.
+**Nothing in this repository fetches anything at presentation time.** Pull the
+ethernet cable and every glyph, every chart and every highlighted token still
+renders — in all 36 themes.
 
-Everything else — every glyph on every slide, in every one of the 36 themes —
-comes off disk.
+The one thing to remember when you move a deck: the `<script>` and `<link>`
+paths are relative, so adjust the `../../` prefix to your deck's depth.
 
 ---
 

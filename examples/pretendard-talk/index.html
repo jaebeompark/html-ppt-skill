@@ -8,8 +8,8 @@
 <link rel="stylesheet" id="theme-link" href="../../assets/themes/tokyo-night.css">
 <link rel="stylesheet" href="../../assets/animations/animations.css">
 <!-- highlight.js browser bundle (see references/layouts.md) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/styles/tokyo-night-dark.min.css">
-<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.10.0/build/highlight.min.js"></script>
+<link rel="stylesheet" href="../../assets/vendor/highlight-tokyo-night-dark.min.css">
+<script src="../../assets/vendor/highlight.min.js"></script>
 <script>addEventListener('DOMContentLoaded',()=>hljs.highlightAll())</script>
 </head>
 <body data-themes="tokyo-night,catppuccin-mocha,dracula,minimal-white,corporate-clean,editorial-serif" data-theme-base="../../assets/themes/">
@@ -77,12 +77,15 @@
 --font-sans: 'Pretendard',-apple-system,…;
 
 
-/* assets/fonts.css — Google Fonts에 없어 jsDelivr에서 */
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9
-             /dist/web/static/pretendard-dynamic-subset.min.css');</code></pre>
-    <p class="lede mt-m">치환 규칙은 하나. <code>'Inter','Noto Sans KR'</code> → <code>'Pretendard'</code>.<br>스택에 둘 다 있던 경우는 중복을 제거했습니다.</p>
+/* assets/fonts.css — CDN 없이, 저장소에 넣고 직접 선언 */
+@font-face {
+  font-family: 'Pretendard';
+  font-weight: 400;
+  src: url('vendor/fonts/Pretendard-Regular.woff2') format('woff2');
+}</code></pre>
+    <p class="lede mt-m">치환 규칙은 하나. <code>'Inter','Noto Sans KR'</code> → <code>'Pretendard'</code>.<br>폰트 파일은 나중에 저장소 안으로 들여왔습니다 — 강의장 와이파이를 믿을 수 없어서요.</p>
     <div class="deck-footer"><span class="dim2">html-ppt · jaebeompark</span><span class="slide-number" data-current="4" data-total="8"></span></div>
-    <aside class="notes">실제 변경은 이게 전부입니다. 토큰 기반 설계라 스택 한 줄만 고치면 36개 테마가 전부 따라옵니다. 한 가지 주의할 점은, Pretendard는 구글 폰트에 없어서 jsDelivr을 써야 한다는 겁니다. 폰트 호스트가 하나 늘어나는 셈인데, 동적 서브셋을 쓰면 한글이 음절 범위별로 쪼개져 있어서 실제 전송량은 오히려 줄어듭니다.</aside>
+    <aside class="notes">실제 변경은 이게 전부입니다. 토큰 기반 설계라 스택 한 줄만 고치면 36개 테마가 전부 따라옵니다. 처음에는 Pretendard를 jsDelivr에서 불러왔는데, 지금은 woff2 파일을 저장소 안에 넣고 직접 @font-face 로 선언합니다. 강의장에서 네트워크가 끊기면 한글이 조용히 시스템 폰트로 떨어지는데, 그걸 발표 중에 알게 되거든요.</aside>
   </section>
 
   <!-- 5. Stat -->
@@ -117,10 +120,10 @@
     <h2 class="h2">전부 바꾸면 오히려 깨집니다</h2>
     <div class="grid g3 mt-l anim-stagger-list" data-anim-target>
       <div class="card card-accent"><h4>세리프 → Noto Serif KR</h4><p class="dim">Pretendard에는 세리프가 없습니다. 함께 치환했다면 <code>editorial-serif</code>와 <code>academic-paper</code>의 한글이 전부 고딕으로 나왔을 겁니다.</p></div>
-      <div class="card card-accent"><h4>중국어 → Noto Sans SC</h4><p class="dim">Pretendard는 간체 한자를 지원하지 않습니다. 이 저장소는 중국어 슬라이드가 많아, 지웠다면 그쪽이 통째로 깨집니다.</p></div>
+      <div class="card card-accent"><h4>당시엔 중국어 → Noto Sans SC</h4><p class="dim">Pretendard는 간체 한자를 지원하지 않아 그때는 남겨야 했습니다. 지금은 저장소에서 중국어가 전부 빠져서 이 폴백도 함께 사라졌습니다.</p></div>
       <div class="card card-accent"><h4>모노 스택의 한글 폴백</h4><p class="dim">터미널·코드 슬라이드에 한글 설명이 들어갑니다. 라틴은 JetBrains Mono, 한글만 Pretendard로 떨어지게 유지했습니다.</p></div>
     </div>
-    <p class="lede mt-l">"Noto Sans를 전부 없앤다"는 목표였다면 <b>달성할 수 없는</b> 작업이었습니다.<br>바꿀 수 있는 건 95곳 중 41곳뿐이었고, 그걸 먼저 아는 게 절반이었습니다.</p>
+    <p class="lede mt-l">"Noto Sans를 전부 없앤다"는 목표였다면 그때는 <b>달성할 수 없는</b> 작업이었습니다.<br>바꿀 수 있는 건 95곳 중 41곳뿐이었고, 그걸 먼저 아는 게 절반이었습니다.</p>
     <div class="deck-footer"><span class="dim2">html-ppt · jaebeompark</span><span class="slide-number" data-current="7" data-total="8"></span></div>
     <aside class="notes">여기가 오늘 제일 하고 싶은 이야기입니다. 처음 요청은 "Noto Sans를 Pretendard로 바꿔달라"였어요. 그런데 세어보니 Noto 참조가 136곳인데 그중 41곳만 바꿀 수 있었습니다. 세리프는 Pretendard에 아예 없고, 중국어는 커버리지가 없어요. 그대로 전부 치환했으면 세리프 테마랑 중국어 슬라이드가 통째로 깨졌을 겁니다. 그래서 작업의 절반은 치환이 아니라 "어디까지가 안전한가"를 세는 일이었습니다.</aside>
   </section>

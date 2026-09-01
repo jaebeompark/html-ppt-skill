@@ -15,7 +15,8 @@ All pages share a token-based design system in `assets/base.css`.
 npx skills add https://github.com/lewislulu/html-ppt-skill
 ```
 
-One command, no build. Pure static HTML/CSS/JS with only CDN webfonts.
+One command, no build. Pure static HTML/CSS/JS, fully offline — fonts,
+Chart.js and highlight.js are all vendored in the repo.
 
 ## What the skill gives you
 

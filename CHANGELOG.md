@@ -49,8 +49,16 @@ working wifi meant Hangul silently fell back to a system face mid-talk. The
 presenter window, which is `document.write`n into a popup, now links the deck's
 own resolved `fonts.css` URL rather than carrying an import of its own.
 
-Chart.js and highlight.js are still fetched from a CDN by the five layouts that
-use them; nothing else touches the network.
+Chart.js 4.4.3 (201 KB) and highlight.js 11.10.0 with its theme stylesheet
+(123 KB) are vendored too, under `assets/vendor/`. The five layouts that use
+them — `chart-bar`, `chart-line`, `chart-pie`, `chart-radar` and `code` — now
+load them from disk.
+
+**Nothing in the repository fetches anything at presentation time.** A new
+`smoke.sh` check 6 fails the build on any external `href`/`src`/`@import` in a
+shipped file, so this cannot quietly regress. It replaces the old check 6,
+which verified that the CDN URLs were reachable — a question that no longer
+exists. The `--net` flag is gone with it.
 
 ### Fixed
 
