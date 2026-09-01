@@ -26,8 +26,8 @@ function go(n) {
 }
 
 document.addEventListener('keydown', (e) =&gt; {
-  if (e.key === 'ArrowRight' || e.key === ' ') go(idx + 1);
-  if (e.key === 'ArrowLeft') go(idx - 1);
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') go(idx + 1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') go(idx - 1);
   if (e.key === 't') cycleTheme();
 });</code></pre>
 </section></div>

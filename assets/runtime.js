@@ -2,7 +2,7 @@
  * Keyboard-driven deck runtime. Zero dependencies.
  *
  * Features:
- *   ← → / space / PgUp PgDn / Home End  navigation
+ *   ← → / ↑ ↓ / space / PgUp PgDn / Home End  navigation
  *   F  fullscreen
  *   S  presenter mode (opens a NEW WINDOW with current/next slide preview + notes + timer)
  *       The original window stays as audience view, synced via BroadcastChannel.
@@ -567,7 +567,7 @@
 </div>
 
 <div class="hint-bar">
-  <span><kbd>← →</kbd> 翻页</span>
+  <span><kbd>← → ↑ ↓</kbd> 翻页</span>
   <span><kbd>R</kbd> 重置计时</span>
   <span><kbd>Esc</kbd> 关闭</span>
   <span style="color:#6e7681">拖动卡片头部移动 · 拖动右下角调整大小</span>
